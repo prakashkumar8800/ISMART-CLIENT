@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h5 *ngIf="restaurant ==null">Add Restaurant</h5>
+    <!-- <h5 *ngIf="assign !=null">Edit Assign</h5> -->
+    <button type="submit" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
+</div>
+
+<div class="modal-body">
+    <div class="form">
+        <form class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="inputname" class="form-label">Name</label>
+              <input name="name" class="form-control"[(ngModel)]="name">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="inputstatus" class="form-label">Status</label>
+              <select name="status" class="form-select" [(ngModel)]="status">
+                <option value="0">Inactive</option>
+                <option value="1">Active</option>
+              </select>
+            </div>
+          </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+<div class="modal-footer">
+    <button *ngIf="restaurant ==null" (click)="add()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">SUBMIT</button>
+    <!-- <button *ngIf="assign !=null" (click)="update()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">UPDATE</button> -->
+</div>
+

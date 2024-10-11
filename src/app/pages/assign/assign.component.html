@@ -1,0 +1,103 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--7">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header p-0">
+                    <div style="display: flex">
+                        <p (click)="addAudit()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Restaurant</label>
+                                <select class="form-control" [(ngModel)]="selected_restaurant" (ngModelChange)="onOutletSelected()" [(ngModel)]="outlet">
+                                    <option value="" *ngIf="userType=='admin'">ALL</option>
+                                    <option *ngFor="let restaurant of restaurants" [value]="restaurant.name">{{restaurant.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                            <div class="form-group">
+                                <label>From</label>
+                                <input type="date" (ngModelChange)="onDateSelected()" [(ngModel)]="from_date" class="form-control" [(ngModel)]="from_date">
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                            <div class="form-group">
+                                <label>To</label>
+                                <input type="date" class="form-control" (ngModelChange)="onDateSelected()" [(ngModel)]="to_date">
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                            <button class="btn btn-primary" style="background: #be1b1e; border: none; margin-top: 30px;">Search</button>
+                        </div>
+                        <!-- [(ngModel)]="searchTerm" -->
+                    </div>
+                    <div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a [ngClass]="scheduledTab ?'nav-link active' : 'nav-link'"
+                                (click)="OrderList('scheduled')">Scheduled (0)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a [ngClass]="pendingTab ?'nav-link active' : 'nav-link'"
+                                (click)="OrderList('pending')">Pending (0)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a [ngClass]="cancleTab ?'nav-link active' : 'nav-link'"
+                                (click)="OrderList('cancle')">Cancelled (0)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a [ngClass]="completeTab ? 'nav-link active' : 'nav-link'"
+                                (click)="OrderList('complete')">Completed (0)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table table-responsive">
+                        <table class="table table-flush">
+                            <thead class="thead-light">
+                                <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Assign Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Added On <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let assignUser of userAssign; let i=index;">
+                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.name}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.auditor}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.restaurant}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.service}}</td>
+                                    <!-- <td><option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option></td> -->
+                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.ass_dt}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.added_on}}</td>
+                                    <td class="text-right" *ngIf="outlet==assignUser.restaurant" >
+                                        <div style="display: flex">
+                                            <p (click)="updateAudit(assignUser)" class="text-success action"
+                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="header bg-gradient-danger py-5 ">
+    <div class="container-login100 mt--3 ">
+      <div style="position: absolute; top: 0%; left: 50%; border-radius: 50%; transform: translate(-50%);">
+      
+      </div>
+      <div class="login-container">
+          <div class="container-fluid" style="background: white;">
+              <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="images">
+                          <img src="./assets/img/images/pizza.jpg" class="logo-img" alt="" />
+                      </div>
+                      <div class="logo" style="position: absolute; bottom: 285px; right: 200px;">
+                          <img src="./assets/img/brand/logo.png" style="width: 205px; height: 60px; border-radius: 10px;" alt="" />
+                      </div>
+      
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="form-detail">
+                          <div class="logo-2">
+                              <img src="./assets/img/brand/logo.png" alt="" />
+                          </div>
+                          <h2>Hello,</h2>
+                          <p>Welcome to the <span>iSmart</span></p>
+      
+                          <form class="row">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" placeholder="Enter Email" [(ngModel)]="email" value="">
+                                </div>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter Password" [(ngModel)]="password" value="">
+                                </div>
+                              </div>
+                              <h3>Forgot Password ?</h3>
+                              <div class="col-md-12">
+                                  <button class="btn btn-primary" (click)="signin()" style="background: #be1b1e; border: none; margin-top: 0px;" type="button">Login</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="separator separator-bottom separator-skew zindex-100">
+      <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
+    </div>
+  </div>
+  
+  
+  
+  
+  <style>
+      .container-fluid .form-detail .row h3{
+          margin: 10px 0 0 auto;
+          text-align: end;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 600;
+          color: #be1b1e;
+      }
+      .container-fluid .form-detail .row input{
+          border: none;
+          border-bottom: 1px solid lightgray;
+      }
+      .container-fluid .form-detail h2{
+          font-size: 24px;
+  
+      }
+      .container-fluid .form-detail p{
+          font-size: 34px;
+          color: #464646;
+      }
+      .container-fluid .form-detail p span{
+          font-size: 40px;
+          color: #be1b1e;
+      }
+  </style>
+

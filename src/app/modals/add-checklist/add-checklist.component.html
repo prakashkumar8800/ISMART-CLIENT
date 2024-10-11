@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <h5 *ngIf="listitem == null">Add Checklist</h5>
+    <button type="submit" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
+</div>
+<div class="modal-body">
+    <div class="form">
+        <form class="row g-3">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="inputname" class="form-label">Name</label>
+                <input [(ngModel)]="name" type="name" class="form-control" name="name">
+              </div>
+            </div>
+            <div class="col-md-12">
+                <button type="button" (click)="addInput()" class="btn btn-primary" style="margin-left: 20px;">+ Add</button> 
+            </div>
+
+            <div class="col-md-12">
+                <div class="row" *ngFor="let list of checklist; let i = index" (ngSubmit)="onSubmit()">
+                    <div class="col-md-6">
+                        <label for="items" class="form-label">Items</label>
+                        <input class="form-control" [(ngModel)]="items" name="items" placeholder="items" >
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" (click)="removeInput(i)" class="btn btn-danger" style="margin-top: 30px; background: #be1b1e;">Delete</button>
+                    </div>
+                </div>
+            </div>
+          </form>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button *ngIf="listitem == null" (click)="add()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">SUBMIT</button>
+</div>
+

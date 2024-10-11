@@ -1,0 +1,79 @@
+<div class="modal-header">
+    <!-- <h5 *ngIf="details != null">Update User</h5> -->
+    <h5 *ngIf="details == null">Add User</h5>
+    <button type="submit" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
+</div>
+<div class="modal-body">
+    <div class="form">
+        <form class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="inputrole" class="form-label">Restaurant</label>
+              <select name="name" class="form-select" [(ngModel)]="restaurant">
+                <option *ngFor="let restaurant of restaurants">{{restaurant.name}}</option>
+              </select>
+            </div>
+          </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inputname">Name</label>
+                <input [(ngModel)]="name" type="text" name="name" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inputemail">Email</label>
+                <input [(ngModel)]="email" type="text" name="email" class="form-control"> 
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inputphone" >Phone</label>
+                 <input [(ngModel)]="phone" type="phone" name="phone" class="form-control" placeholder="" required
+                pattern="^\\+?[0-9]{10,12}$"
+                #phoneControl="ngModel"
+                >
+                <div *ngIf="phoneControl.invalid && phoneControl.touched">
+                  <small *ngIf="phoneControl.errors?.required">Phone number is required.</small>
+                  <small *ngIf="phoneControl.errors?.pattern">Invalid phone number format.</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inputrole">Role</label>
+                <select [(ngModel)]="role" name="role" class="form-control">
+                  <option *ngFor="let userdetails of userRoles">{{userdetails.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inputpass">Password</label>
+                <input [(ngModel)]="password" type="password" name="password" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inputcpass">Confirm Password</label>
+                <input [(ngModel)]="Cpass" type="Cpass" name="Cpass" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inputstatus">Status</label>
+                <select [(ngModel)]="status" name="status" class="form-control">
+                  <option value="1">Active</option>
+                  <option value="0">InActive</option>
+                </select>
+              </div>
+            </div>
+          </form>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+  <button *ngIf="details == null" (click)="add()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">SUBMIT</button>
+  <!-- <button *ngIf="details != null" (click)="update()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">UPDATE</button> -->
+</div>

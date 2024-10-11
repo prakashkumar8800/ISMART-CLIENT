@@ -1,0 +1,149 @@
+<nav class="navbar navbar-expand-lg navbar-absolute" style="z-index: 1;">
+    <div class="container-fluid">
+        <div class="navbar-wrapper">
+            <!-- <div class="navbar-toggle">
+                <button (click)="sidebarToggle()" class="navbar-toggler" type="button">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                </button>
+            </div> -->
+            <a class="navbar-brand" href="javascript:void(0)" style="color: white;">{{getTitle()}}</a>
+            <div class="switch ">
+            </div>
+        </div>
+        <button (click)="collapse()" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"
+            class="navbar-toggler" type="button">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+        <div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse justify-content-end" id="collapseExample">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <!-- <a class="nav-link btn-magnify" href="javascript:void(0)">
+                        <i class="fa-solid fa-grid" style="color: white;"></i>
+                        <p>
+                            <span class="d-lg-none d-md-block">Stats</span>
+                        </p>
+                    </a> -->
+                </li>
+  
+                <li class="nav-item btn-rotate" ngbDropdown placement="bottom-left">
+                    <a class="nav-link" id="navbarDropdownMenuLink" style="background: white; border-radius: 4px; padding-bottom: 0;" ngbDropdownToggle>
+                        <i class="fa-solid fa-user" style="color: lightgray; cursor: pointer; margin-bottom: 7px;"></i>
+                        <p>
+                            <span class="d-lg-none d-md-block">Some Actions</span>
+                        </p>
+                    </a>
+                    <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-right"
+                        ngbDropdownMenu>
+                        <a (click)="logoutUser()" style="cursor: pointer;" ngbDropdownItem>Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+  
+  <style>
+    .switch {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        margin-left: 10px;
+    }
+  
+    .switch input {
+        cursor: pointer;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+    }
+  
+  
+    .switch {
+        position: relative;
+        width: 5em !important;
+    }
+  
+    .label-text__switch {
+        font-size: 0.83rem;
+        font-weight: 700;
+        margin: unset;
+        text-align: center;
+        padding-top: 0.3em;
+        margin: unset;
+        font-size: 0.8rem;
+        text-align: center;
+        color: lightgray;
+    }
+  
+    .switch label {
+        background: #fbfafa;
+        color: #ebebeb;
+        border-radius: 0.5rem;
+        white-space: nowrap;
+        display: block;
+        height: 2rem;
+        position: relative;
+        transition: all .15s ease;
+        width: 100%;
+        box-shadow: 0 1px 0 transparent, 0 1px 3px rgb(0 0 0 / 20%) inset;
+    }
+  
+    .switch label div {
+        background: white;
+        border-radius: 50px;
+        display: block;
+        height: 24px;
+        transform: translateX(0.7em);
+        position: absolute;
+        top: 4px;
+        transition: all .15s ease;
+        width: 25px;
+        z-index: 3;
+    }
+  
+    .switch label div:before {
+        background: #E9E9E9;
+        bottom: 0;
+        box-shadow: -6px 0 0 0 #E9E9E9,
+            6px 0 0 0 #E9E9E9;
+        content: '';
+        display: block;
+        height: 15px;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: all .15s ease;
+        width: 3px;
+    }
+  
+    .switch .fontawesome-ok {
+        font-size: 1.75rem;
+        left: 20px;
+        position: relative;
+        top: 13px;
+        z-index: 2;
+    }
+  
+    .switch .fontawesome-remove {
+        font-size: 1.8125rem;
+        left: 51px;
+        position: relative;
+        top: 12px;
+        z-index: 2;
+    }
+  
+    .switch input:checked~label {
+        background: #91ffbb;
+        color: #91ffbb;
+    }
+  
+    .switch input:checked~label div {
+        transform: translateX(3em);
+    }
+  </style>

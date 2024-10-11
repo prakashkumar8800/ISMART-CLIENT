@@ -1,0 +1,39 @@
+.modal-body{
+    .form{
+        .g-3{
+            label{
+                font-size: 0.8rem;
+            }
+            select{
+                width: -webkit-fill-available;
+                height: 40px;
+                border: 1px solid #d6d5d5;
+                border-radius: 4px;
+                font-size: 14px;
+                font-family: Montserrat, Helvetica Neue, Arial, sans-serif;
+                font-weight: 400;
+                color: #66615b;
+            }
+
+        }
+    }
+}
+
+.modal-header{
+    align-items: center;
+    border-bottom: 1px solid #dfdfdf;
+
+    h5{
+        font-size: 1.2rem;
+    }
+}
+
+.modal-footer{
+    border-top: 1px solid #dfdfdf;
+
+    .btn{
+        background: #c73437;
+        border: none;
+    
+    }
+} 

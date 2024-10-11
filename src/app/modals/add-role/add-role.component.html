@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <!-- <h5 *ngIf="userDetails != null">Edit User Role</h5> -->
+    <h5 *ngIf="userRole == null">Add User Role</h5>
+    <button type="submit" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
+</div>
+<div class="modal-body">
+    <div class="form">
+        <form class="row g-3">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inputname" class="form-label">Role Name</label>
+                <input [(ngModel)]="name" type="name" class="form-control" name="name">
+              </div>
+            </div>
+            <!-- <div class="col-md-6">
+                <div class="form-group">
+                  <label for="inputname" class="form-label">Total user</label>
+                  <input [(ngModel)]="total_user" type="name" class="form-control" name="total_user">
+                </div>
+              </div> -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inputstatus" class="form-label">Status</label>
+                <select [(ngModel)]="status" name="status" class="form-select">
+                  <option value="0">InActive</option>
+                  <option value="1">Active</option>
+                </select>
+              </div>
+            </div>
+          </form>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button *ngIf="userRole ==null" (click)="add()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">SUBMIT</button>
+    <!-- <button *ngIf="userDetails !=null" (click)="update()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">UPDATE</button> -->
+</div>

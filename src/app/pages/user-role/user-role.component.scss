@@ -1,0 +1,16 @@
+.header{
+    position: relative;
+    top: -80px;
+    background: linear-gradient(87deg, #f5365c 0, #f56036 100%) !important;
+
+}
+
+.container-fluid .card{
+    margin-top: -10rem;
+    padding: 16px;
+
+
+    .card-body table th{
+        font-size: 0.8rem;
+    }
+}

@@ -1,0 +1,97 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--7">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header p-0">
+                    <div style="display: flex">
+                        <div class="row" style="margin: 0 0 0 auto;">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <div class="form-group d-flex" style="gap: 10px; align-items: center;">
+                                  <label for="inputscore" class="form-label">Score</label>
+                                  <input type="score" class="form-control" name="score" readonly="true">
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="form">
+                        <form class="row" (ngSubmit)="onSubmit()" #userForm="ngForm" *ngFor="let audit of audits">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputname" class="form-label">Audit Name</label>
+                                    <input [(ngModel)]="audit.name" name="name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputstatus" class="form-label">Shift Manager</label>
+                                    <select name="shift_manager" class="form-select">
+                                      <option *ngFor="let User of userdetail">{{User.role=="shift manager" && User.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputdatetime" class="form-label">Audit Date Time</label>
+                                    <input [(ngModel)]="audit.audit_dt" name="audit_time" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputstatus" class="form-label">Restaurent Manager</label>
+                                    <select name="resturant_manager" class="form-select">
+                                      <option *ngFor="let User of userdetail">{{ User.role=="restaurant manager" && User.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="table table-responsive" style="margin-top: 20px;">
+                            <table class="table table-flush">
+                              <thead class="thead-light">
+                                 <th>Check List</th>
+                                 <th>Attachement: (Yes/ No)</th>
+                                 <th>Action</th>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let audit of audits">
+                                  <td>{{audit.checklist_item}}</td>
+                                  <td><input hidden type="file" #uploader (change)="uploadFile($event)">
+                                    <button class="btn btn-primary" (click)="uploader.click()" style="background: #be1b1e; border: none; margin-left: 10px;">Upload</button></td>
+                                  <td><div class="form-group">
+                                    <input type="checkbox" class="form-control" style="height: 25px; margin-top: 8px;">
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
