@@ -16,16 +16,15 @@ export class AddUserComponent implements OnInit {
   @Input() details;
 
   name = '';
-  password = '';
+  // password = '';
   Cpass = '';
-  phone = '';
-  email= '';
+  // phone = '';
+  // email= '';
   role = '1';
   status = '1';
   
-  phoneForm: FormGroup;
-  emailForm: FormGroup;
-emailControl: any;
+  userForm: FormGroup;
+
   constructor( public utilService: UtilService,
     public apiService: ApiService,
     private headerService: HeaderService,
@@ -35,22 +34,43 @@ emailControl: any;
     private fb: FormBuilder
   ) 
 
-    {this.phoneForm = this.fb.group({
+    {this.userForm = this.fb.group({
+
+      email: [
+        '', 
+        [
+          Validators.required,  // Email is required
+          Validators.email      // Validate email format
+        ]
+      ],
       phone: [
         '', 
         [
+          Validators.required,  // Phone number is required
+          Validators.pattern('^[0-9]{10}$')  // Regex for 10-digit phone number
+        ]
+      ],
+      password: [
+        '', 
+        [
           Validators.required,
-          Validators.pattern('^\\+?[0-9]{10,12}$') // Regex to allow phone numbers with optional + and between 10 to 12 digits
+          Validators.minLength(8), 
+          Validators.pattern('(?=.*[0-9])(?=.*[a-zA-Z]).{8,}')  
         ]
       ]
     }) 
   }
+
+  get email() { return this.userForm.get('email'); }
+  get phone() { return this.userForm.get('phone'); }
+  get password() { return this.userForm.get('password'); }
+
   ngOnInit(): void {
     if (this.details != null && this.details != undefined) {
 
       this.name = this.details.name;
-      this.email = this.details.email;
-      this.phone = this.details.phone;
+      // this.email = this.details.email;
+      // this.phone = this.details.phone;
       this.restaurant = this.details.restaurant,
       this.role = this.details.role;
       this.status = this.details.status;
@@ -58,6 +78,15 @@ emailControl: any;
     this.getUserDetails();
     this.getRestaurant();
   }
+
+  submit() {
+    if (this.userForm.valid) {
+      console.log('Form Data:', this.userForm.value);
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+
   userRoles = []
 
   getUserDetails(){
@@ -71,9 +100,10 @@ emailControl: any;
 
     })
   }
-  restaurant = '';
 
-restaurants=[];
+  restaurant = '';
+  restaurants=[];
+
   getRestaurant() {
     this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {
       console.log(result)
@@ -90,6 +120,7 @@ restaurants=[];
     }
   );
   }
+
   add() {
     if (this.name == '') {
       this.toaster.error("Please enter name");
@@ -99,22 +130,22 @@ restaurants=[];
       this.toaster.error("Please select the restaurant");
       return;
     }
-    if (this.email == '') {
-      this.toaster.error("Please enter address");
-      return;
-    }
-    if (this.phone == '') {
-      this.toaster.error("Please enter Phone");
-      return;
-    }
-    if (this.password == '') {
-      this.toaster.error("Please enter password");
-      return;
-    }
-    if (this.password != this.Cpass) {
-      this.toaster.error("password and confirm password do not match");
-      return;
-    }
+    // if (this.email == '') {
+    //   this.toaster.error("Please enter address");
+    //   return;
+    // }
+    // if (this.phone == '') {
+    //   this.toaster.error("Please enter Phone");
+    //   return;
+    // }
+    // if (this.password == '') {
+    //   this.toaster.error("Please enter password");
+    //   return;
+    // }
+    // if (this.password != this.Cpass) {
+    //   this.toaster.error("password and confirm password do not match");
+    //   return;
+    // }
         this.apiService.postAPI(this.apiService.BASE_URL + 'user/addUser',{
         name: this.name,
         restaurant:this.restaurant,

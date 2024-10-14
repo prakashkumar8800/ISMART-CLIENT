@@ -1,5 +1,4 @@
 <div class="modal-header">
-    <!-- <h5 *ngIf="assign ==null">Add Assign</h5> -->
     <h5 *ngIf="assign !=null">Edit Assign</h5>
     <button type="submit" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
 </div>
@@ -38,14 +37,14 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputdatetime" class="form-label">Assign Date Time</label>
-                <input type="datetime-local" class="form-control" name="ass_dt" [(ngModel)]="assign.ass_dt">
+                <input class="form-control" name="ass_dt" [(ngModel)]="assign.ass_dt">
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputdatetime" class="form-label">Added Date Time</label>
-                <input type="date" class="form-control" name="added_dt" [(ngModel)]="assign.added_dt">
+                <input class="form-control" name="added_dt" [(ngModel)]="assign.added_dt">
               </div>
           </div>
           <div class="col-md-6">
@@ -67,6 +66,5 @@
 
 
 <div class="modal-footer">
-    <!-- <button *ngIf="assign ==null" (click)="add()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">SUBMIT</button> -->
     <button *ngIf="assign !=null" (click)="update()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">UPDATE</button>
 </div>

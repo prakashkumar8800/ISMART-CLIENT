@@ -128,7 +128,6 @@ export class AssignComponent implements OnInit {
         console.log(this.restaurants);
       }
     }, (error) => {
-      // Handle any error that occurs during the API call
       console.error('Error fetching restaurants:', error);
     });
   }
@@ -169,19 +168,6 @@ export class AssignComponent implements OnInit {
 
   restaurants = [];
 
-  // get filteredRestaurants() {
-  //   return this.userAssign.filter(restaurant => {
-  //     const matchesName = restaurant.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-  //     const matchesDate = this.isWithinDateRange(restaurant.dateAdded);
-  //     return matchesName && matchesDate;
-  //   });
-  // }
-
-  // isWithinDateRange(date: Date): boolean {
-  //   if (this.from_date && date < this.from_date) return false;
-  //   if (this.to_date && date > this.to_date) return false;
-  //   return true;
-  // }
 
   unSelectAllTab() {
     this.scheduledTab = false;

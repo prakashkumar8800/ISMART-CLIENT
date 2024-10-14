@@ -24,8 +24,8 @@ export class ApiService {
     // BASE_URL = "http://192.168.29.17:3000/";
     // IMAGE_BASE_URL = "http://192.168.29.17/pw_api";
 
-    BASE_URL = "http://65.0.171.139:4000/";
-    IMAGE_BASE_URL = "http://65.0.171.139/pw_api";
+     BASE_URL = "http://65.0.171.139:4000/";
+     IMAGE_BASE_URL = "http://65.0.171.139/pw_api";
 
     // BASE_URL = "http://3.108.247.233:3000/"; 
     // IMAGE_BASE_URL = "http://3.108.247.233/pw_api/";

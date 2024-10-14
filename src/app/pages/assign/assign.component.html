@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <label>Restaurant</label>
                                 <select class="form-control" [(ngModel)]="selected_restaurant" (ngModelChange)="onOutletSelected()" [(ngModel)]="outlet">
-                                    <option value="" *ngIf="userType=='admin'">ALL</option>
+                                    <option value="-1" *ngIf="userType=='admin'">ALL</option>
                                     <option *ngFor="let restaurant of restaurants" [value]="restaurant.name">{{restaurant.name}}</option>
                                 </select>
                             </div>
@@ -83,7 +83,6 @@
                                     <td *ngIf="outlet==assignUser.restaurant">{{assignUser.auditor}}</td>
                                     <td *ngIf="outlet==assignUser.restaurant">{{assignUser.restaurant}}</td>
                                     <td *ngIf="outlet==assignUser.restaurant">{{assignUser.service}}</td>
-                                    <!-- <td><option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option></td> -->
                                     <td *ngIf="outlet==assignUser.restaurant">{{assignUser.ass_dt}}</td>
                                     <td *ngIf="outlet==assignUser.restaurant">{{assignUser.added_on}}</td>
                                     <td class="text-right" *ngIf="outlet==assignUser.restaurant" >
