@@ -18,10 +18,6 @@ export class CheckListComponent implements OnInit {
 
   selectedItem: any;
 
-  // onSelect(item: any) {
-  //   this.selectedItem = item; // Update the selected item
-  // }
-
   constructor(public utilService: UtilService,
     public apiService: ApiService,
     private headerService: HeaderService,
@@ -32,7 +28,6 @@ export class CheckListComponent implements OnInit {
     this.getChecklist();
     // this.onServiceChange()
   }
-  // differentitems={items:['Item 1', 'Item 2', 'Item 3']};
 
   searchTerm: any = '';
 

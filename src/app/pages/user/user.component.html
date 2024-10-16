@@ -1,7 +1,6 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
     <div class="container-fluid">
         <div class="header-body">
-            <!-- Card stats -->
 
         </div>
     </div>
@@ -11,7 +10,6 @@
     <div class="card">
         <div class="card-header p-0">
             <div style="display: flex">
-                <!-- <h4 class="card-title" style="flex-grow: 1"> Crust</h4> -->
                 <p (click)="addUser()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
             </div>
             <div class="row">
@@ -49,7 +47,7 @@
                     </thead>
                     <tbody>
                         
-                       <tr *ngFor="let User of userdetail of filteredData">
+                       <tr *ngFor="let User of userdetail of filteredData | orderBy: order">
                             
                             <td *ngIf="outlet==User.restaurant">{{User.id}}</td>
                             <td  *ngIf="outlet==User.restaurant">{{User.name}}</td>

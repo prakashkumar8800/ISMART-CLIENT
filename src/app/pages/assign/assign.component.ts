@@ -206,7 +206,7 @@ export class AssignComponent implements OnInit {
     modal.componentInstance.assign = item;
   }
 
-  addAudit() {
+  addAssign() {
     let modal = this.modalService.open(AddAssignComponent, {
       backdrop: 'static',
       size: 'xl',

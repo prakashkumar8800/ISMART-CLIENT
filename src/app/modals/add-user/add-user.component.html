@@ -1,11 +1,11 @@
 <div class="modal-header">
-    <!-- <h5 *ngIf="details != null">Update User</h5> -->
     <h5 *ngIf="details == null">Add User</h5>
     <button type="submit" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
 </div>
 <div class="modal-body">
     <div class="form">
-        <form class="row" [formGroup]="userForm" (ngSubmit)="submit()">
+        <form class="row">
+         <!-- [formGroup]="userForm" (ngSubmit)="submit()" -->
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputrole" class="form-label">Restaurant</label>
@@ -17,32 +17,28 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputname">Name</label>
-                <input type="text" formControlName="name" name="name" class="form-control">
-                <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
-                  <small *ngIf="userForm.get('name')?.errors?.required">Name is required.</small>
-                </div>
+                <input type="text" [(ngModel)]="name" name="name" class="form-control">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputemail">Email</label>
-                <input type="email" formControlName="email" name="email" class="form-control"> 
+                <input type="email" [(ngModel)]="email" name="email" class="form-control"> 
 
-                <div *ngIf="email.invalid && email.touched">
+                <!-- <div *ngIf="email.invalid && email.touched">
                   <small *ngIf="email.errors?.required">Email is required.</small>
                   <small *ngIf="email.errors?.email">Invalid email format.</small>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputphone" >Phone</label>
-                 <input type="phone" formControlName="phone" name="phone" class="form-control" required
-                >
-                <div *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
+                 <input type="phone" [(ngModel)]="phone" name="phone" class="form-control">
+                <!-- <div *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
                   <small *ngIf="userForm.get('phone')?.errors?.required">Phone number is required.</small>
                   <small *ngIf="userForm.get('phone')?.errors?.pattern">Phone number must be 10 digits long.</small>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="col-md-6">
@@ -56,19 +52,24 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputpass">Password</label>
-                <input type="password" name="password" formControlName="password" class="form-control">
+                <input [(ngModel)]="password" type="password" name="password" class="form-control" autocomplete="new-password">
 
-                <div *ngIf="password.invalid && password.touched">
-                  <small *ngIf="password.errors?.required">Password is required.</small>
-                  <small *ngIf="password.errors?.minlength">Password must be at least 8 characters long.</small>
-                  <small *ngIf="password.errors?.pattern">Password must contain at least one letter and one number.</small>
-                </div>
+                <!-- <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+                  <small *ngIf="userForm.get('password')?.errors?.required">Password is required.</small>
+                  <small *ngIf="userForm.get('password')?.errors?.minlength">Password must be at least 6 characters.</small>
+                  <small *ngIf="userForm.get('password')?.errors?.pattern">Password must contain at least one letter and one number.</small>
+                </div> -->
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputcpass">Confirm Password</label>
-                <input [(ngModel)]="Cpass" type="Cpass" name="Cpass" class="form-control">
+                <input [(ngModel)]="Cpass" type="Cpass" name="Cpass" class="form-control" autocomplete="new-password">
+
+                <!-- <div *ngIf="userForm.get('Cpassword')?.invalid && userForm.get('Cpassword')?.touched">
+                  <small *ngIf="userForm.get('Cpassword')?.errors?.required">Confirm Password is required.</small>
+                  <small *ngIf="userForm.hasError('passwordMismatch')">Passwords do not match.</small>
+                </div> -->
               </div>
             </div>
             <div class="col-md-6">
@@ -86,6 +87,8 @@
 </div>
 
 <div class="modal-footer">
-  <button *ngIf="details == null" (click)="add()" [disabled]="userForm.invalid" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">SUBMIT</button>
-  <!-- <button *ngIf="details != null" (click)="update()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">UPDATE</button> -->
+  <button *ngIf="details == null" (click)="add()"  class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">SUBMIT</button>
 </div>
+
+
+<!-- [formGroup]="userForm" (ngSubmit)="submit()" -->

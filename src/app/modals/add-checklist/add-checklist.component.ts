@@ -18,7 +18,7 @@ export class AddChecklistComponent implements OnInit {
   name = '';
   items = '';
 
-  myForm : FormGroup;
+  // myForm : FormGroup;
 
   constructor(public utilService: UtilService,
     private fb: FormBuilder,
@@ -28,9 +28,9 @@ export class AddChecklistComponent implements OnInit {
     private modalService: NgbModal,
     private toaster: ToastrService) { 
 
-      this.myForm = this.fb.group({
-        items: this.fb.array([]) // Initialize your form controls
-      });
+      // this.myForm = this.fb.group({
+      //   items: this.fb.array([]) // Initialize your form controls
+      // });
   }
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class AddChecklistComponent implements OnInit {
   checklist: any[] = []
 
   addInput() {
-    this.checklist.push(''); // This should now work without errors
+    this.checklist.push({value: ''}); // This should now work without errors
   }
 
   removeInput(index: number) {
@@ -62,7 +62,7 @@ export class AddChecklistComponent implements OnInit {
       return;
     }
     if (this.items == '') {
-      this.toaster.error("please select item");
+      this.toaster.error("please enter items");
       return;
     }
 

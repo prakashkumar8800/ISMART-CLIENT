@@ -9,6 +9,7 @@ import { UtilService } from '../../services/util.service';
 import { UpdateServiceComponent } from 'src/app/modals/update-service/update-service.component';
 import { ViewServiceComponent } from 'src/app/modals/view-service/view-service.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AddAuditComponent } from 'src/app/modals/add-audit/add-audit.component';
 
 @Component({
   selector: 'app-audit',
@@ -25,6 +26,9 @@ export class AuditComponent implements OnInit {
   checklist_item : ''
  }
 
+ completeTab = false;
+  pendingTab = true;
+
   userForm: FormGroup;
 
   constructor(public utilService: UtilService,
@@ -39,14 +43,35 @@ export class AuditComponent implements OnInit {
         shift_manager: [''],
         resturant_manager: [''],
         audit_dt: [''],
-        cheklist_item: ['']
+        cheklist_name: [''],
+        attachment_path: ['']
       });
-     }
+  }
 
   ngOnInit(): void {
     this.getAudit();
     console.log("this is data",this.audits);
     this.getUser()
+  }
+
+  selectedType = 'pending';
+
+  unSelectAllTab() {
+    this.pendingTab = false;
+    this.completeTab = false;
+  }
+
+  OrderList(type) {
+    this.unSelectAllTab()
+    this.selectedType = type;
+    switch (type) {
+      case 'pending':
+        this.pendingTab = true;
+        break;
+      case 'complete':
+        this.completeTab = true;
+        break;
+    }
   }
 
   userdetail = [];
@@ -63,6 +88,17 @@ export class AuditComponent implements OnInit {
       console.log(error.error.message);
       this.toaster.error(error.error.message)
     })
+  }
+
+  checklist=[];
+
+  getChecklist() {
+    this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then ((result) =>{
+      if (result.status){
+       this.checklist = result.result
+       console.log(this.checklist)
+      }
+    }) 
   }
 
   onSubmit(){ 
@@ -86,5 +122,26 @@ export class AuditComponent implements OnInit {
       this.toaster.error(error.error.message);
     })
   }
+
+  viewAudit(item: any) {
+    let modal = this.modalService.open(ViewAuditComponent, {
+      backdrop: 'static',
+      size: 'xl',
+      keyboard: false,
+      centered: true,
+      windowClass: 'customm-modal',
+    });
+    modal.componentInstance.viewaudit = item;
+  }
+
+  // addAudit() {
+  //   let modal = this.modalService.open(AddAuditComponent, {
+  //     backdrop: 'static',
+  //     size: 'xl',
+  //     keyboard: false,
+  //     centered: true,
+  //     windowClass: 'customm-modal',
+  //   });
+  // }
 
 }

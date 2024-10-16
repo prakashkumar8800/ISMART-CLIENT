@@ -7,6 +7,7 @@ import { ApiService } from '../../services/api.service';
 import { HeaderService } from '../../services/header.service';
 import { UtilService } from '../../services/util.service';
 import { AddUserComponent } from 'src/app/modals/add-user/add-user.component';
+import { OrderPipe } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-user',
@@ -22,12 +23,18 @@ export class UserComponent implements OnInit {
     this.key = key;
     this.reverse = !this.reverse;
   }
+
+  order: string = 'name';
   
     constructor(public utilService: UtilService,
+      private orderPipe: OrderPipe,
       private apiService: ApiService,
       private modalService: NgbModal,
       private toaster: ToastrService,
-      private datePipe: DatePipe) { }
+      private datePipe: DatePipe) { 
+
+        console.log(this.orderPipe.transform(this.userdetail, this.order));
+       }
 
       userdetail = [];
   

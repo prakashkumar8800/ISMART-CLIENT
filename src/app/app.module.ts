@@ -39,7 +39,8 @@ import { AddChecklistComponent } from './modals/add-checklist/add-checklist.comp
 import { AddAssignComponent } from './modals/add-assign/add-assign.component';
 import { AddRestaurantComponent } from './modals/add-restaurant/add-restaurant.component';
 import { UpdateRestaurantComponent } from './modals/update-restaurant/update-restaurant.component';
-// import { OrderModule } from 'ngx-order-pipe';
+import { AddAuditComponent } from './modals/add-audit/add-audit.component';
+import { OrderModule, OrderPipe } from 'ngx-order-pipe';
 // import { OrderByModule } from 'ng-orderby-pipe';
 
 // import { NgxEditorModule } from 'ngx-editor';
@@ -61,7 +62,7 @@ import { UpdateRestaurantComponent } from './modals/update-restaurant/update-res
     NgxPaginationModule,
     NgMultiSelectDropDownModule,
     NavbarModule,
-    // OrderModule,
+    OrderModule,
     AngularEditorModule,
     ToastrModule.forRoot()
   ],
@@ -85,11 +86,12 @@ import { UpdateRestaurantComponent } from './modals/update-restaurant/update-res
     AddAssignComponent,
     AddRestaurantComponent,
     UpdateRestaurantComponent,
+    AddAuditComponent,
     
     
   ],
   providers: [DatePipe, 
-    // OrderByModule,
+     OrderPipe,
     ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

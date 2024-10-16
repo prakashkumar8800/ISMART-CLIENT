@@ -14,24 +14,13 @@
             color: #be1b1e;
             background-color: lightgray;
         }
+        .nav-link{
+            cursor: pointer;
+        }
 
         .row .form-group{
-            h2{
-                font-size: 16px;
-                font-weight: 500;
-                color: #252429;
-            }
             label{
                 font-size: 0.9rem;
-            }
-            select{
-                width: -webkit-fill-available;
-                height: 43px;
-                font-size: 1rem;
-                font-weight: 400;
-                color: #454545;
-                border-radius: 5px;
-                border: 1px solid #cad1d7;
             }
             input{
                 font-size: 1rem;
@@ -40,11 +29,6 @@
             }
         }
 
-        .row h1{
-            font-size: 1.3rem;
-            font-weight: 400;
-            color: #252429;
-        }
     }
 
 }

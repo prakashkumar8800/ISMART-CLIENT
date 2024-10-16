@@ -21,10 +21,72 @@
                                   <label for="inputscore" class="form-label">Score</label>
                                   <input type="score" class="form-control" name="score" readonly="true">
                                 </div>
-                              </div>
+                            </div>
                         </div>
+                        <!-- <p (click)="addAudit()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p> -->
                     </div>
-                    <div class="form">
+
+                    <div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a [ngClass]="pendingTab ?'nav-link active' : 'nav-link'"
+                                (click)="OrderList('pending')">Pending (0)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a [ngClass]="completeTab ? 'nav-link active' : 'nav-link'"
+                                (click)="OrderList('complete')">Completed (0)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table table-responsive">
+                        <table class="table table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Shift Manager</th>
+                                    <th>Audit DT</th>
+                                    <th>Restaurant Manager</th>
+                                    <th>Checklist Item</th>
+                                    <!-- <th>Attachment Path</th> -->
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let audit of audits">
+                                    <td>{{audit.name}}</td>
+                                    <td>{{audit.shift_manager}}</td>
+                                    <td>{{audit.audit_dt}}</td>
+                                    <td>{{audit.resturant_manager}}</td>
+                                    <td>{{audit.checklist_item}}</td>
+                                    <!-- <td>{{audit.attachment_path}}</td> -->
+                                    <td class="text-right">
+                                        <div style="display: flex">
+                                            <p (click)="viewAudit(audit)" class="text-success action"
+                                            style="margin-left: 10px;"><i class="fa-solid fa-eye" style="cursor: pointer;"></i></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="form">
                         <form class="row" (ngSubmit)="onSubmit()" #userForm="ngForm" *ngFor="let audit of audits">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -75,19 +137,7 @@
                               </tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
+                    </div> -->
 
 
 

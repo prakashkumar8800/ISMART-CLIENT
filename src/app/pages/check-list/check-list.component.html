@@ -23,9 +23,8 @@
                                 <div class="form-group">
                                     <label for="inputservice" class="form-label">Service</label>
                                     <select class="form-select" [(ngModel)]="selectedService">
-                                        <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.status!=0?list.name:''}}</option>
+                                        <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.status !=0 ? list.name:''}}</option>
                                     </select>
-                                    <!-- (change)="onSelect(checklist[$event.target.selectedIndex])" -->
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -46,25 +45,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <p><i class="fa fa-edit" (click)="updatechecklist(list)" style="color: #be1b1e; border: none; cursor: pointer;"></i></p>
+                                                    <p><i class="fa fa-edit" (click)="updatechecklist(item)" style="color: #be1b1e; border: none; cursor: pointer;"></i></p>
                                                 </div>
                                             </div>
-                                            
                                         </li>
-                                       
-                                       
                                     </ul>
                                 </div>
                             </div>
-                            <!-- <div class="col-md-3">
-                                <div class="form-group" style="display: flex;">
-                                    <label for="inputscore" class="form-label">Attachement:</label>
-                                    <input type="checkbox" class="form-control" style="height: 25px; width: 50px;">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <p><i class="fa fa-edit" (click)="updatechecklist(list)" style="color: #be1b1e; border: none; cursor: pointer;"></i></p>
-                            </div> -->
                         </form>
                     </div>
                 </div>

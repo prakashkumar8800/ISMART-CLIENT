@@ -1,11 +1,12 @@
 <div class="modal-header">
-    <h5 *ngIf="viewaudit !=null">View Audit</h5>
+    <h5 *ngIf="audit ==null">Add Assign</h5>
+    <!-- <h5 *ngIf="assign !=null">Edit Assign</h5> -->
     <button type="button" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
 </div>
 
 <div class="modal-body">
     <div class="form">
-        <form class="row" #userForm="ngForm" (ngSubmit)="onSubmit()">
+        <form class="row">
             <div class="col-md-6">
                 <div class="form-group">
                 <label for="inputname" class="form-label">Audit Name</label>
@@ -22,8 +23,8 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                  <label for="inputdatetime" class="form-label">Audit DT</label>
-                  <input type="datetime" class="form-control" name="audit_dt" [(ngModel)]="audit_dt">
+                  <label for="inputdatetime" class="form-label">Audit Date Time</label>
+                  <input type="date" class="form-control" name="ass_dt" [(ngModel)]="audit_dt">
                 </div>
             </div>
             <div class="col-md-6">
@@ -34,10 +35,12 @@
                 </select>
               </div>
             </div>
-            <!-- <div class="col-md-6">
+            <div class="col-md-6">
                 <div class="form-group">
                   <label for="inputrole" class="form-label">Checklist Name</label>
-                  <input type="name" name="checklist_item" class="form-control" [(ngModel)]="viewaudit.checklist_item">
+                  <select name="service" [(ngModel)]="checklist_name">
+                    <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option>
+                  </select>
                 </div>
             </div>
             <div class="col-md-6"></div>
@@ -46,35 +49,11 @@
                     <label for="inputstatus" class="form-label">attachment_path</label>
                     <input class="form-control" name="attach_path">
                 </div>
-            </div> -->
+            </div>
         </form>
-    </div>
-
-    <div class="table table-responsive">
-      <table class="table table-flush">
-        <thead class="thead-light">
-          <th>Checklist Item</th>
-          <th>Attachment</th>
-          <th>Action</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let audit of audits">
-            <td>{{audit.checklist_item}}</td>
-            <td>{{audit.attachment_path}}
-              <div>
-                <input hidden type="file" #uploader (change)="uploadFile($event)">
-                <i class="fa-solid fa-arrow-up-from-bracket" (click)="uploader.click()"></i>
-              </div>
-            </td>
-            <td>
-              <input type="checkbox" class="form-control" style="height: 25px; margin-top: 8px;">
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 </div>
 
 <div class="modal-footer">
-    <button   *ngIf="viewaudit !=null" (click)="add()" class="btn btn-primary"  type="button" style="background: #be1b1e; border: none;">Save</button>
+    <button   *ngIf="audit ==null" (click)="add()" class="btn btn-primary"  type="submit" style="background: #be1b1e; border: none;">SUBMIT</button>
   </div>
