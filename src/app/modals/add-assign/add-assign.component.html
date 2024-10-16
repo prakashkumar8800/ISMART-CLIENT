@@ -22,36 +22,29 @@
               <input name="name" class="form-control"[(ngModel)]="name">
             </div>
           </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="inputrole" class="form-label">Auditor</label>
-                <select type="name" class="form-select" name="name" [(ngModel)]="auditor">
-                  <option *ngFor="let User of userdetail">{{User.name}}</option>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="inputrole" class="form-label">Auditor</label>
+              <select type="name" class="form-select" name="name" [(ngModel)]="auditor">
+                <option *ngFor="let User of userdetail">{{User.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="inputrole" class="form-label">Service</label>
+              <!-- <input name="service" class="form-control" [(ngModel)]="service"> -->
+                <select name="service" id="" [(ngModel)]="service">
+                <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option>
                 </select>
-              </div>
+              <!-- <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option> -->
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="inputrole" class="form-label">Service</label>
-                <!-- <input name="service" class="form-control" [(ngModel)]="service"> -->
-                 <select name="service" id="" [(ngModel)]="service">
-                  <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option>
-                 </select>
-                <!-- <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option> -->
-              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="inputdatetime" class="form-label">Assign Date Time</label>
+              <input type="datetime" class="form-control" name="ass_dt" [(ngModel)]="ass_dt">
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="inputdatetime" class="form-label">Assign Date Time</label>
-                <input type="datetime-local" class="form-control" name="ass_dt" [(ngModel)]="ass_dt">
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="inputdatetime" class="form-label">Added Date Time</label>
-                <input type="date" class="form-control" name="added_dt" [(ngModel)]="added_dt">
-              </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">

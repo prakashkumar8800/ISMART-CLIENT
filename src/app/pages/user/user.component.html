@@ -47,7 +47,7 @@
                     </thead>
                     <tbody>
                         
-                       <tr *ngFor="let User of userdetail of filteredData | orderBy: order">
+                       <tr *ngFor="let User of userdetail of filteredData">
                             
                             <td *ngIf="outlet==User.restaurant">{{User.id}}</td>
                             <td  *ngIf="outlet==User.restaurant">{{User.name}}</td>
