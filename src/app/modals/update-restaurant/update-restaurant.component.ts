@@ -72,7 +72,7 @@ export class UpdateRestaurantComponent implements OnInit {
     //   return;
     // }
         this.apiService.postAPI(this.apiService.BASE_URL + 'restaurant/updateRestaurant',{
-          name: this.name,
+          name: this.restaurant.name,
           status: this.restaurant.status,
           id: this.restaurant.id
         }).then((result) => {

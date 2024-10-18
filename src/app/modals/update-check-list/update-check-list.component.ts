@@ -15,7 +15,7 @@ export class UpdateCheckListComponent implements OnInit {
   @Input() listitem;
 
   name = '';
-  items = '';
+  items = [{itemname: ''}];
   status= '1';
 
   constructor(public utilService: UtilService,
@@ -39,9 +39,9 @@ export class UpdateCheckListComponent implements OnInit {
       return;
     }
 
-    if (this.items == '') {
-      this.toaster.error("please enter value")
-    }
+    // if (this.itemname ) {
+    //   this.toaster.error("please enter value")
+    // }
 
     if (this.status == '') {
       this.toaster.error("please select value")

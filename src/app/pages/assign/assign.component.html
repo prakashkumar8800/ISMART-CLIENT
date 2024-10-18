@@ -21,8 +21,8 @@
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label>Restaurant</label>
-                                <select class="form-control" [(ngModel)]="selected_restaurant" (ngModelChange)="onOutletSelected()" [(ngModel)]="outlet">
-                                    <option value="-1" *ngIf="userType=='admin'">ALL</option>
+                                <select class="form-control" [(ngModel)]="outlet">
+                                    <option value="all">ALL</option>
                                     <option *ngFor="let restaurant of restaurants" [value]="restaurant.name">{{restaurant.name}}</option>
                                 </select>
                             </div>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table table-responsive">
+                    <div class="table table-responsive" *ngIf="scheduledTab">
                         <table class="table table-flush">
                             <thead class="thead-light">
                                 <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
@@ -77,13 +77,97 @@
                                 <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let assignUser of userAssign; let i=index;">
-                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.name}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.auditor}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.restaurant}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.service}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant">{{assignUser.ass_dt}}</td>
-                                    <td class="text-right" *ngIf="outlet==assignUser.restaurant" >
+                                <tr *ngFor="let assignUser of userAssign;">
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.name}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.auditor}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.restaurant}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.service}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.ass_dt}}</td>
+                                    <td class="text-right" *ngIf="outlet==assignUser.restaurant || outlet=='all'" >
+                                        <div style="display: flex">
+                                            <p (click)="updateAudit(assignUser)" class="text-success action"
+                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table table-responsive" *ngIf="pendingTab">
+                        <table class="table table-flush">
+                            <thead class="thead-light">
+                                <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Assign Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let assignUser of userAssign;">
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.name}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.auditor}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.restaurant}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.service}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.ass_dt}}</td>
+                                    <td class="text-right" *ngIf="outlet==assignUser.restaurant || outlet=='all'" >
+                                        <div style="display: flex">
+                                            <p (click)="updateAudit(assignUser)" class="text-success action"
+                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table table-responsive" *ngIf="cancleTab">
+                        <table class="table table-flush">
+                            <thead class="thead-light">
+                                <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Assign Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let assignUser of userAssign;">
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.name}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.auditor}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.restaurant}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.service}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.ass_dt}}</td>
+                                    <td class="text-right" *ngIf="outlet==assignUser.restaurant || outlet=='all'" >
+                                        <div style="display: flex">
+                                            <p (click)="updateAudit(assignUser)" class="text-success action"
+                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table table-responsive" *ngIf="completeTab">
+                        <table class="table table-flush">
+                            <thead class="thead-light">
+                                <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Assign Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                                <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let assignUser of userAssign;">
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.name}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.auditor}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.restaurant}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.service}}</td>
+                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.ass_dt}}</td>
+                                    <td class="text-right" *ngIf="outlet==assignUser.restaurant || outlet=='all'" >
                                         <div style="display: flex">
                                             <p (click)="updateAudit(assignUser)" class="text-success action"
                                             style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>

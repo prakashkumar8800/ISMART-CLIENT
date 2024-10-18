@@ -13,6 +13,12 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
+                <label for="inputitems" class="form-label">Items</label>
+                <input [(ngModel)]="items" name="items" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
                 <label for="inputstatus" class="form-label">Status</label>
                 <select [(ngModel)]="status" id="inputstatus" class="form-select">
                   <option value="0">InActive</option>
@@ -20,13 +26,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                  <label for="inputitems" class="form-label">Items</label>
-                  <input [(ngModel)]="listitem.items" name="items" class="form-control">
-                </div>
-            </div>
-          </form>
+        </form>
     </div>
 
 </div>

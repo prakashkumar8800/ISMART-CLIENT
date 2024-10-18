@@ -26,38 +26,12 @@ export class CheckListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getChecklist();
-    // this.onServiceChange()
+    // this.selectedService;
   }
 
   searchTerm: any = '';
 
-  checklistitem : any[] = []
-
-  selectedService: string = '';
-
-  // onServiceChange() {
-  //   const list = this.checklist.find(s => s.name === this.selectedService);
-  //   if (list) {
-  //     this.checklistitem = list.checklist;
-  //   }
-  // }
-
-
-  // get filteredData() {
-  //   return this.checklist.filter(person => 
-  //     person.id.includes(this.searchTerm)
-  //   ); // Filter data based on the search term
-  // }
-
-  // getChecklist() {
-  //  this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then ((result) =>{
-  //    console.log(result)
-  //    if (result.status){
-  //     this.checklist = result.result
-  //     console.log(this.checklist)
-  //    }
-  //  }) 
-  // }
+  Service: string = '';
 
   getChecklist() {
     this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then((result) => {
@@ -80,7 +54,7 @@ export class CheckListComponent implements OnInit {
       }
     });
   }
-  
+
 
   addchecklist() {
     let modal = this.modalService.open(AddChecklistComponent, {

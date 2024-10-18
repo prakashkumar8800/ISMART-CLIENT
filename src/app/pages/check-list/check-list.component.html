@@ -22,8 +22,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="inputservice" class="form-label">Service</label>
-                                    <select class="form-select" [(ngModel)]="selectedService">
-                                        <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.status !=0 ? list.name:''}}</option>
+                                    <select class="form-select" [(ngModel)]="Service">
+                                        <option value="-1" *ngFor="let list of checklist"  [value]="list.id">{{list.status !=0 ? list.name:''}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -36,7 +36,9 @@
                                 <div class="form-group">
                                     <ul>
                                         <li *ngFor="let item of list.items" style="display: flex; justify-content: space-between;">
-                                            {{item}} 
+                                            <div>
+                                                {{item.itemname}} 
+                                            </div>
                                             <div style="display: flex; justify-content: space-between;">
                                                 <div class="col-md-3">
                                                     <div class="form-group" style="display: flex;">
@@ -45,7 +47,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <p><i class="fa fa-edit" (click)="updatechecklist(item)" style="color: #be1b1e; border: none; cursor: pointer;"></i></p>
+                                                    <p><i class="fa fa-edit" (click)="updatechecklist(list)" style="color: #be1b1e; border: none; cursor: pointer;"></i></p>
                                                 </div>
                                             </div>
                                         </li>

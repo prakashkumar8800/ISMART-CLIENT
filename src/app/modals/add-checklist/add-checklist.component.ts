@@ -18,7 +18,7 @@ export class AddChecklistComponent implements OnInit {
   name = '';
   items = '';
 
-  // myForm : FormGroup;
+  myForm : FormGroup;
 
   constructor(public utilService: UtilService,
     private fb: FormBuilder,
@@ -28,9 +28,9 @@ export class AddChecklistComponent implements OnInit {
     private modalService: NgbModal,
     private toaster: ToastrService) { 
 
-      // this.myForm = this.fb.group({
-      //   items: this.fb.array([]) // Initialize your form controls
-      // });
+      this.myForm = this.fb.group({
+        items: this.fb.array([]) // Initialize your form controls
+      });
   }
 
   ngOnInit(): void {
@@ -45,14 +45,16 @@ export class AddChecklistComponent implements OnInit {
 
   addInput() {
     this.checklist.push({value: ''}); // This should now work without errors
+    console.log(this.checklist)
   }
 
   removeInput(index: number) {
     this.checklist.splice(index, 1);
+    console.log(this.checklist)
   }
 
   onSubmit(form : any) {
-    console.log('Form submitted:', this.listitem);
+    console.log('Form submitted:', this.listitem.value);
     this.items = ''; // Reset the form input if needed
   }
 
@@ -61,15 +63,19 @@ export class AddChecklistComponent implements OnInit {
       this.toaster.error("Please enter name");
       return;
     }
-    if (this.items == '') {
-      this.toaster.error("please enter items");
-      return;
-    }
+    // if (this.items == '') {
+    //   this.toaster.error("please enter items");
+    //   return;
+    // }
+    const outputObject = {
+      "name": this.name,
+      "items": this.checklist.map(item => item.value)
+  };
+  console.log(outputObject)
 
-    this.apiService.postAPI(this.apiService.BASE_URL + "checklist/createCheckList", {
-       name: this.name,
-       items: this.items
-    }).then((result)=> {
+    this.apiService.postAPI(this.apiService.BASE_URL + "checklist/createCheckList",
+      outputObject
+    ).then((result)=> {
       if (result.status){
         this.activeModal.close()
       }else {
@@ -84,5 +90,4 @@ export class AddChecklistComponent implements OnInit {
   close() {
     this.activeModal.close()
   }
-
 }

@@ -23,7 +23,8 @@ export class AddUserComponent implements OnInit {
   role = '1';
   status = '1';
   
-  userForm: FormGroup;
+  userForm: FormGroup
+    // name: new name
 
   constructor( public utilService: UtilService,
     public apiService: ApiService,
@@ -36,21 +37,26 @@ export class AddUserComponent implements OnInit {
 
     {this.userForm = this.fb.group({
 
-
-    //   email: [
-    //     '', 
-    //     [
-    //       Validators.required,  // Email is required
-    //       Validators.email      // Validate email format
-    //     ]
-    //   ],
-    //   phone: [
-    //     '', 
-    //     [
-    //       Validators.required,  // Phone number is required
-    //       Validators.pattern('^[0-9]{10}$')  // Regex for 10-digit phone number
-    //     ]
-    //   ],
+      // name: [
+      //   '',[
+      //     Validators.required,
+      //     Validators.name
+      //   ]
+      // ],
+      // email: [
+      //   '', 
+      //   [
+      //     Validators.required,  // Email is required
+      //     Validators.email      // Validate email format
+      //   ]
+      // ],
+      // phone: [
+      //   '', 
+      //   [
+      //     Validators.required,  // Phone number is required
+      //     Validators.pattern('^[0-9]{10}$')  // Regex for 10-digit phone number
+      //   ]
+      // ],
     //   password: [
     //     '', 
     //     [
@@ -83,9 +89,9 @@ export class AddUserComponent implements OnInit {
   ngOnInit(): void {
     if (this.details != null && this.details != undefined) {
 
-      this.name = this.details.name;
-      this.email = this.details.email;
-      this.phone = this.details.phone;
+      this.name = this.details.name.validator.required();
+      this.email = this.details.email.validator.required(this.email);
+      this.phone = this.details.phone.validator.required();
       this.restaurant = this.details.restaurant,
       this.role = this.details.role;
       this.status = this.details.status;
@@ -166,6 +172,7 @@ export class AddUserComponent implements OnInit {
         email: this.email,
         restaurant:this.restaurant,
         phone: this.phone,
+        password: this.password,
         role: this.role,
         status: this.status,
         }).then((result) => {

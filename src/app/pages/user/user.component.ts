@@ -34,9 +34,9 @@ export class UserComponent implements OnInit {
       private datePipe: DatePipe) { 
 
         console.log(this.orderPipe.transform(this.userdetail, this.order));
-       }
+    }
 
-      userdetail = [];
+    userdetail = [];
   
     ngOnInit(): void {
        this.getUser();
@@ -45,7 +45,8 @@ export class UserComponent implements OnInit {
 
     searchTerm: string = '';
     
-    outlet:string='All';
+    outlet:string ='all';
+
     getUser(){
       this.userdetail = [];
       this.apiService.getAPI(this.apiService.BASE_URL + "user/getAllusers").then((result)=>{
@@ -62,6 +63,7 @@ export class UserComponent implements OnInit {
 
     restaurants = []
     filteredPackages: any[]=[];
+
     applyFilters(): void {
       if (!this.restaurants || this.restaurants.length === 0) return;
   
@@ -84,16 +86,11 @@ export class UserComponent implements OnInit {
       console.log("Filtered Packages:", this.filteredPackages);
     }
 
-
-
-
     getRestaurant() {
       this.restaurants = [];
       this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {
         console.log(result)
         if (result.status == true) {
-          //  this.restaurants = result.result;
-          //  console.log(this.restaurants);
           this.restaurants = result.result.filter( x=> 
             x.status == 1 ?x.name:'' 
           );
@@ -109,7 +106,6 @@ export class UserComponent implements OnInit {
         person.name.toLowerCase().includes(this.searchTerm.toLowerCase())
       ); // Filter data based on the search term
     }
-  
   
     addUser() {
       let modal = this.modalService.open(AddUserComponent, {

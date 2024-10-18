@@ -20,7 +20,7 @@
                     <div class="col-md-6">
                         <div>
                             <label for="items" class="form-label">Items</label>
-                            <input class="form-control" [(ngModel)]="items.value" name="items">
+                            <input class="form-control" [(ngModel)]="list.value" name="items{{i}}">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -34,6 +34,6 @@
 </div>
 
 <div class="modal-footer">
-    <button *ngIf="listitem== null" (click)="add()" class="btn btn-primary" type="submit" style="background: #be1b1e; border: none;">SUBMIT</button>
+    <button *ngIf="listitem == null" (click)="add()" class="btn btn-primary" type="submit" style="background: #be1b1e; border: none;">SUBMIT</button>
 </div>
 

@@ -20,7 +20,6 @@ export class AddAssignComponent implements OnInit {
   auditor = '';
   ass_dt = '';
   restaurant = '';
-  added_dt = '';
   status = '1';
 
   userdetail = []
@@ -38,16 +37,12 @@ export class AddAssignComponent implements OnInit {
       this.auditor= this.assign.auditor,
       this.restaurant = this.assign.restaurant
       this.ass_dt = this.assign.ass_dt,
-      this.added_dt = this.assign.added_dt,
       this.status = this.assign.status
     }
     this.getRestaurant();
     this.getUser()
     this.getChecklist();
     console.log(this.assign)
-    //console.log("Hello");
-    console.log()
-    this.add();
   }
 
   getUser(){
@@ -129,7 +124,8 @@ export class AddAssignComponent implements OnInit {
       restaurant: this.restaurant,
       auditor: this.auditor,
       service: this.service,
-      ass_dt: this.ass_dt
+      ass_dt: this.ass_dt,
+      status: this.status
     }).then((result) => {
       if (result.status) {
         this.activeModal.close()

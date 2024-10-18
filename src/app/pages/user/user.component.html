@@ -16,8 +16,8 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                     <div class="form-group">
                         <label>Restaurant</label>
-                        <select class="form-control" style="padding: 0px;height: 43px;" [(ngModel)]="outlet">
-                          <option value="-1">All</option>
+                        <select class="form-control" [(ngModel)]="outlet">
+                          <option value="all">ALL</option>
                           <option *ngFor="let restaurant of restaurants" [value]="restaurant.name">{{restaurant.name}}</option>
                         </select>
                     </div>
@@ -39,7 +39,7 @@
                             <th (click)="sort('name')">Name &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
                             <th (click)="sort('email')">Email &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
                             <th (click)="sort('phone')">Phone &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
-                            <th (click)="sort('roletype')">Role &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
+                            <th (click)="sort('role')">Role &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
                             <th (click)="sort('status')">Status &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
                             <th (click)="sort('added_on')">Added On &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
                             <th>Action</th>
@@ -48,16 +48,17 @@
                     <tbody>
                         
                        <tr *ngFor="let User of userdetail of filteredData">
-                            
-                            <td *ngIf="outlet==User.restaurant">{{User.id}}</td>
-                            <td  *ngIf="outlet==User.restaurant">{{User.name}}</td>
-                            <td  *ngIf="outlet==User.restaurant">{{User.email}}</td>
-                            <td  *ngIf="outlet==User.restaurant">{{User.phone}}</td>
-                            <td  *ngIf="outlet==User.restaurant">{{User.role}}</td>
-                            <td *ngIf="User.status == 0 && outlet==User.restaurant">Inactive</td>
-                            <td *ngIf="User.status == 1 && outlet==User.restaurant">Active</td>
-                            <td  *ngIf="outlet==User.restaurant">{{User.created_DT}}</td>
-                            <td class="text-right"  *ngIf="outlet==User.restaurant">
+                            <td *ngIf="outlet==User.restaurant || outlet=='all'">{{User.id}}</td>
+                            <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.name}}</td>
+                            <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.email}}</td>
+                            <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.phone}}</td>
+                            <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.role}}</td>
+                            <div *ngIf="outlet=='all' || outlet==User.restaurant">
+                                <td *ngIf="User.status == 0 ">Inactive</td>
+                                <td *ngIf="User.status == 1 ">Active</td>
+                            </div>
+                            <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.created_DT}}</td>
+                            <td class="text-right"  *ngIf="outlet==User.restaurant || outlet=='all'">
                                 <div style="display: flex">
                                     <p (click)="updateUser(User)" class="text-success action"
                                     style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>

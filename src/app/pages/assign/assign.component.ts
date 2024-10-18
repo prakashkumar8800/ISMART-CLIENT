@@ -21,8 +21,6 @@ export class AssignComponent implements OnInit {
   cancleTab = false;
   pendingTab = false;
 
-  restaurant_id = -1;
-  selected_restaurant = '';
   userType = ''
   from_date = '';
   to_date = '';
@@ -49,51 +47,17 @@ export class AssignComponent implements OnInit {
     this.getRestaurant()
   }
 
-  onOutletSelected() {
-    this.OrderList(this.selectedType)
+  getCompletedTasks() {
+    return this.userAssign.filter(userAssign => userAssign.status === "1");
   }
 
-  // getRestaurant() {
-  //   this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {
-  //     if (result.status) {
-  //       if (this.utilService.getItem(this.utilService.USER_TYPE) == 'admin') {
-  //           this.restaurants = result.result;
-  //       } 
-  //       else {
-  //           let profile = this.utilService.getUserProfile();
-  //           for (let i = 0; i < result.result.length; i++) {
-  //               if (result.result[i].id == profile.restaurants && result.result[i].status!="inactive") {
-  //                   this.restaurants.push(result.result[i]);
-  //               }
-  //           }
-  //           if (this.restaurants.length > 0) {
-  //               this.selected_restaurant = this.restaurants[this.restaurants.length - 1].id;
-  //           }
-  //       }
 
-  //       if (this.restaurants.length > 0) {
-  //           this.OrderList('scheduled');
-  //       }
-  //   } else {
-  //       this.toaster.error('No Outlets Found');
-  //   }
-  //     console.log(result)
-  //     if (result.status == true) {
-  //        this.restaurants = result.result;
-  //        console.log(this.restaurants);
-  //     }
-  //   }, (error) => {
-
-  //   })
-  // }
-
+  outlet:string ='all';
  
   getRestaurant() {
     let activeRestaurants:any;
     this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {
       if (result.status) {
-        // Filter only active restaurants
-        //  activeRestaurants = result.result.filter(restaurant => restaurant.status === "active");
         this.restaurants = result.result.filter( x=> 
           x.status == 1 ?x.name:'' 
         );
@@ -109,7 +73,7 @@ export class AssignComponent implements OnInit {
             }
           }
           if (this.restaurants.length > 0) {
-            this.selected_restaurant = this.restaurants[this.restaurants.length - 1].id;
+            this.outlet = this.restaurants[this.restaurants.length - 1].id;
           }
         }
 
@@ -131,8 +95,6 @@ export class AssignComponent implements OnInit {
       console.error('Error fetching restaurants:', error);
     });
   }
-  outlet:string='';
-
 
   onDateSelected() {
     setTimeout(() => {
@@ -167,7 +129,6 @@ export class AssignComponent implements OnInit {
   }
 
   restaurants = [];
-
 
   unSelectAllTab() {
     this.scheduledTab = false;
