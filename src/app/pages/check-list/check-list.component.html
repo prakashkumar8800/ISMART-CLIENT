@@ -22,8 +22,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="inputservice" class="form-label">Service</label>
+<<<<<<< Updated upstream
                                     <select class="form-select" [(ngModel)]="x" name="selectedService">
                                         <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option>
+=======
+                                    <select class="form-select"  [(ngModel)]="Service" name="selectedService" (ngModelChange)="onServiceChange()">
+                                        <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.status !=0 ? list.name:''}}</option>
+>>>>>>> Stashed changes
                                     </select>
                                 </div>
                             </div>
@@ -34,7 +39,7 @@
                         <form class="row" *ngFor="let list of checklist">
                             <div class="col-md-11">
                                 <div class="form-group">
-                                    <ul>
+                                    <ul *ngIf="Service == list.name">
                                         <li *ngFor="let item of list.items" style="display: flex; justify-content: space-between;">
                                             <div>
                                                 {{item}} 

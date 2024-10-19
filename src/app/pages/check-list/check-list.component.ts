@@ -57,6 +57,11 @@ export class CheckListComponent implements OnInit {
     });
   }
 
+  onServiceChange() {
+    console.log('Selected service:', this.Service);
+    // Perform any actions needed when the selection changes
+  }
+
 
   addchecklist() {
     let modal = this.modalService.open(AddChecklistComponent, {
