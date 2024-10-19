@@ -22,8 +22,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="inputservice" class="form-label">Service</label>
-                                    <select class="form-select" [(ngModel)]="Service">
-                                        <option value="-1" *ngFor="let list of checklist"  [value]="list.id">{{list.status !=0 ? list.name:''}}</option>
+                                    <select class="form-select" [(ngModel)]="x" name="selectedService">
+                                        <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                     <ul>
                                         <li *ngFor="let item of list.items" style="display: flex; justify-content: space-between;">
                                             <div>
-                                                {{item.itemname}} 
+                                                {{item}} 
                                             </div>
                                             <div style="display: flex; justify-content: space-between;">
                                                 <div class="col-md-3">

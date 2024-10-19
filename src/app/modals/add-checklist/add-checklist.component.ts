@@ -69,7 +69,7 @@ export class AddChecklistComponent implements OnInit {
     // }
     const outputObject = {
       "name": this.name,
-      "items": this.checklist.map(item => item.value)
+      "items": JSON.stringify(this.checklist.map(item => item.value))
   };
   console.log(outputObject)
 

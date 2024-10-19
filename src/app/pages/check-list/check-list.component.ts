@@ -31,7 +31,9 @@ export class CheckListComponent implements OnInit {
 
   searchTerm: any = '';
 
-  Service: string = '';
+  Service: string= ' ';
+
+  x :string=" ";
 
   getChecklist() {
     this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then((result) => {
