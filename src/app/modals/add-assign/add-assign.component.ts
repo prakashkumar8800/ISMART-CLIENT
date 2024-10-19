@@ -77,7 +77,6 @@ export class AddAssignComponent implements OnInit {
   );
   }
 
-
   close() {
     this.activeModal.close()
   }
@@ -93,8 +92,6 @@ export class AddAssignComponent implements OnInit {
    }
 
   add() {
-
-    console.log("user")
     if (this.name == '') {
       this.toaster.error("Please enter name");
       return;

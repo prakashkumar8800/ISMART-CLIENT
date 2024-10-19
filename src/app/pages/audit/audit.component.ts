@@ -22,7 +22,7 @@ export class AuditComponent implements OnInit {
   name : '',
   shift_manager : '',
   audit_dt : '',
-  resturant_manager : '',
+  restaurant_manager : '',
   checklist_item : ''
  }
 
@@ -41,7 +41,7 @@ export class AuditComponent implements OnInit {
       this.userForm = this.fb.group({
         name: [''],
         shift_manager: [''],
-        resturant_manager: [''],
+        restaurant_manager: [''],
         audit_dt: [''],
         cheklist_name: [''],
         attachment_path: ['']
@@ -134,14 +134,14 @@ export class AuditComponent implements OnInit {
     modal.componentInstance.viewaudit = item;
   }
 
-  // addAudit() {
-  //   let modal = this.modalService.open(AddAuditComponent, {
-  //     backdrop: 'static',
-  //     size: 'xl',
-  //     keyboard: false,
-  //     centered: true,
-  //     windowClass: 'customm-modal',
-  //   });
-  // }
+  addAudit() {
+    let modal = this.modalService.open(AddAuditComponent, {
+      backdrop: 'static',
+      size: 'xl',
+      keyboard: false,
+      centered: true,
+      windowClass: 'customm-modal',
+    });
+  }
 
 }

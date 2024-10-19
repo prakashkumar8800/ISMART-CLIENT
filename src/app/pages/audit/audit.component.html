@@ -15,15 +15,18 @@
                 <div class="card-header p-0">
                     <div style="display: flex">
                         <div class="row" style="margin: 0 0 0 auto;">
-                            <div class="col-md-6"></div>
-                            <div class="col-md-6">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
                                 <div class="form-group d-flex" style="gap: 10px; align-items: center;">
                                   <label for="inputscore" class="form-label">Score</label>
                                   <input type="score" class="form-control" name="score" readonly="true">
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <p (click)="addAudit()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
+                            </div>
                         </div>
-                        <!-- <p (click)="addAudit()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p> -->
                     </div>
 
                     <div>
@@ -40,7 +43,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table table-responsive">
+                    <div class="table table-responsive" *ngIf="pendingTab">
                         <table class="table table-flush">
                             <thead class="thead-light">
                                 <tr>
@@ -49,7 +52,6 @@
                                     <th>Audit DT</th>
                                     <th>Restaurant Manager</th>
                                     <th>Checklist Item</th>
-                                    <!-- <th>Attachment Path</th> -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -58,11 +60,40 @@
                                     <td>{{audit.name}}</td>
                                     <td>{{audit.shift_manager}}</td>
                                     <td>{{audit.audit_dt}}</td>
-                                    <td>{{audit.resturant_manager}}</td>
+                                    <td>{{audit.restaurant_manager}}</td>
                                     <td>{{audit.checklist_item}}</td>
-                                    <!-- <td>{{audit.attachment_path}}</td> -->
                                     <td class="text-right">
                                         <div style="display: flex">
+                                            <p (click)="viewAudit(audit)" class="text-success action"
+                                            style="margin-left: 10px;"><i class="fa-solid fa-eye" style="cursor: pointer;"></i></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table table-responsive" *ngIf="completeTab">
+                        <table class="table table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Shift Manager</th>
+                                    <th>Audit DT</th>
+                                    <th>Restaurant Manager</th>
+                                    <th>Checklist Item</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let audit of audits">
+                                    <td *ngIf="status== 0">{{audit.name}}</td>
+                                    <td *ngIf="status== 0">{{audit.shift_manager}}</td>
+                                    <td *ngIf="status== 0">{{audit.audit_dt}}</td>
+                                    <td *ngIf="status== 0">{{audit.resturant_manager}}</td>
+                                    <td *ngIf="status== 0">{{audit.checklist_item}}</td>
+                                    <td class="text-right">
+                                        <div style="display: flex" *ngIf="status== 0">
                                             <p (click)="viewAudit(audit)" class="text-success action"
                                             style="margin-left: 10px;"><i class="fa-solid fa-eye" style="cursor: pointer;"></i></p>
                                         </div>

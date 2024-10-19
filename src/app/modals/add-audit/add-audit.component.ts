@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/services/api.service';
@@ -12,36 +13,42 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class AddAuditComponent implements OnInit {
 
-  @Input() audit;
+  @Input() auditdetail;
 
-  name = '';
-  shift_manager = '';
-  audit_dt = '';
-  resturant_manager = '';
-  checklist_name = '';
-  attachment_path = '';
+    name : ''
+    shift_manager : ''
+    audit_dt : ''
+    restaurant_manager: ''
+    checklist_item : ''
+    attachment_path : ''
+
+  userForm: FormGroup
 
   userdetail = []
 
   constructor(public utilService: UtilService,
     public apiService: ApiService,
     private headerService: HeaderService,
+    private fb: FormBuilder,
     private modalService: NgbModal,
     private activeModal: NgbActiveModal,
-    private toaster: ToastrService) { }
+    private toaster: ToastrService) { 
+
+      this.userForm = this.fb.group({});
+    }
 
   ngOnInit(): void {
-    if (this.audit != null && this.audit != undefined) {
-      this.name = this.audit.name,
-      this.shift_manager= this.audit.shift_manager,
-      this.resturant_manager = this.audit.restaurant_manager
-      this.audit_dt = this.audit.audit_dt,
-      this.checklist_name = this.audit.cheklist_name,
-      this.attachment_path = this.audit.attachment_path
+    if (this.auditdetail != null && this.auditdetail != undefined) {
+      this.name = this.auditdetail.name,
+      this.shift_manager= this.auditdetail.shift_manager,
+      this.restaurant_manager = this.auditdetail.restaurant_manager,
+      this.audit_dt = this.auditdetail.audit_dt,
+      this.checklist_item = this.auditdetail.cheklist_item,
+      this.attachment_path = this.auditdetail.attachment_path
     }
     this.getUser()
     this.getChecklist();
-    console.log(this.audit);
+    // console.log(this.auditdetail);
   }
 
   getUser(){
@@ -56,7 +63,6 @@ export class AddAuditComponent implements OnInit {
       this.toaster.error(error.error.message)
     })
   }
-
 
   close() {
     this.activeModal.close()
@@ -79,32 +85,32 @@ export class AddAuditComponent implements OnInit {
       return;
     }
 
-     if (this.shift_manager == '') {
-       this.toaster.error("please enter restaurant")
-   }
+    if (this.shift_manager == '') {
+       this.toaster.error("please select restaurant")
+    }
 
     if (this.audit_dt == '') {
-      this.toaster.error("Please enter auditor name");
+      this.toaster.error("Please select datetime");
       return;
     }
 
-    if (this.resturant_manager == '') {
-      this.toaster.error("Please enter assign date");
+    if (this.restaurant_manager == '') {
+      this.toaster.error("Please select restaurant manager");
       return;
     }
 
-    if (this.checklist_name == '') {
+    if (this.checklist_item == '') {
       this.toaster.error("Please select service");
       return;
     }
 
-    this.apiService.postAPI(this.apiService.BASE_URL + "assign/createAssign", {
+    this.apiService.postAPI(this.apiService.BASE_URL + "audit/createAudit", {
       name: this.name,
       shift_manager: this.shift_manager,
-      restaurant: this.resturant_manager,
+      restaurant_manager: this.restaurant_manager,
       audit_dt: this.audit_dt,
-      checklist_name: this.checklist_name,
-      ass_dt: this.attachment_path
+      checklist_item: this.checklist_item,
+      attachment_path: this.attachment_path
     }).then((result) => {
       if (result.status) {
         this.activeModal.close()

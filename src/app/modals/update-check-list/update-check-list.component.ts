@@ -15,8 +15,8 @@ export class UpdateCheckListComponent implements OnInit {
   @Input() listitem;
 
   name = '';
-  items = [{itemname: ''}];
-  status= '1';
+  items = [];
+  status: string = '1';
 
   constructor(public utilService: UtilService,
     public apiService: ApiService,
@@ -32,16 +32,21 @@ export class UpdateCheckListComponent implements OnInit {
     }
   }
 
+  OnStatuschange() {
+    console.log('Selected service:', this.listitem);
+  }
+
 
   update() {
+    console.log(this.status)
     if (this.name == '') {
       this.toaster.error("Please enter name");
       return;
     }
 
-    // if (this.itemname ) {
-    //   this.toaster.error("please enter value")
-    // }
+    if (this.items ) {
+      this.toaster.error("please enter value")
+    }
 
     if (this.status == '') {
       this.toaster.error("please select value")
@@ -49,8 +54,8 @@ export class UpdateCheckListComponent implements OnInit {
 
     this.apiService.postAPI(this.apiService.BASE_URL + "checklist/updateCheckList", {
       name: this.name,
-      items: this.items,
-      status: this.listitem.status,
+      items: JSON.stringify(this.items),
+      status : this.listitem.status || '0',
       id: this.listitem.id
    }).then((result)=> {
      if (result.status){

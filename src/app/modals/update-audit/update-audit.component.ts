@@ -47,7 +47,6 @@ export class UpdateAuditComponent implements OnInit {
       this.restaurant = this.assign.restaurant
       this.ass_dt = this.assign.ass_dt,
       this.added_dt = this.assign.added_dt,
-      // this.type = this.assign.type,
       this.status = this.assign.status
     }
     this.getRestaurant();
@@ -88,16 +87,32 @@ export class UpdateAuditComponent implements OnInit {
       return;
     }
 
-    // if (this.type == '') {
-    //   this.toaster.error("Please select type");
-    //   return;
-    // }
+    if (this.auditor == '') {
+      this.toaster.error("Please enter auditor");
+      return;
+    }
+    if (this.service == '') {
+      this.toaster.error("Please enter service");
+      return;
+    }
+    if (this.ass_dt == '') {
+      this.toaster.error("Please enter datetime");
+      return;
+    }
+    if (this.restaurant == '') {
+      this.toaster.error("Please select restaurant");
+      return;
+    }
+    if (this.status == '') {
+      this.toaster.error("Please select status");
+      return;
+    }
 
     this.apiService.postAPI(this.apiService.BASE_URL + "assign/updateAssign", {
       name: this.name,
       restaurant : this.assign.restaurant,
       service : this.assign.service,
-      auditor : this.auditor,
+      auditor : this.assign.auditor,
       added_dt : this.added_dt,
       ass_dt : this.ass_dt,
       // type: this.type,

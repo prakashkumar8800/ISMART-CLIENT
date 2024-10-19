@@ -15,9 +15,9 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputrole" class="form-label">Shift Manager</label>
-                <select type="name" class="form-select" name="shift_manager" [(ngModel)]="shift_manager">
-                  <option *ngFor="let User of userdetail">{{User.role}}</option>
-                </select>
+                <input type="name" class="form-control" name="shift_manager" [(ngModel)]="shift_manager">
+                  <!-- <option *ngFor="let User of userdetail">{{User.role}}</option>
+                </select> -->
               </div>
             </div>
             <div class="col-md-6">
@@ -29,9 +29,9 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputrole" class="form-label">Restaurant Manager</label>
-                <select name="service" [(ngModel)]="resturant_manager">
-                  <option value="-1" *ngFor="let User of userdetail">{{User.name}}</option>
-                </select>
+                <input name="service" [(ngModel)]="resturant_manager" class="form-control">
+                  <!-- <option value="-1" *ngFor="let User of userdetail">{{User.name}}</option>
+                </select> -->
               </div>
             </div>
             <!-- <div class="col-md-6">

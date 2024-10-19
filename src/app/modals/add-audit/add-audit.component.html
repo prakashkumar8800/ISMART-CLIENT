@@ -1,6 +1,5 @@
 <div class="modal-header">
-    <h5 *ngIf="audit ==null">Add Assign</h5>
-    <!-- <h5 *ngIf="assign !=null">Edit Assign</h5> -->
+    <h5 *ngIf="auditdetail == null">Add Audit</h5>
     <button type="button" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
 </div>
 
@@ -24,36 +23,36 @@
             <div class="col-md-6">
                 <div class="form-group">
                   <label for="inputdatetime" class="form-label">Audit Date Time</label>
-                  <input type="date" class="form-control" name="ass_dt" [(ngModel)]="audit_dt">
+                  <input type="datetime-local" class="form-control" name="audit_dt" [(ngModel)]="audit_dt">
                 </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="inputrole" class="form-label">Restaurant Manager</label>
-                <select name="service" [(ngModel)]="resturant_manager">
-                  <option value="-1" *ngFor="let User of userdetail">{{User.name}}</option>
+                <label for="input" class="form-label">Restaurant Manager</label>
+                <select name="restaurant_manager" [(ngModel)]="restaurant_manager">
+                  <option *ngFor="let User of userdetail">{{User.name}}</option>
                 </select>
               </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                   <label for="inputrole" class="form-label">Checklist Name</label>
-                  <select name="service" [(ngModel)]="checklist_name">
+                  <select name="name" [(ngModel)]="checklist_item">
                     <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option>
                   </select>
                 </div>
             </div>
-            <div class="col-md-6"></div>
+            <!-- <div class="col-md-6"></div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="inputstatus" class="form-label">attachment_path</label>
                     <input class="form-control" name="attach_path">
                 </div>
-            </div>
+            </div> -->
         </form>
     </div>
 </div>
 
 <div class="modal-footer">
-    <button   *ngIf="audit ==null" (click)="add()" class="btn btn-primary"  type="submit" style="background: #be1b1e; border: none;">SUBMIT</button>
+    <button  *ngIf="auditdetail == null" (click)="add()" class="btn btn-primary"  type="submit" style="background: #be1b1e; border: none;">SUBMIT</button>
   </div>

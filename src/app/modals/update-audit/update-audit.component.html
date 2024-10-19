@@ -23,21 +23,21 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputrole" class="form-label">Auditor</label>
-                <select name="auditor" class="form-select">
-                  <option>{{assign.auditor}}</option>
-                </select>
+                <input name="auditor" class="form-control" [(ngModel)]="auditor">
+                  <!-- <option>{{assign.auditor}}</option>
+                </select> -->
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputrole" class="form-label">Service</label>
-                <input name="service" class="form-control" [(ngModel)]="assign.service">
+                <input name="service" class="form-control" [(ngModel)]="service">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputdatetime" class="form-label">Assign Date Time</label>
-                <input class="form-control" name="ass_dt" [(ngModel)]="assign.ass_dt">
+                <input class="form-control" type="datetime-local" name="ass_dt" [(ngModel)]="assign.ass_dt">
               </div>
             </div>
 

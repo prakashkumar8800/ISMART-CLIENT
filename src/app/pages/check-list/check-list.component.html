@@ -23,7 +23,7 @@
                                 <div class="form-group">
                                     <label for="inputservice" class="form-label">Service</label>
                                     <select class="form-select"  [(ngModel)]="Service" name="selectedService" (ngModelChange)="onServiceChange()">
-                                        <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.status !=0 ? list.name:''}}</option>
+                                        <option *ngFor="let list of checklist"  [value]="list.name">{{list.status !=0 ? list.name:''}}</option>
                                     </select>
                                 </div>
                             </div>

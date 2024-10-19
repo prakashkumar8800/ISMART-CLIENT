@@ -31,7 +31,7 @@ export class CheckListComponent implements OnInit {
 
   searchTerm: any = '';
 
-  Service: string= ' ';
+  Service: string= '';
 
   x :string=" ";
 

@@ -12,19 +12,21 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class AddRestaurantComponent implements OnInit {
   
-  @Input()
-  restaurant
-  constructor(
+  @Input() restaurant
 
-    public utilService: UtilService,
-    public apiService: ApiService,
-    private headerService: HeaderService,
-    private modalService: NgbModal,
-    private activeModal: NgbActiveModal,
-    private toaster: ToastrService
-  ) { }
+    constructor(
+
+      public utilService: UtilService,
+      public apiService: ApiService,
+      private headerService: HeaderService,
+      private modalService: NgbModal,
+      private activeModal: NgbActiveModal,
+      private toaster: ToastrService
+    ) { }
+    
   name='';
   status='1';
+
   add(){
     if (this.name == '') {
       this.toaster.error("Please enter name");

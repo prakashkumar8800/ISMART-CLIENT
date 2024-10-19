@@ -88,7 +88,6 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.details != null && this.details != undefined) {
-
       this.name = this.details.name.validator.required();
       this.email = this.details.email.validator.required(this.email);
       this.phone = this.details.phone.validator.required();
