@@ -16,6 +16,8 @@ import { OrderPipe } from 'ngx-order-pipe';
 })
 export class UserComponent implements OnInit {
 
+  p = 1
+
   key: string = 'name';
   reverse: boolean = false;
 

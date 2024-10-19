@@ -13,6 +13,9 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./restaurant.component.scss']
 })
 export class RestaurantComponent implements OnInit {
+
+  p = 1
+  
   addrestaurant(){
     let modal = this.modalService.open(AddRestaurantComponent, {
       backdrop: 'static',

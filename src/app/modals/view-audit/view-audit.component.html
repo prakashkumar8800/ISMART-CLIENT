@@ -63,7 +63,7 @@
             <td>{{audit.attachment_path}}
               <div>
                 <input hidden type="file" #uploader (change)="uploadFile($event)">
-                <i class="fa-solid fa-arrow-up-from-bracket" (click)="uploader.click()"></i>
+                <i class="fa-solid fa-arrow-up-from-bracket" style="cursor: pointer;" (click)="uploader.click()"></i>
               </div>
             </td>
             <td>

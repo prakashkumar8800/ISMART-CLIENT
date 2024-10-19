@@ -47,7 +47,7 @@
                     </thead>
                     <tbody>
                         
-                       <tr *ngFor="let User of userdetail of filteredData">
+                       <tr *ngFor="let User of userdetail of filteredData | paginate: { itemsPerPage: 10, currentPage: p }">
                             <td *ngIf="outlet==User.restaurant || outlet=='all'">{{User.id}}</td>
                             <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.name}}</td>
                             <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.email}}</td>
@@ -70,7 +70,7 @@
                     </tbody>
                 </table>
                 <div class="has-text-centered">
-                    <!-- <pagination-controls (pageChange)="page = $event"></pagination-controls> -->
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
         </div>

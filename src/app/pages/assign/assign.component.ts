@@ -24,6 +24,8 @@ export class AssignComponent implements OnInit {
   userType = ''
   from_date = '';
   to_date = '';
+   
+  p= 1;
 
   selectedType = 'scheduled';
 

@@ -38,7 +38,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let restaurant of restaurants">
+                                    <tr *ngFor="let restaurant of restaurants | paginate: { itemsPerPage: 10, currentPage: p }">
                                         <td>{{restaurant.id}}</td>
                                         <td>{{restaurant.name}}</td>
                                         
@@ -55,11 +55,11 @@
                                 </tbody>
                             </table>
                             <div class="has-text-centered">
-                                <!-- <pagination-controls (pageChange)="page = $event"></pagination-controls> -->
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
                             </div>
                         </div>
                     </div>
                     
                 </div>
             </div>
-                </div>
+</div>

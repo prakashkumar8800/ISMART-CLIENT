@@ -53,23 +53,10 @@ export class AddChecklistComponent implements OnInit {
     console.log(this.checklist)
   }
 
-  onSubmit(form : any) {
-    console.log('Form submitted:', this.listitem.value);
-    this.items = ''; // Reset the form input if needed
-  }
-
   add() {
-    if (this.name == '') {
-      this.toaster.error("Please enter name");
-      return;
-    }
-    // if (this.items == '') {
-    //   this.toaster.error("please enter items");
-    //   return;
-    // }
     const outputObject = {
       "name": this.name,
-      "items": JSON.stringify(this.checklist.map(item => item.value))
+      "items": JSON.stringify(this.checklist.map(item => item.value))
   };
   console.log(outputObject)
 
