@@ -18,7 +18,7 @@ export class AddUserComponent implements OnInit {
   name = '';
   password = '';
   Cpass = '';
-  phone = '';
+  phone :string= '';
   email= '';
   role = '1';
   status = '1';
@@ -139,6 +139,15 @@ export class AddUserComponent implements OnInit {
       console.error('Error fetching data', error);
     }
   );
+  }
+
+  submit(form: any) {
+    // Check if the form is valid before proceeding
+    if (form.valid) {
+      console.log('Form Submitted!', form.value);
+    } else {
+      console.log('Form is invalid');
+    }
   }
 
   add() {

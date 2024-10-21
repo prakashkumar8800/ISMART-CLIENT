@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
     <div class="form">
-        <form class="row">
+        <form class="row" #userForm="ngForm"  (ngSubmit)="submit(userForm)">
          <!-- [formGroup]="userForm" (ngSubmit)="submit()" -->
           <div class="col-md-6">
             <div class="form-group">
@@ -18,18 +18,19 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputname">Name</label>
-                <input type="text" [(ngModel)]="name" name="name" class="form-control" />
+                <input type="text" [(ngModel)]="name" name="name" class="form-control"/>
                 <!-- <div *ngIf="name.invalid && name.touched">
                   <small *ngIf="name.errors?.required">Name is required.</small>
                   <small *ngIf="name.errors?.minlength">Name must be at least 3 characters long.</small>
                 </div> -->
                 <!-- [(ngModel)]="name" -->
+          
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputemail">Email</label>
-                <input type="email" [(ngModel)]="email" name="email" class="form-control" /> 
+                <input type="email" [(ngModel)]="email" name="email" class="form-control"/> 
                 <!-- <div *ngIf="email.invalid && email.touched">
                   <small *ngIf="email.errors?.required">Email is required.</small>
                   <small *ngIf="email.errors?.email">Invalid email format.</small>
@@ -40,12 +41,17 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputphone" >Phone</label>
-                 <input type="phone" [(ngModel)]="phone" name="phone" class="form-control" />
-                 <!-- <div *ngIf="phone.invalid && phone.touched">
-                  <small *ngIf="phone.errors?.required">Phone number is required.</small>
-                  <small *ngIf="phone.errors?.pattern">Phone number must be 10 digits long.</small>
-                </div> -->
-                <!-- [(ngModel)]="phone" -->
+                 <input type="phone" [(ngModel)]="phone" name="phone" class="form-control"
+                 required 
+                 pattern="^[0-9]{10}$" 
+                 minlength="10" 
+                 maxlength="10"/>
+
+                 <div *ngIf="userForm.controls.phone.invalid && userForm.controls.phone.touched" class="text-danger">
+                  <small *ngIf="userForm.controls.phone.errors?.required">Phone number is required.</small>
+                  <small *ngIf="userForm.controls.phone.errors?.pattern">Phone number must be numeric and 10 digits long.</small>
+                  <small *ngIf="userForm.controls.phone.errors?.minlength || userForm.controls.phone.errors?.maxlength">Phone number must be exactly 10 digits.</small>
+                </div>
               </div>
             </div>
             <div class="col-md-6">
@@ -75,11 +81,7 @@
               <div class="form-group">
                 <label for="inputcpass">Confirm Password</label>
                 <input [(ngModel)]="Cpass" type="Cpass" name="Cpass" class="form-control">
-
-                <!-- <div *ngIf="userForm.get('Cpassword')?.invalid && userForm.get('Cpassword')?.touched">
-                  <small *ngIf="userForm.get('Cpassword')?.errors?.required">Confirm Password is required.</small>
-                  <small *ngIf="userForm.hasError('passwordMismatch')">Passwords do not match.</small>
-                </div> -->
+                
               </div>
             </div>
             <div class="col-md-6">
