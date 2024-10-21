@@ -15,17 +15,15 @@ import { UtilService } from 'src/app/services/util.service';
 export class RestaurantComponent implements OnInit {
 
   p = 1
-  
-  addrestaurant(){
-    let modal = this.modalService.open(AddRestaurantComponent, {
-      backdrop: 'static',
-      size: 'xl',
-      keyboard: false,
-      centered: true,
-      windowClass: 'customm-modal',
-   });
-   this.getRestaurant();
+
+  key: string = 'name';
+  reverse: boolean = false;
+
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
   }
+
   constructor(
     public utilService: UtilService,
     public apiService: ApiService,
@@ -54,16 +52,16 @@ export class RestaurantComponent implements OnInit {
   );
   }
 
-  key: string = 'name';
-  reverse: boolean = false;
-
-  sort(key) {
-    this.key = key;
-    this.reverse = !this.reverse;
+  addrestaurant(){
+    let modal = this.modalService.open(AddRestaurantComponent, {
+      backdrop: 'static',
+      size: 'xl',
+      keyboard: false,
+      centered: true,
+      windowClass: 'customm-modal',
+   });
+   this.getRestaurant();
   }
-  // filteredData:any[]=[];
-
-  
 
   updaterestaurant(item: any) {
     console.log(item)
@@ -75,7 +73,7 @@ export class RestaurantComponent implements OnInit {
       windowClass: 'customm-modal'
     });
     modal.result.then((result) => {
-      
+      this.getRestaurant();
     })
      modal.componentInstance.restaurant = item;
   }

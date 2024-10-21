@@ -17,6 +17,7 @@ export class AddChecklistComponent implements OnInit {
 
   name = '';
   items = '';
+  attachment: '';
 
   myForm : FormGroup;
 
@@ -56,7 +57,8 @@ export class AddChecklistComponent implements OnInit {
   add() {
     const outputObject = {
       "name": this.name,
-      "items": JSON.stringify(this.checklist.map(item => item.value))
+      "items": JSON.stringify(this.checklist.map(item => item.value)),
+      "attachment": this.attachment
   };
   console.log(outputObject)
 

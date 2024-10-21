@@ -8,7 +8,7 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label for="inputname" class="form-label">Name</label>
-                <input [(ngModel)]="name" type="name" class="form-control" name="name">
+                <input [(ngModel)]="name" type="name" class="form-control" name="name" placeholder="Enter Service name">
               </div>
             </div>
             <div class="col-md-12">
@@ -17,11 +17,15 @@
 
             <div class="col-md-12">
                 <div class="row" *ngFor="let list of checklist; let i = index;">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div>
-                            <label for="items" class="form-label">Items</label>
-                            <input class="form-control" [(ngModel)]="list.value" name="items{{i}}">
+                            <label for="items" class="form-label">Items {{i}}</label>
+                            <input class="form-control" [(ngModel)]="list.value" name="items{{i}}" placeholder="Enter Items">
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="formFile" class="form-label">Attachment</label>
+                        <input class="form-control" type="file" id="formFile">
                     </div>
                     <div class="col-md-3">
                         <button type="button" (click)="removeInput(i)" class="btn btn-danger" style="margin-top: 30px; background: #be1b1e;">Delete</button>

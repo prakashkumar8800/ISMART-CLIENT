@@ -26,7 +26,6 @@ export class CheckListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getChecklist();
-    // this.selectedService;
   }
 
   searchTerm: any = '';
