@@ -33,7 +33,7 @@
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <a [ngClass]="pendingTab ?'nav-link active' : 'nav-link'"
-                                (click)="OrderList('pending')">Pending (0)</a>
+                                (click)="OrderList('pending')">Pending ({{userdetail.length}})</a>
                             </li>
                             <li class="nav-item">
                                 <a [ngClass]="completeTab ? 'nav-link active' : 'nav-link'"

@@ -30,17 +30,17 @@
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                             <div class="form-group">
                                 <label>From</label>
-                                <input type="date" (ngModelChange)="onDateSelected()" [(ngModel)]="from_date" class="form-control" [(ngModel)]="from_date">
+                                <input type="date"  [(ngModel)]="from_date" class="form-control" [(ngModel)]="from_date">
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                             <div class="form-group">
                                 <label>To</label>
-                                <input type="date" class="form-control" (ngModelChange)="onDateSelected()" [(ngModel)]="to_date">
+                                <input type="date" class="form-control"  [(ngModel)]="to_date">
                             </div>
                         </div>
                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                            <button class="btn btn-primary" style="background: #be1b1e; border: none; margin-top: 30px;">Search</button>
+                            <button (click)="onDateOrOutletChange()" class="btn btn-primary" style="background: #be1b1e; border: none; margin-top: 30px;">Search</button>
                         </div>
                         <!-- [(ngModel)]="searchTerm" -->
                     </div>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table table-responsive" *ngIf="scheduledTab">
+                    <div class="table table-responsive" >
                         <table class="table table-flush">
                             <thead class="thead-light">
                                 <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
@@ -77,13 +77,13 @@
                                 <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let assignUser of userAssign | paginate: { itemsPerPage: 10, currentPage: p}">
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.name}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.auditor}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.restaurant}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.service}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.ass_dt}}</td>
-                                    <td class="text-right" *ngIf="outlet==assignUser.restaurant || outlet=='all'" >
+                                <tr *ngFor="let assignUser of filteredAssignments | paginate: { itemsPerPage: 10, currentPage: p}">
+                                    <td >{{assignUser.name}}</td>
+                                    <td >{{assignUser.auditor}}</td>
+                                    <td >{{assignUser.restaurant}}</td>
+                                    <td >{{assignUser.service}}</td>
+                                    <td >{{assignUser.ass_dt}}</td>
+                                    <td class="text-right" >
                                         <div style="display: flex">
                                             <p (click)="updateAudit(assignUser)" class="text-success action"
                                             style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>

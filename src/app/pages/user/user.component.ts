@@ -25,6 +25,7 @@ export class UserComponent implements OnInit {
     this.key = key;
     this.reverse = !this.reverse;
   }
+  filteredUsers = [];
 
   order: string = 'name';
   
@@ -43,11 +44,18 @@ export class UserComponent implements OnInit {
     ngOnInit(): void {
        this.getUser();
        this.getRestaurant();
+       this.filteredUsers = this.userdetail;
     }
 
     searchTerm: string = '';
     
     outlet:string ='all';
+
+    applyFilters() {
+      this.filteredUsers = this.userdetail.filter(user => 
+        user.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
 
     getUser(){
       this.userdetail = [];
@@ -66,27 +74,27 @@ export class UserComponent implements OnInit {
     restaurants = []
     filteredPackages: any[]=[];
 
-    applyFilters(): void {
-      if (!this.restaurants || this.restaurants.length === 0) return;
+    // applyFilters(): void {
+    //   if (!this.restaurants || this.restaurants.length === 0) return;
   
-      console.log("Filters applied:", {
-        searchTerm: this.searchTerm,
+    //   console.log("Filters applied:", {
+    //     searchTerm: this.searchTerm,
   
-      });
+    //   });
   
-      this.filteredPackages = this.restaurants.filter((packages) => {
+    //   this.filteredPackages = this.restaurants.filter((packages) => {
   
-        // Check if typedCountry is either part of the package's country name or matches dropdown selection
+    //     // Check if typedCountry is either part of the package's country name or matches dropdown selection
         
-        return (
-          // Combine both dropdown and text input country filters
-          (this.searchTerm === "" ||
-            packages.searchTerm === this.searchTerm)
-        );
-      });
+    //     return (
+    //       // Combine both dropdown and text input country filters
+    //       (this.searchTerm === "" ||
+    //         packages.searchTerm === this.searchTerm)
+    //     );
+    //   });
   
-      console.log("Filtered Packages:", this.filteredPackages);
-    }
+    //   console.log("Filtered Packages:", this.filteredPackages);
+    // }
 
     getRestaurant() {
       this.restaurants = [];

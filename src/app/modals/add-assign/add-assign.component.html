@@ -11,6 +11,7 @@
             <div class="form-group">
               <label for="inputrole" class="form-label">Restaurant</label>
               <select name="name" class="form-select" [(ngModel)]="restaurant">
+                <option [value]="null"></option>
                 <option *ngFor="let restaurant of restaurants">{{restaurant.name}}</option>
               </select>
             </div>
@@ -26,6 +27,7 @@
             <div class="form-group">
               <label for="inputrole" class="form-label">Auditor</label>
               <select type="name" class="form-select" name="name" [(ngModel)]="auditor">
+                <option [value]="null"></option>
                 <option *ngFor="let User of userdetail">{{User.name}}</option>
               </select>
             </div>
@@ -43,13 +45,14 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputdatetime" class="form-label">Assign Date Time</label>
-              <input type="datetime-local" class="form-control" name="date" [(ngModel)]="ass_dt">
+              <input type="date" class="form-control" name="date" [(ngModel)]="ass_dt">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputstatus" class="form-label">Status</label>
               <select name="status" class="form-select" [(ngModel)]="status">
+                
                 <option value="0">Inactive</option>
                 <option value="1">Active</option>
               </select>

@@ -22,9 +22,12 @@ export class AssignComponent implements OnInit {
   pendingTab = false;
 
   userType = ''
-  from_date = '';
-  to_date = '';
-   
+  from_date:string = '';
+  to_date :string= '';
+  outlet:string ='all';
+  filteredAssignments = [];
+  // filteredAssignments: any[] = []; 
+  
   p= 1;
 
   selectedType = 'scheduled';
@@ -49,12 +52,15 @@ export class AssignComponent implements OnInit {
     this.getRestaurant()
   }
 
+  
+  
+
   getCompletedTasks() {
     return this.userAssign.filter(userAssign => userAssign.status === "1");
   }
 
 
-  outlet:string ='all';
+  // outlet:string ='all';
  
   getRestaurant() {
     let activeRestaurants:any;
@@ -124,6 +130,7 @@ export class AssignComponent implements OnInit {
       console.log(result)
       if (result.status == true) {
         this.userAssign = result.result
+        this.filteredAssignments = this.userAssign;
         console.log(this.userAssign)
       }
     }, (error) => {
@@ -158,6 +165,8 @@ export class AssignComponent implements OnInit {
     }
   }
 
+  
+
   updateAudit(item: any) {
     let modal = this.modalService.open(UpdateAuditComponent, {
       backdrop: 'static',
@@ -178,5 +187,39 @@ export class AssignComponent implements OnInit {
       windowClass: 'customm-modal',
     });
   }
+
+  filterAssignments() {
+    // const fromDate=(this.from_date);
+    // const toDate=this.to_date;
+     const fromDate = new Date(this.from_date );
+     const toDate = new Date(this.to_date);
+    
+    console.log(fromDate);
+    console.log(toDate);
+
+    // // Check date validity
+    // if (fromDate.getTime() > toDate.getTime()) {
+    //   this.toaster.error('From date must be less than to date');
+    //   return;
+    // }
+
+    // Filter assignments based on date range and outlet
+    this.filteredAssignments = this.userAssign.filter(assign => {
+      let assignDate = new Date(assign.ass_dt);
+      console.log("Prakash",assignDate);
+      let isDateInRange = assignDate >= fromDate && assignDate <= toDate;
+      let isOutletMatch = this.outlet === 'all' || assign.restaurant === this.outlet;
+      return isDateInRange && isOutletMatch;
+    });
+  }
+
+  // Ensure the filterAssignments method is called whenever the user changes the date or outlet
+  onDateOrOutletChange() {
+    console.log('Filtering with outlet:', this.outlet, 'From:', this.from_date, 'To:', this.to_date);
+    console.log('BeforFiltered Assignments:', this.filteredAssignments);
+    this.filterAssignments();
+    console.log('Filtered Assignments:', this.filteredAssignments);
+  }
+
 
 }

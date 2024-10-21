@@ -16,9 +16,10 @@ export class AddAuditComponent implements OnInit {
   @Input() auditdetail;
 
     name : ''
-    shift_manager : ''
+    // shift_manager : ''
+    shift_manager: string | null = null;
     audit_dt : ''
-    restaurant_manager: ''
+    restaurant_manager: string | null = null;
     checklist_item : ''
     attachment_path : ''
 
