@@ -19,6 +19,12 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
+                <label for="formFile" class="form-label">Attachment</label>
+                <input class="form-control" type="file" id="formFile">
+              </div>
+          </div>
+            <div class="col-md-6">
+              <div class="form-group">
                 <label for="inputstatus" class="form-label">Status</label>
                 <select [(ngModel)]="status" (ngModelChange)="OnStatuschange()" name="status" class="form-select">
                   <option value="0">InActive</option>

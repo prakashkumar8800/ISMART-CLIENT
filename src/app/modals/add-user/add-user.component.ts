@@ -20,10 +20,12 @@ export class AddUserComponent implements OnInit {
   Cpass = '';
   phone :string = '';
   email : string = '';
-  role = '1';
+  role = '';
   status = '1';
+
+  restaurant: string = '';
   
-  userForm: FormGroup
+  userForm: FormGroup;
 
   constructor( public utilService: UtilService,
     public apiService: ApiService,
@@ -34,17 +36,20 @@ export class AddUserComponent implements OnInit {
     private fb: FormBuilder
   ) 
 
-    {this.userForm = this.fb.group({}, 
-    ) 
-  }
+    {this.userForm = this.fb.group({}) }
 
   ngOnInit(): void {
     if (this.details != null && this.details != undefined) {
-      this.name = this.details.name.validator.required();
+      this.name = this.details.name.validator.required(this.name);
       this.email = this.details.email.validator.required(this.email);
+<<<<<<< Updated upstream
       this.phone = this.details.phone.validator.required();
       // this.restaurant = this.details.restaurant,
       // this.restaurant = this.restaurants[0].name;
+=======
+      this.phone = this.details.phone.validator.required(this.phone);
+      this.restaurant = this.details.restaurant,
+>>>>>>> Stashed changes
       this.role = this.details.role;
       this.status = this.details.status;
     }
@@ -59,7 +64,7 @@ export class AddUserComponent implements OnInit {
   userRoles = []
 
   getUserDetails(){
-    this.userRoles = []
+    // this.userRoles = []
     this.apiService.getAPI(this.apiService.BASE_URL + "user-type/getAllUserRole").then((result)=>{
       console.log(result)
       if(result.status == true){
@@ -71,11 +76,10 @@ export class AddUserComponent implements OnInit {
     })
   }
 
-  restaurant = '';
   restaurants=[];
 
   getRestaurant() {
-    this.restaurants=[];
+    // this.restaurants=[];
     this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {
       console.log(result)
       if (result.status == true) {

@@ -30,7 +30,7 @@ export class CheckListComponent implements OnInit {
 
   searchTerm: any = '';
 
-  Service: string= '';
+  Service: string= 'check1';
 
   x :string=" ";
 
@@ -39,8 +39,6 @@ export class CheckListComponent implements OnInit {
       console.log(result);
       if (result.status) {
         this.checklist = result.result;
-  
-        // Parse 'items' if it's in string format
         this.checklist.forEach((list: any) => {
           if (typeof list.items === 'string') {
             try {
@@ -73,7 +71,7 @@ export class CheckListComponent implements OnInit {
    this.getChecklist();
   }
 
-  updatechecklist(item:any) {
+  editchecklist() {
     let modal = this.modalService.open(UpdateCheckListComponent, {
       backdrop: 'static',
       size: 'xl',
@@ -82,7 +80,7 @@ export class CheckListComponent implements OnInit {
       windowClass: 'customm-modal',
    });
    this.getChecklist();
-   modal.componentInstance.listitem = item;
+  //  modal.componentInstance.listitem = item;
   }
 
 }

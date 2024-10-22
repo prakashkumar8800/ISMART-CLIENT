@@ -23,31 +23,27 @@
                           <h2>Hello,</h2>
                           <p>Welcome to the <span>iSmart</span></p>
       
-                          <form class="row" #adminForm="ngForm" (ngSubmit)="onSubmit(adminForm)">
+                          <form class="row" #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
                               <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required #email ngModel value="">
+                                    <input type="email" name="email" class="form-control" placeholder="Enter Email" required #email ngModel value="">
                                 </div>
                               </div>
                               <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required #password ngModel value="">
+                                    <input type="password" name="password" class="form-control" placeholder="Enter Password" [(ngModel)]="password" value="">
                                 </div>
                               </div>
-<<<<<<< Updated upstream
-                              <!-- <h3>Forgot Password ?</h3> -->
-=======
->>>>>>> Stashed changes
                               <div class="col-md-12">
                                   <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                      <h4 style="cursor: pointer; color: #be1b1e;" routerLink="/user-login">User Login</h4>
+                                      <h4 style="cursor: pointer; color: #be1b1e;" routerLink="/login">Login</h4>
                                       <h4 style="cursor: pointer; color: #be1b1e;" routerLink="/forget-password">Forgot Password ?</h4>
                                   </div>
                               </div>
                               <div class="col-md-12">
-                                  <button class="btn btn-primary" [disabled]="adminForm.invalid" style="background: #be1b1e; border: none; margin-top: 0px;" type="submit">Login</button>
+                                  <button class="btn btn-primary" [disabled]="userForm.invalid" style="background: #be1b1e; border: none; margin-top: 0px;" type="submit">Login</button>
                               </div>
                           </form>
                       </div>
