@@ -16,7 +16,7 @@ export class UpdateCheckListComponent implements OnInit {
 
   name = '';
   items = [];
-  status: string = '1';
+  status: number= 0;
 
   constructor(public utilService: UtilService,
     public apiService: ApiService,
@@ -29,11 +29,12 @@ export class UpdateCheckListComponent implements OnInit {
     if (this.listitem != null && this.listitem != undefined) {
       this.name = this.listitem.name;
       this.items = this.listitem.items;
+      this.status=this.listitem.status;
     }
   }
 
   OnStatuschange() {
-    console.log('Selected service:', this.listitem);
+    console.log('Selected service prakash:', this.status);
   }
 
 
@@ -48,21 +49,22 @@ export class UpdateCheckListComponent implements OnInit {
       this.toaster.error("please enter value")
     }
 
-    if (this.status == '') {
-      this.toaster.error("please select value")
-    }
-
+    // if (this.status == '') {
+    //   this.toaster.error("please select value")
+    // }
     this.apiService.postAPI(this.apiService.BASE_URL + "checklist/updateCheckList", {
       name: this.name,
       items: JSON.stringify(this.items),
-      status : this.listitem.status || '0',
+      status : this.status,
       id: this.listitem.id
    }).then((result)=> {
      if (result.status){
+       console.log("This is my updated status",this.status);
        this.activeModal.close()
      }else {
      alert(result.message)
      }
+     window.location.reload();  // Trigger page refresh
    }, (error) => {
    console.log(error.error.message);
    alert(error.error.message)

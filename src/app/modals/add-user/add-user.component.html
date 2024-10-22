@@ -48,8 +48,12 @@
               <div class="form-group">
                 <label for="inputrole">Role</label>
                 <select [(ngModel)]="role" name="role" class="form-control">
-                <option [value]="null"></option>
-                  <option *ngFor="let userdetails of userRoles" value="">{{userdetails.name}}</option>
+
+
+                <!-- <option [value]="null"></option> -->
+
+                  <option *ngFor="let userdetails of userRoles">{{userdetails.name}}</option>
+
                 </select>
               </div>
             </div>

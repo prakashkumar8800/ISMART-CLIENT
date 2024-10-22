@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     }
 
     signin() {
+        console.log("Here are my credtials",this.email,this.password);
         if (this.email == '') {
             this.toaster.error("Please enter email");
             return;

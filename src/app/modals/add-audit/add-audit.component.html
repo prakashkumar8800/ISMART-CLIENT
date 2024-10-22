@@ -15,8 +15,10 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputrole" class="form-label">Shift Manager</label>
-                <select type="name" class="form-select" name="shift_manager" [(ngModel)]="shift_manager" aria-placeholder="select name">
-                  <option *ngFor="let User of userdetail" value="" selected>{{User.role}}</option>
+
+
+                <select type="name" class="form-select" name="shift_manager" [(ngModel)]="shift_manager">
+                  <option *ngFor="let User of userdetail">{{User.role}}</option>
                 </select>
               </div>
             </div>
@@ -30,7 +32,10 @@
               <div class="form-group">
                 <label for="input" class="form-label">Restaurant Manager</label>
                 <select name="restaurant_manager" [(ngModel)]="restaurant_manager">
-                  <option *ngFor="let User of userdetail" value="" selected>{{User.name}}</option>
+
+
+                  <option *ngFor="let User of userdetail">{{User.name}}</option>
+
                 </select>
               </div>
             </div>
@@ -38,7 +43,10 @@
                 <div class="form-group">
                   <label for="inputrole" class="form-label">Checklist Name</label>
                   <select name="name" [(ngModel)]="checklist_item">
+
                     <option *ngFor="let list of checklist"  value="" selected>{{list.name}}</option>
+
+                    
                   </select>
                 </div>
             </div>

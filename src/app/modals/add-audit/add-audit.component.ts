@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { UserDetail } from 'src/app/dto/order-detail';
 import { ApiService } from 'src/app/services/api.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -43,7 +44,7 @@ export class AddAuditComponent implements OnInit {
       this.shift_manager= this.auditdetail.shift_manager,
       this.restaurant_manager = this.auditdetail.restaurant_manager,
       this.audit_dt = this.auditdetail.audit_dt,
-      this.checklist_item = this.auditdetail.cheklist_item,
+      // this.checklist_item = this.auditdetail.cheklist_item,
       this.attachment_path = this.auditdetail.attachment_path
     }
     this.getUser()
@@ -76,6 +77,9 @@ export class AddAuditComponent implements OnInit {
     this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then ((result) =>{
       if (result.status){
        this.checklist = result.result
+       if (this.checklist.length > 0) {
+        this.checklist_item = this.checklist[0].name;
+      }
        console.log(this.checklist)
       }
     }) 
@@ -119,6 +123,7 @@ export class AddAuditComponent implements OnInit {
       } else {
         alert(result.message)
       }
+      window.location.reload();  // Trigger page refresh
     }, (error) => {
       console.log(error.error.message);
       alert(error.error.message)

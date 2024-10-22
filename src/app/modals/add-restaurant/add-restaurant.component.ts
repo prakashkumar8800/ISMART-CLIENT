@@ -41,6 +41,8 @@ export class AddRestaurantComponent implements OnInit {
       } else {
         alert(result.message)
       }
+
+      window.location.reload();  // Trigger page refresh
     },(error) => {
       console.log(error.error.message);
       alert(error.error.message)
