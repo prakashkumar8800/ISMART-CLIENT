@@ -34,27 +34,10 @@ export class LoginComponent implements OnInit {
 
     }
 
-<<<<<<< Updated upstream
-    signin() {
-        console.log("Here are my credtials",this.email,this.password);
-        if (this.email == '') {
-            this.toaster.error("Please enter email");
-            return;
-        }
-        if (!this.utilService.validateEmail(this.email)) {
-            this.toaster.error("Please enter valid email");
-            return;
-        }
-        if (this.password == '') {
-            this.toaster.error("Please enter password");
-            return;
-        }
-=======
     ngOnInit() {
         document.querySelector('body').setAttribute('themebg-pattern', 'theme1');
     //    console.log(this.email,this.password)
     }
->>>>>>> Stashed changes
 
 
 
