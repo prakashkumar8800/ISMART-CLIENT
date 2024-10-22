@@ -16,12 +16,8 @@ export class UpdateCheckListComponent implements OnInit {
 
   name = '';
   items = [];
-<<<<<<< Updated upstream
-  status: number= 0;
-=======
   attachment = '';
   status: string = '1';
->>>>>>> Stashed changes
 
   constructor(public utilService: UtilService,
     public apiService: ApiService,
@@ -32,8 +28,6 @@ export class UpdateCheckListComponent implements OnInit {
 
      }
 
-    //  checklist : string [] = [];
-
   ngOnInit(): void {
     console.log(this.listitem)
     if (this.listitem != null && this.listitem != undefined) {
@@ -43,38 +37,31 @@ export class UpdateCheckListComponent implements OnInit {
     }
   }
 
+  checklist: any[] = []
+
+  addInput() {
+    this.checklist.push({
+      name:"",
+      attachment:false,
+      status:1
+    }); // This should now work without errors
+    console.log(this.checklist)
+  }
+
   OnStatuschange() {
     console.log('Selected service prakash:', this.status);
   }
 
 
   update() {
-    console.log(this.status)
-    if (this.name == '') {
-      this.toaster.error("Please enter name");
-      return;
+    let post={
+      name:this.listitem.name,
+      items:JSON.stringify(this.checklist),
+      status:1
     }
-
-    if (this.items ) {
-      this.toaster.error("please enter value")
-    }
-
-    // if (this.status == '') {
-    //   this.toaster.error("please select value")
-    // }
-    this.apiService.postAPI(this.apiService.BASE_URL + "checklist/updateCheckList", {
-      name: this.name,
-      items: JSON.stringify(this.items),
-<<<<<<< Updated upstream
-      status : this.status,
-=======
-      status : this.listitem.status || '0',
-      attachment : this.attachment,
->>>>>>> Stashed changes
-      id: this.listitem.id
-   }).then((result)=> {
+    this.apiService.postAPI(this.apiService.BASE_URL + "checklist/updateCheckList", post).then((result)=> {
      if (result.status){
-       console.log("This is my updated status",this.status);
+      //  console.log("This is my updated status",this.status);
        this.activeModal.close()
      }else {
      alert(result.message)
