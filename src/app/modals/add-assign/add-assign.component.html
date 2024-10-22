@@ -11,7 +11,6 @@
             <div class="form-group">
               <label for="inputrole" class="form-label">Restaurant</label>
               <select name="name" class="form-select" [(ngModel)]="restaurant">
-                <option [value]="null"></option>
                 <option *ngFor="let restaurant of restaurants">{{restaurant.name}}</option>
               </select>
             </div>
@@ -27,7 +26,7 @@
             <div class="form-group">
               <label for="inputrole" class="form-label">Auditor</label>
               <select type="name" class="form-select" name="name" [(ngModel)]="auditor">
-                <option [value]="null"></option>
+                <!-- <option [value]="null"></option> -->
                 <option *ngFor="let User of userdetail">{{User.name}}</option>
               </select>
             </div>

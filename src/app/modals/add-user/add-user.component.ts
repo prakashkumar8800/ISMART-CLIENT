@@ -91,12 +91,17 @@ export class AddUserComponent implements OnInit {
       this.name = this.details.name.validator.required();
       this.email = this.details.email.validator.required(this.email);
       this.phone = this.details.phone.validator.required();
-      this.restaurant = this.details.restaurant,
+      // this.restaurant = this.details.restaurant,
+      // this.restaurant = this.restaurants[0].name;
       this.role = this.details.role;
       this.status = this.details.status;
     }
     this.getUserDetails();
     this.getRestaurant();
+
+  
+      // this.restaurant = this.restaurants[0].name;  // Set the first restaurant as the default
+    
   }
 
   // submit() {
@@ -132,6 +137,10 @@ export class AddUserComponent implements OnInit {
             this.restaurants = result.result.filter( x=> 
               x.status == 1 ?x.name:'' 
             );
+            console.log("This are my restaurants",this.restaurants);
+            if (this.restaurants.length > 0) {
+              this.restaurant = this.restaurants[0].name;
+            }
           }
          console.log(this.restaurants);
       }
