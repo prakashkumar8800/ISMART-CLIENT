@@ -16,16 +16,26 @@ export class UpdateCheckListComponent implements OnInit {
 
   name = '';
   items = [];
+<<<<<<< Updated upstream
   status: number= 0;
+=======
+  attachment = '';
+  status: string = '1';
+>>>>>>> Stashed changes
 
   constructor(public utilService: UtilService,
     public apiService: ApiService,
     private headerService: HeaderService,
     private activeModal: NgbActiveModal,
     private modalService: NgbModal,
-    private toaster: ToastrService ) { }
+    private toaster: ToastrService ) { 
+
+     }
+
+    //  checklist : string [] = [];
 
   ngOnInit(): void {
+    console.log(this.listitem)
     if (this.listitem != null && this.listitem != undefined) {
       this.name = this.listitem.name;
       this.items = this.listitem.items;
@@ -55,7 +65,12 @@ export class UpdateCheckListComponent implements OnInit {
     this.apiService.postAPI(this.apiService.BASE_URL + "checklist/updateCheckList", {
       name: this.name,
       items: JSON.stringify(this.items),
+<<<<<<< Updated upstream
       status : this.status,
+=======
+      status : this.listitem.status || '0',
+      attachment : this.attachment,
+>>>>>>> Stashed changes
       id: this.listitem.id
    }).then((result)=> {
      if (result.status){

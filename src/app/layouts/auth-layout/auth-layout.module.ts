@@ -9,6 +9,7 @@ import { LoginComponent } from '../../pages/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { UserLoginComponent } from 'src/app/pages/user-login/user-login.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
   ],
   declarations: [
     LoginComponent,
+    UserLoginComponent
   ]
 })
 export class AuthLayoutModule { }

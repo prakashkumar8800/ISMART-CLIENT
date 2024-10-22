@@ -45,7 +45,11 @@ export class AddChecklistComponent implements OnInit {
   checklist: any[] = []
 
   addInput() {
-    this.checklist.push({value: ''}); // This should now work without errors
+    this.checklist.push({
+      name:"",
+      attachment:false,
+      status:1
+    }); // This should now work without errors
     console.log(this.checklist)
   }
 
@@ -55,15 +59,15 @@ export class AddChecklistComponent implements OnInit {
   }
 
   add() {
-    const outputObject = {
-      "name": this.name,
-      "items": JSON.stringify(this.checklist.map(item => item.value)),
-      "attachment": this.attachment
-  };
-  console.log(outputObject)
+   
+    let post={
+      name:this.name,
+      items:JSON.stringify(this.checklist),
+      status:1
+    }
 
     this.apiService.postAPI(this.apiService.BASE_URL + "checklist/createCheckList",
-      outputObject
+      post
     ).then((result)=> {
       if (result.status){
         this.activeModal.close()

@@ -17,5 +17,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-role',       component: UserRoleComponent },
     { path: 'user',       component: UserComponent },
     { path: 'faq-modal',       component: FaqModalComponent },
-    {path: 'restaurant', component:RestaurantComponent}
+    { path: 'restaurant', component:RestaurantComponent },
 ];

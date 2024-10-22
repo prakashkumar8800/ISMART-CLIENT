@@ -23,15 +23,80 @@
                                 <div class="form-group">
                                     <label for="inputservice" class="form-label">Service</label>
                                     <select class="form-select"  [(ngModel)]="Service" name="selectedService" (ngModelChange)="onServiceChange()">
-                                        <option *ngFor="let list of checklist" value="" [value]="list.name">{{list.status !=0 ? list.name:''}}</option>
+                                        <option *ngFor="let list of checklist" [value]="list.name">{{list.status !=0 ? list.name:''}}</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <button type="button" (click)="editchecklist()" style="background: #be1b1e;" class="btn btn-primary">Edit</button>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <h1>Check List</h1>
                             </div>
                         </form>
-                        <form class="row">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table table-responsive">
+                        <table class="table table-flush">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Attachment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <div *ngFor="let list of checklist">
+                                        <div *ngIf="Service == list.name">
+                                            <tr *ngFor="let item of list.items" style="display: flex; justify-content: space-between;">
+                                                <td>
+                                                    {{item.name}} 
+                                                </td>
+                                                <td *ngIf="item.status == 0">Inactive</td>
+                                                <td *ngIf="item.status == 1">Active</td>
+                                                <td>
+                                                    {{item.attachment}}
+                                                </td>
+                                            </tr>
+                                        </div>
+                                    </div>
+                                </tr>
+                                <!-- <div *ngFor="let list of checklist">
+                                <div *ngIf="Service == list.name">
+                                        <tr *ngFor="let item of list.items">
+                                            <td>{{item.name}}</td>
+                                            <td *ngIf="item.status == 0">Inactive</td>
+                                            <td *ngIf="item.status == 1">Active</td>
+                                            <td>{{item.attachment}}</td>
+                                        </tr>
+                                    </div>
+                                </div> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form class="row">
                             <div class="col-md-11">
                                 <div class="form-group">
                                     <div *ngFor="let list of checklist">
@@ -39,7 +104,7 @@
                                             <ul>
                                                 <li *ngFor="let item of list.items" style="display: flex; justify-content: space-between;">
                                                     <div>
-                                                        {{item}} 
+                                                        {{item.name}} 
                                                     </div>
                                                     <div style="display: flex; justify-content: space-between;">
                                                         <div class="col-md-3">
@@ -59,10 +124,4 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                        </form> -->

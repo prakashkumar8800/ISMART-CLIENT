@@ -41,6 +41,7 @@ import { AddRestaurantComponent } from './modals/add-restaurant/add-restaurant.c
 import { UpdateRestaurantComponent } from './modals/update-restaurant/update-restaurant.component';
 import { AddAuditComponent } from './modals/add-audit/add-audit.component';
 import { OrderModule, OrderPipe } from 'ngx-order-pipe';
+import { UserLoginComponent } from './pages/user-login/user-login.component';
 // import { OrderByModule } from 'ng-orderby-pipe';
 
 // import { NgxEditorModule } from 'ngx-editor';
@@ -87,6 +88,7 @@ import { OrderModule, OrderPipe } from 'ngx-order-pipe';
     AddRestaurantComponent,
     UpdateRestaurantComponent,
     AddAuditComponent,
+    // UserLoginComponent,
     
     
   ],
