@@ -30,19 +30,18 @@
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                             <div class="form-group">
                                 <label>From</label>
-                                <input type="date"  [(ngModel)]="from_date" class="form-control" [(ngModel)]="from_date">
+                                <input type="date"  [(ngModel)]="from_date" class="form-control" name="from_date">
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                             <div class="form-group">
                                 <label>To</label>
-                                <input type="date" class="form-control"  [(ngModel)]="to_date">
+                                <input type="date" class="form-control"  [(ngModel)]="to_date" name="to_date">
                             </div>
                         </div>
                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
                             <button (click)="onDateOrOutletChange()" class="btn btn-primary" style="background: #be1b1e; border: none; margin-top: 30px;">Search</button>
                         </div>
-                        <!-- [(ngModel)]="searchTerm" -->
                     </div>
                     <div>
                         <ul class="nav nav-tabs">
@@ -66,7 +65,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table table-responsive" >
+                    <div class="table table-responsive" *ngIf="scheduledTab">
                         <table class="table table-flush">
                             <thead class="thead-light">
                                 <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>

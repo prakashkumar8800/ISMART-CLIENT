@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { interval, Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'argon-dashboard-angular';
+
 }

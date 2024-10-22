@@ -59,14 +59,10 @@ export class ViewAuditComponent implements OnInit {
     console.log(this.viewaudit);
   }
 
-  uploadFile($event){
-    console.log($event.target.files[0]);
-    alert('File uploaded')
-  }
-
   audits = [];
 
   getAudit(){
+    this.audits = [];
     this.apiService.getAPI(this.apiService.BASE_URL + "audit/getAllAuditByList").then (( result) =>{
       console.log(result);
        if (result.status == true){
@@ -79,6 +75,7 @@ export class ViewAuditComponent implements OnInit {
   }
 
   getUser(){
+    this.userdetail = [];
     this.apiService.getAPI(this.apiService.BASE_URL + "user/getAllusers").then((result)=>{
       console.log(result)
       if(result.status){
@@ -103,6 +100,7 @@ export class ViewAuditComponent implements OnInit {
   checklist=[];
 
   getChecklist() {
+    this.checklist=[];
     this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then ((result) =>{
       if (result.status){
        this.checklist = result.result

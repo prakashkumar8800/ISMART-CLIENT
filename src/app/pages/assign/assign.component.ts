@@ -26,7 +26,6 @@ export class AssignComponent implements OnInit {
   to_date :string= '';
   outlet:string ='all';
   filteredAssignments = [];
-  // filteredAssignments: any[] = []; 
   
   p= 1;
 
@@ -45,24 +44,14 @@ export class AssignComponent implements OnInit {
 
   ngOnInit(): void {
     this.userType = this.utilService.getItem(this.utilService.USER_TYPE)
-    // this.from_date = this.datePipe.transform(new Date(), 'yyyy-MM-dd')
-    // this.to_date = this.datePipe.transform(new Date(), 'yyyy-MM-dd')
-
     this.getAssign();
     this.getRestaurant()
   }
 
-  
-  
-
-  getCompletedTasks() {
-    return this.userAssign.filter(userAssign => userAssign.status === "1");
-  }
-
-
-  // outlet:string ='all';
+  restaurants = [];
  
   getRestaurant() {
+    this.restaurants = [];
     let activeRestaurants:any;
     this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {
       if (result.status) {
@@ -104,24 +93,6 @@ export class AssignComponent implements OnInit {
     });
   }
 
-  onDateSelected() {
-    setTimeout(() => {
-      console.log(this.from_date)
-      console.log(this.to_date)
-
-      let fromDate = new Date(this.from_date + ' 00:00:00');
-      let toDate = new Date(this.to_date + ' 23:59:59');
-
-      if (fromDate.getTime() > toDate.getTime()) {
-        this.toaster.error('From date must be less than to date')
-        return;
-      }
-
-      this.OrderList(this.selectedType)
-
-    }, 300)
-  }
-
   userAssign = []
 
   getAssign() {
@@ -136,8 +107,6 @@ export class AssignComponent implements OnInit {
     }, (error) => {
     })
   }
-
-  restaurants = [];
 
   unSelectAllTab() {
     this.scheduledTab = false;
@@ -165,8 +134,6 @@ export class AssignComponent implements OnInit {
     }
   }
 
-  
-
   updateAudit(item: any) {
     let modal = this.modalService.open(UpdateAuditComponent, {
       backdrop: 'static',
@@ -175,6 +142,7 @@ export class AssignComponent implements OnInit {
       centered: true,
       windowClass: 'customm-modal',
     });
+    this.getAssign()
     modal.componentInstance.assign = item;
   }
 
@@ -186,22 +154,15 @@ export class AssignComponent implements OnInit {
       centered: true,
       windowClass: 'customm-modal',
     });
+    this.getAssign();
   }
 
   filterAssignments() {
-    // const fromDate=(this.from_date);
-    // const toDate=this.to_date;
      const fromDate = new Date(this.from_date );
      const toDate = new Date(this.to_date);
     
-    console.log(fromDate);
-    console.log(toDate);
-
-    // // Check date validity
-    // if (fromDate.getTime() > toDate.getTime()) {
-    //   this.toaster.error('From date must be less than to date');
-    //   return;
-    // }
+      console.log(fromDate);
+      console.log(toDate);
 
     // Filter assignments based on date range and outlet
     this.filteredAssignments = this.userAssign.filter(assign => {

@@ -17,10 +17,9 @@ export class AddAuditComponent implements OnInit {
   @Input() auditdetail;
 
     name : ''
-    // shift_manager : ''
-    shift_manager: string | null = null;
+    shift_manager: '';
     audit_dt : ''
-    restaurant_manager: string | null = null;
+    restaurant_manager: '';
     checklist_item : ''
     attachment_path : ''
 
@@ -50,10 +49,11 @@ export class AddAuditComponent implements OnInit {
     }
     this.getUser()
     this.getChecklist();
-    // console.log(this.auditdetail);
+    console.log(this.auditdetail);
   }
 
   getUser(){
+    this.userdetail = [];
     this.apiService.getAPI(this.apiService.BASE_URL + "user/getAllusers").then((result)=>{
       console.log(result)
       if(result.status){
@@ -73,6 +73,7 @@ export class AddAuditComponent implements OnInit {
   checklist=[];
 
   getChecklist() {
+    this.checklist=[];
     this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then ((result) =>{
       if (result.status){
        this.checklist = result.result

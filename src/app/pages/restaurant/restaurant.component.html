@@ -18,10 +18,8 @@
                 <div class="card-header p-0">
                     
                     <div style="display: flex">
-                        <!-- <h4 class="card-title" style="flex-grow: 1"> Crust</h4> -->
                         <p (click)="addrestaurant()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
                     </div>
-                    <!-- Restaurant    -->
                 </div>
                 <div class="card-body">
                     <div class="card-body">
@@ -29,7 +27,7 @@
                             <table class="table table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th (click)="sort('name')">id &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
+                                        <th (click)="sort('id')">id &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
                                         <th (click)="sort('name')">Name &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
                                      
                                         <th (click)="sort('status')">Status &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
@@ -41,7 +39,6 @@
                                     <tr *ngFor="let restaurant of restaurants | paginate: { itemsPerPage: 10, currentPage: p }">
                                         <td>{{restaurant.id}}</td>
                                         <td>{{restaurant.name}}</td>
-                                        
                                         <td *ngIf="restaurant.status == 0">Inactive</td>
                                         <td *ngIf="restaurant.status == 1">Active</td>
                                         

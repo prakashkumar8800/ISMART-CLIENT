@@ -15,16 +15,15 @@ export class AddUserComponent implements OnInit {
 
   @Input() details;
 
-  name = '';
-  password = '';
+  name : string = '';
+  password : string = '';
   Cpass = '';
-  phone :string= '';
-  email= '';
+  phone :string = '';
+  email : string = '';
   role = '1';
   status = '1';
   
   userForm: FormGroup
-    // name: new name
 
   constructor( public utilService: UtilService,
     public apiService: ApiService,
@@ -35,56 +34,9 @@ export class AddUserComponent implements OnInit {
     private fb: FormBuilder
   ) 
 
-    {this.userForm = this.fb.group({
-
-      // name: [
-      //   '',[
-      //     Validators.required,
-      //     Validators.name
-      //   ]
-      // ],
-      // email: [
-      //   '', 
-      //   [
-      //     Validators.required,  // Email is required
-      //     Validators.email      // Validate email format
-      //   ]
-      // ],
-      // phone: [
-      //   '', 
-      //   [
-      //     Validators.required,  // Phone number is required
-      //     Validators.pattern('^[0-9]{10}$')  // Regex for 10-digit phone number
-      //   ]
-      // ],
-    //   password: [
-    //     '', 
-    //     [
-    //       Validators.required,
-    //       Validators.minLength(8), 
-    //       Validators.pattern('(?=.*[0-9])(?=.*[a-zA-Z]).{8,}')  
-    //     ]
-    //   ],
-    //   Cpassword: ['', Validators.required]
-    // 
-    }, 
-    // { validator: this.passwordMatchValidator}
+    {this.userForm = this.fb.group({}, 
     ) 
   }
-
-  // passwordMatchValidator(form: AbstractControl): { [key: string]: boolean } | null {
-  //   const password = form.get('password')?.value;
-  //   const Cpassword = form.get('Cpassword')?.value;
-  //   if (password !== Cpassword) {
-  //     form.get('Cpassword')?.setErrors({ passwordMismatch: true });
-  //     return { passwordMismatch: true };
-  //   }
-  //   return null;
-  // }
-
-  // get email() { return this.userForm.get('email'); }
-  // get phone() { return this.userForm.get('phone'); }
-  // get password() { return this.userForm.get('password'); }
 
   ngOnInit(): void {
     if (this.details != null && this.details != undefined) {
@@ -104,17 +56,10 @@ export class AddUserComponent implements OnInit {
     
   }
 
-  // submit() {
-  //   if (this.userForm.valid) {
-  //     console.log('Form Data:', this.userForm.value);
-  //   } else {
-  //     console.log('Form is invalid');
-  //   }
-  // }
-
   userRoles = []
 
   getUserDetails(){
+    this.userRoles = []
     this.apiService.getAPI(this.apiService.BASE_URL + "user-type/getAllUserRole").then((result)=>{
       console.log(result)
       if(result.status == true){
@@ -130,6 +75,7 @@ export class AddUserComponent implements OnInit {
   restaurants=[];
 
   getRestaurant() {
+    this.restaurants=[];
     this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {
       console.log(result)
       if (result.status == true) {
@@ -151,7 +97,6 @@ export class AddUserComponent implements OnInit {
   }
 
   submit(form: any) {
-    // Check if the form is valid before proceeding
     if (form.valid) {
       console.log('Form Submitted!', form.value);
     } else {

@@ -11,7 +11,9 @@
             <div class="form-group">
               <label for="inputrole" class="form-label">Restaurant</label>
               <select name="name" class="form-select" [(ngModel)]="restaurant">
+
                 <option *ngFor="let restaurant of restaurants">{{restaurant.name}}</option>
+
               </select>
             </div>
           </div>
@@ -19,26 +21,26 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputname" class="form-label">Name</label>
-              <input name="name" class="form-control"[(ngModel)]="name">
+              <input name="name" class="form-control"[(ngModel)]="name" placeholder="Enter Name">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputrole" class="form-label">Auditor</label>
               <select type="name" class="form-select" name="name" [(ngModel)]="auditor">
-                <!-- <option [value]="null"></option> -->
-                <option *ngFor="let User of userdetail">{{User.name}}</option>
+
+                <option *ngFor="let User of userdetail" value="">{{User.name}}</option>
+
+               
               </select>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputrole" class="form-label">Service</label>
-              <!-- <input name="service" class="form-control" [(ngModel)]="service"> -->
                 <select name="service" id="" [(ngModel)]="service">
-                <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option>
+                  <option *ngFor="let list of checklist" value="" [value]="list.name">{{list.name}}</option>
                 </select>
-              <!-- <option value="-1" *ngFor="let list of checklist"  [value]="list.name">{{list.name}}</option> -->
             </div>
           </div>
           <div class="col-md-6">
