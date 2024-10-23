@@ -37,10 +37,15 @@ export class AddChecklistComponent implements OnInit {
   ngOnInit(): void {
     if (this.listitem != null && this.listitem != undefined) {
       this.name = this.listitem.name;
-      this.items = this.listitem.items;
+  
+      // If items is already an array (which it seems to be), just assign it directly.
+      this.checklist = this.listitem.items;
     }
-    console.log(this.listitem)
+    console.log(this.listitem);  // Ensure the items are logged correctly
+    console.log(this.checklist); // Ensure the checklist array is populated
   }
+  
+  
 
   checklist: any[] = []
 
@@ -48,7 +53,7 @@ export class AddChecklistComponent implements OnInit {
     this.checklist.push({
       name:"",
       attachment:false,
-      status:1
+      status:"1"
     }); // This should now work without errors
     console.log(this.checklist)
   }
@@ -59,26 +64,50 @@ export class AddChecklistComponent implements OnInit {
   }
 
   add() {
-   
-    let post={
-      name:this.name,
-      items:JSON.stringify(this.checklist),
-      status:1
-    }
-
-    this.apiService.postAPI(this.apiService.BASE_URL + "checklist/createCheckList",
-      post
-    ).then((result)=> {
-      if (result.status){
-        this.activeModal.close()
-      }else {
-      alert(result.message)
-      }
-    }, (error) => {
-    console.log(error.error.message);
-    alert(error.error.message)
-    })
+    let post = {
+      name: this.name,
+      items: JSON.stringify(this.checklist),
+      status: this.listitem.status
+    };
+  
+    this.apiService.postAPI(this.apiService.BASE_URL + "checklist/createCheckList", post)
+      .then((result) => {
+        if (result.status) {
+          this.activeModal.close();
+        } else {
+          alert(result.message);
+        }
+      }, (error) => {
+        console.log(error.error.message);
+        alert(error.error.message);
+      });
   }
+  
+
+  update() {
+    let updatedStatus = document.getElementById('status'); 
+
+    let post = {
+      id: this.listitem.id,  // Ensure the checklist ID is sent
+      name: this.name,
+      items: JSON.stringify(this.checklist),
+      status: updatedStatus
+    };
+  
+    this.apiService.postAPI(this.apiService.BASE_URL + "checklist/updateCheckList", post)
+      .then((result) => {
+        if (result.status) {
+          this.activeModal.close();
+          window.location.reload();  
+        } else {
+          alert(result.message);
+        }
+      }, (error) => {
+        console.log(error.error.message);
+        alert(error.error.message);
+      });
+  }
+  
 
   close() {
     this.activeModal.close()

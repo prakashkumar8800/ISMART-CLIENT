@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AddChecklistComponent } from 'src/app/modals/add-checklist/add-checklist.component';
-import { UpdateCheckListComponent } from 'src/app/modals/update-check-list/update-check-list.component';
 import { ApiService } from 'src/app/services/api.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -15,25 +14,20 @@ import { UtilService } from 'src/app/services/util.service';
 export class CheckListComponent implements OnInit {
 
   checklist = [];
-
-  selectedItem: any;
+  Service: any; // Holds the selected service from the dropdown
+  allItems = [];
 
   constructor(public utilService: UtilService,
-    public apiService: ApiService,
-    private headerService: HeaderService,
-    private modalService: NgbModal,
-    private toast: ToastrService) { }
+              public apiService: ApiService,
+              private headerService: HeaderService,
+              private modalService: NgbModal,
+              private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.getChecklist();
   }
 
-  searchTerm: any = '';
-
-  Service: string= 'check1';
-
-  x :string=" ";
-
+  // Get the checklist data from API
   getChecklist() {
     this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then((result) => {
       console.log(result);
@@ -45,21 +39,33 @@ export class CheckListComponent implements OnInit {
               list.items = JSON.parse(list.items);
             } catch (e) {
               console.error("Error parsing items", e);
+              list.items = []; // Set to empty array on error
             }
           }
+          this.allItems.push(...list.items);
         });
-  
-        console.log(this.checklist);  // Check if 'items' is now an array
       }
     });
   }
 
+  selectedService: any = null;
+
   onServiceChange() {
-    console.log('Selected service:', this.Service);
-    // Perform any actions needed when the selection changes
-  }
+    if (this.selectedService === null) {
+      // "ALL" selected - display all items
+      console.log('Showing all items:');
+      this.checklist.forEach((service) => {
+        console.log('Service:', service.name, 'Items:', service.items);
+      });
+    } else if (this.selectedService && this.selectedService.items) {
+      console.log('Selected service:', this.selectedService);
+      console.log('Items:', this.selectedService.items);
+    } else {
+      console.log('No items found for this service.');
+    }
+  }
 
-
+  // Open the modal to add a new checklist
   addchecklist() {
     let modal = this.modalService.open(AddChecklistComponent, {
       backdrop: 'static',
@@ -67,20 +73,23 @@ export class CheckListComponent implements OnInit {
       keyboard: false,
       centered: true,
       windowClass: 'customm-modal',
-   });
-   this.getChecklist();
+    });
+    this.getChecklist();
   }
 
-  editchecklist() {
-    let modal = this.modalService.open(UpdateCheckListComponent, {
+  // Edit the selected service's checklist
+  editchecklist(selectedService: any) {
+    let modal = this.modalService.open(AddChecklistComponent, {
       backdrop: 'static',
       size: 'xl',
       keyboard: false,
       centered: true,
       windowClass: 'customm-modal',
-   });
-   this.getChecklist();
-  //  modal.componentInstance.listitem = item;
+    });
+
+    if (selectedService) {
+      modal.componentInstance.listitem = selectedService;  
+    }
   }
 
 }
