@@ -1,5 +1,5 @@
-<div class="modal-header">
-  <h5 *ngIf="listitem == null">Edit Checklist</h5>
+<!-- <div class="modal-header">
+  <h5 *ngIf="listitem != null">Edit Checklist</h5>
   <button type="submit" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
 </div>
 <div class="modal-body">
@@ -8,7 +8,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="inputname" class="form-label">Name</label>
-              <input [(ngModel)]="name" type="name" class="form-control" name="name" placeholder="Enter Service name">
+              <input [(ngModel)]="listitem.name" type="name" class="form-control" name="name">
             </div>
           </div>
           <div class="col-md-12">
@@ -16,17 +16,15 @@
           </div>
 
           <div class="col-md-12">
-            <!-- *ngFor="let list of checklist; let i = index;" -->
-              <div class="row" *ngFor="let list of checklist; let i = index;">
+             *ngFor="let list of checklist; let i = index;"
+              <div class="row" *ngFor="let list of checklist;">
                   <div class="col-md-4">
-                      <div>
-                          <label for="items" class="form-label">Items {{(i+1)}}</label>
-                          <input class="form-control" [(ngModel)]="name" placeholder="Enter Items">
-                      </div>
+                      <label for="items" class="form-label">Items {{(i+1)}}</label>
+                      <input class="form-control" [(ngModel)]="list.name" placeholder="Enter Items">
                   </div>
                   <div class="col-md-4">
                       <label for="formFile" class="form-label">Attachment</label>
-                      <input class="form-control" type="checkbox" [(ngModel)]="attachment">
+                      <input class="form-control" type="checkbox" [(ngModel)]="list.attachment">
                   </div>
                   <div class="col-md-4">
                       <label for="formFile" class="form-label">Status</label>
@@ -46,8 +44,8 @@
 </div>
 
 <div class="modal-footer">
-  <button *ngIf="listitem == null" (click)="update()" class="btn btn-primary" type="submit" style="background: #be1b1e; border: none;">Update</button>
-</div>
+  <button *ngIf="listitem != null" (click)="update()" class="btn btn-primary" type="submit" style="background: #be1b1e; border: none;">Update</button>
+</div> -->
 
 
 

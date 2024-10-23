@@ -2,19 +2,16 @@
     <div class="container-fluid">
         <div class="header-body">
             <!-- Card stats -->
-
         </div>
     </div>
 </div>
 
 <div class="container-fluid mt--7">
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header p-0">
                     <div style="display: flex">
-                        <!-- <h4 class="card-title" style="flex-grow: 1"> Crust</h4> -->
                         <p (click)="addchecklist()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
                     </div>
                     <div class="form">
@@ -22,14 +19,16 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="inputservice" class="form-label">Service</label>
-                                    <select class="form-select"  [(ngModel)]="Service" name="selectedService" (ngModelChange)="onServiceChange()">
-                                        <option *ngFor="let list of checklist" [value]="list.name">{{list.status !=0 ? list.name:''}}</option>
+                                    <!-- Service selection dropdown -->
+                                    <select class="form-select" [(ngModel)]="selectedService" name="selectedService" (ngModelChange)="onServiceChange()">
+                                        <option [ngValue]="null">ALL</option>
+                                        <option *ngFor="let list of checklist" [ngValue]="list">{{ list.status != 0 ? list.name : '' }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="">
-                                    <button type="button" (click)="editchecklist()" style="background: #be1b1e;" class="btn btn-primary">Edit</button>
+                                <div class="form-group">
+                                    <button type="button" (click)="editchecklist(selectedService)" style="background: #be1b1e; margin-top: 30px; border: none;" class="btn btn-primary">Edit</button>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -39,9 +38,9 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table table-responsive">
+                    <div class="table-responsive" *ngIf="(selectedService && selectedService.items?.length > 0) || (selectedService === null && allItems.length > 0)">
                         <table class="table table-flush">
-                            <thead>
+                            <thead class="thead-light">
                                 <tr>
                                     <th>Name</th>
                                     <th>Status</th>
@@ -49,79 +48,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <div *ngFor="let list of checklist">
-                                        <div *ngIf="Service == list.name">
-                                            <tr *ngFor="let item of list.items" style="display: flex; justify-content: space-between;">
-                                                <td>
-                                                    {{item.name}} 
-                                                </td>
-                                                <td *ngIf="item.status == 0">Inactive</td>
-                                                <td *ngIf="item.status == 1">Active</td>
-                                                <td>
-                                                    {{item.attachment}}
-                                                </td>
-                                            </tr>
-                                        </div>
-                                    </div>
+                                <!-- Display items based on selected service -->
+                                <tr *ngFor="let item of (selectedService ? selectedService.items : allItems)">
+                                    <td>{{ item.name }}</td>
+                                    <td *ngIf="item.status == 0">Inactive</td>
+                                    <td *ngIf="item.status == 1">Active</td>
+                                    <td>{{ item.attachment ? 'True' : 'False' }}</td>
                                 </tr>
-                                <!-- <div *ngFor="let list of checklist">
-                                <div *ngIf="Service == list.name">
-                                        <tr *ngFor="let item of list.items">
-                                            <td>{{item.name}}</td>
-                                            <td *ngIf="item.status == 0">Inactive</td>
-                                            <td *ngIf="item.status == 1">Active</td>
-                                            <td>{{item.attachment}}</td>
-                                        </tr>
-                                    </div>
-                                </div> -->
                             </tbody>
                         </table>
+                    </div>
+                    <!-- Show a message only if Service exists but has no items -->
+                    <div *ngIf="selectedService && (!selectedService.items || selectedService.items.length == 0)">
+                        <p>No items available for this service.</p>
+                    </div>
+                    <!-- Show a message when "ALL" is selected but no items exist -->
+                    <div *ngIf="selectedService === null && allItems.length === 0">
+                        <p>No items available in the checklist.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <form class="row">
-                            <div class="col-md-11">
-                                <div class="form-group">
-                                    <div *ngFor="let list of checklist">
-                                        <div *ngIf="Service == list.name">
-                                            <ul>
-                                                <li *ngFor="let item of list.items" style="display: flex; justify-content: space-between;">
-                                                    <div>
-                                                        {{item.name}} 
-                                                    </div>
-                                                    <div style="display: flex; justify-content: space-between;">
-                                                        <div class="col-md-3">
-                                                            <div class="form-group" style="display: flex;">
-                                                                <label for="inputscore" class="form-label">Attachement:</label>
-                                                                <img src="" />
-                                                                <input type="checkbox" class="form-control" style="height: 25px; width: 50px;">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <p><i class="fa fa-edit" (click)="updatechecklist(list)" style="color: #be1b1e; border: none; cursor: pointer;"></i></p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form> -->

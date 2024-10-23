@@ -1,5 +1,6 @@
 <div class="modal-header">
     <h5 *ngIf="listitem == null">Add Checklist</h5>
+    <h5 *ngIf="listitem != null">Edit Checklist</h5>
     <button type="submit" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
 </div>
 <div class="modal-body">
@@ -16,6 +17,10 @@
             </div>
 
             <div class="col-md-12">
+                <h2 style="margin-top: 10px;">Checklist Items</h2>
+            </div>
+
+            <div class="col-md-12">
                 <div class="row" *ngFor="let list of checklist; let i = index;">
                     <div class="col-md-4">
                         <div>
@@ -23,15 +28,15 @@
                             <input class="form-control" [(ngModel)]="list.name" name="items{{i}}" placeholder="Enter Items">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-1">
                         <label for="formFile" class="form-label">Attachment</label>
-                        <input class="form-control" type="checkbox" [(ngModel)]="list.attachment">
+                        <input class="form-control" name="checkbox" type="checkbox" [(ngModel)]="list.attachment">
                     </div>
                     <div class="col-md-4">
                         <label for="formFile" class="form-label">Status</label>
-                        <select class="form-control" [(ngModel)]="list.status">
+                        <select class="form-control" name="status" id="status" [(ngModel)]="list.status">
                             <option value="1">Active</option>
-                            <option value="0">Deactive</option>
+                            <option value="0">Inactive</option>
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -46,5 +51,7 @@
 
 <div class="modal-footer">
     <button *ngIf="listitem == null" (click)="add()" class="btn btn-primary" type="submit" style="background: #be1b1e; border: none;">SUBMIT</button>
+    <button *ngIf="listitem != null" (click)="update()" class="btn btn-primary" type="submit" style="background: #be1b1e; border: none;">Update</button>
 </div>
+
 
