@@ -18,13 +18,12 @@ import { AddAuditComponent } from 'src/app/modals/add-audit/add-audit.component'
 })
 export class AuditComponent implements OnInit {
 
- audits = {
-  name : '',
-  shift_manager : '',
-  audit_dt : '',
-  restaurant_manager : '',
-  checklist_item : ''
- }
+  name : '';
+  shift_manager : '';
+  audit_dt : '';
+  restaurant_manager : '';
+  checklist_item : '';
+  score: number = 0;
 
  completeTab = false;
   pendingTab = true;
@@ -110,17 +109,31 @@ export class AuditComponent implements OnInit {
     alert('File uploaded')
   }
 
+  audits: any[] = []
 
   getAudit(){
     this.apiService.getAPI(this.apiService.BASE_URL + "audit/getAllAuditByList").then (( result) =>{
       console.log(result);
        if (result.status == true){
           this.audits = result.result
+          this.calculateScore();
        }
     },(error) => {
       console.log(error.error.message);
       this.toaster.error(error.error.message);
     })
+  }
+
+  calculateScore() {
+    let completedAudits = this.audits.filter(audit => {
+      let auditDate = new Date(audit.audit_dt);
+      let today = new Date();
+      // Check if the audit was completed today
+      return auditDate.toDateString() === today.toDateString();
+    });
+
+    // For example, set score based on the number of completed audits
+    this.score = completedAudits.length * 10; // Arbitrary scoring logic (e.g., 10 points per completed audit)
   }
 
   viewAudit(item: any) {

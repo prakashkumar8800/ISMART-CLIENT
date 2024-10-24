@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/services/api.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
@@ -13,15 +11,14 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class UserLoginComponent implements OnInit {
 
-  email : string = '';
-  password : string = '';
+  email = '';
+  password = '';
 
   constructor(
       public utilService: UtilService,
       public apiService: ApiService,
       private router: Router,
-      private toaster: ToastrService,
-      private authService: AuthService
+      private toaster: ToastrService
   ) {
   }
 
@@ -29,20 +26,12 @@ export class UserLoginComponent implements OnInit {
       document.querySelector('body').setAttribute('themebg-pattern', 'theme1');
   }
 
-  onSubmit(form: NgForm): void {
-    if (form.valid) {
-      const { email, password } = form.value;
-      this.authService.login(email, password).subscribe(
-        response => {
-          // Handle successful login, e.g., store token, navigate to dashboard
-          console.log('Login successful!', response);
-          this.router.navigate(['/assign']); // Change to your desired route
-        },
-        error => {
-          // Handle error, e.g., show an error message
-          console.error('Login failed', error);
-        }
-      );
+  onSubmit(Form){
+    if(Form.valid){
+       console.log('Form Submitted', Form.value);
+       this.router.navigateByUrl("/assign");
+    }else{
+      console.log("Form is Invalid");
     }
   }
 
