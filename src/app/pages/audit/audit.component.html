@@ -25,7 +25,7 @@
                             </div>
                             <div class="col-md-3">
                                 <p (click)="addAudit()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
-                            </div>
+                            </div> 
                         </div>
                     </div>
 
@@ -33,11 +33,11 @@
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <a [ngClass]="pendingTab ?'nav-link active' : 'nav-link'"
-                                (click)="OrderList('pending')">Pending ({{userdetail.length}})</a>
+                                (click)="OrderList('pending')">Pending  ({{pendingAudits.length}})</a>
                             </li>
                             <li class="nav-item">
                                 <a [ngClass]="completeTab ? 'nav-link active' : 'nav-link'"
-                                (click)="OrderList('complete')">Completed (0)</a>
+                                (click)="OrderList('complete')">Completed ({{scheduledAudits.length}})</a>
                             </li>
                         </ul>
                     </div>
@@ -56,7 +56,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let audit of audits">
+                                <tr *ngFor="let audit of pendingAudits">
                                     <td>{{audit.name}}</td>
                                     <td>{{audit.shift_manager}}</td>
                                     <td>{{audit.audit_dt}}</td>
@@ -72,7 +72,7 @@
                             </tbody>
                         </table>
                     </div>
-
+                   <!-- Scheduled Audits Table -->
                     <div class="table table-responsive" *ngIf="completeTab">
                         <table class="table table-flush">
                             <thead class="thead-light">
@@ -86,14 +86,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let audit of audits">
-                                    <td *ngIf="status== 0">{{audit.name}}</td>
-                                    <td *ngIf="status== 0">{{audit.shift_manager}}</td>
-                                    <td *ngIf="status== 0">{{audit.audit_dt}}</td>
-                                    <td *ngIf="status== 0">{{audit.resturant_manager}}</td>
-                                    <td *ngIf="status== 0">{{audit.checklist_item}}</td>
+                                <tr *ngFor="let audit of scheduledAudits">
+                                    <td>{{audit.name}}</td>
+                                    <td>{{audit.shift_manager}}</td>
+                                    <td>{{audit.audit_dt}}</td>
+                                    <td>{{audit.resturant_manager}}</td>
+                                    <td>{{audit.checklist_item}}</td>
                                     <td class="text-right">
-                                        <div style="display: flex" *ngIf="status== 0">
+                                        <div style="display: flex">
                                             <p (click)="viewAudit(audit)" class="text-success action"
                                             style="margin-left: 10px;"><i class="fa-solid fa-eye" style="cursor: pointer;"></i></p>
                                         </div>
