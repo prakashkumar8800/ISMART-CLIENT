@@ -28,6 +28,8 @@ export class AuditComponent implements OnInit {
  completeTab = false;
   pendingTab = true;
 
+  p= 1;
+
   userForm: FormGroup;
 
   constructor(public utilService: UtilService,
