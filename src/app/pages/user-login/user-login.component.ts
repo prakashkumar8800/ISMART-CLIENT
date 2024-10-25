@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/services/api.service';
@@ -12,9 +11,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./user-login.component.scss']
 })
 export class UserLoginComponent implements OnInit {
-
   
   error:string='';
+  
   constructor(
       public utilService: UtilService,
       public apiService: ApiService,

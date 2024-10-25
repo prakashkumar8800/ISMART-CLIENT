@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../services/api.service';
 import { EmitEvent, Events, HeaderService } from '../../services/header.service';
 import { UtilService } from '../../services/util.service';
+import { Form, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,8 @@ import { UtilService } from '../../services/util.service';
 })
 export class LoginComponent implements OnInit {
  
-        email: string = 'admin@gmail.com';
-        password: string = '654321';
+    email: string = 'admin@gmail.com';
+    password: string = '654321';
 
     constructor(
         public utilService: UtilService,
@@ -24,19 +25,25 @@ export class LoginComponent implements OnInit {
     ) {
     }
 
-    onSubmit(Form){
-        if(Form.valid){
-           console.log('Form Submitted', Form.value)
-           this.router.navigateByUrl("/audit");
-        }else{
-            console.log('form is invalid')
+    onSubmit(Form: NgForm) {
+        if (Form.valid) {
+          const { email, password } = Form.value;
+          
+          if (email === this.email && password === this.password) {
+            this.toaster.success('Login successful!', 'Success');
+            this.router.navigateByUrl('/audit');
+          } else {
+            this.toaster.error('Invalid email or password', 'Error');
+            alert('Invalid login details')
+          }
+        } else {
+          this.toaster.error('Please fill in all required fields', 'Error');
         }
-
     }
+
 
     ngOnInit() {
         document.querySelector('body').setAttribute('themebg-pattern', 'theme1');
-    //    console.log(this.email,this.password)
     }
 
 

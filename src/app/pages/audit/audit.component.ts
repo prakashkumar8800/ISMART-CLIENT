@@ -16,6 +16,7 @@ import { AddAuditComponent } from 'src/app/modals/add-audit/add-audit.component'
   templateUrl: './audit.component.html',
   styleUrls: ['./audit.component.scss']
 })
+
 export class AuditComponent implements OnInit {''
 
 //  audits = {
@@ -32,6 +33,8 @@ audits=[];
  pendingTab = true;
 
  currentDate:Date=new Date();
+
+  p= 1;
 
   userForm: FormGroup;
 
@@ -120,6 +123,7 @@ audits=[];
     alert('File uploaded')
   }
 
+  audits: any[] = []
 
   getAudit(){
     this.apiService.getAPI(this.apiService.BASE_URL + "audit/getAllAuditByList").then (( result) =>{
@@ -138,6 +142,18 @@ audits=[];
       console.log(error.error.message);
       this.toaster.error(error.error.message);
     })
+  }
+
+  calculateScore() {
+    let completedAudits = this.audits.filter(audit => {
+      let auditDate = new Date(audit.audit_dt);
+      let today = new Date();
+      // Check if the audit was completed today
+      return auditDate.toDateString() === today.toDateString();
+    });
+
+    // For example, set score based on the number of completed audits
+    this.score = completedAudits.length * 10; // Arbitrary scoring logic (e.g., 10 points per completed audit)
   }
 
   viewAudit(item: any) {

@@ -20,7 +20,7 @@
                             <div class="col-md-4">
                                 <div class="form-group d-flex" style="gap: 10px; align-items: center;">
                                   <label for="inputscore" class="form-label">Score</label>
-                                  <input type="score" class="form-control" name="score" readonly="true">
+                                  <input type="score" class="form-control" name="score" [(ngModel)]="score" readonly="true">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -56,6 +56,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr *ngFor="let audit of audits | paginate: { itemsPerPage: 10, currentPage: p}">
                                 <tr *ngFor="let audit of pendingAudits">
                                     <td>{{audit.name}}</td>
                                     <td>{{audit.shift_manager}}</td>
@@ -71,6 +72,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="has-text-centered">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </div>
                     </div>
                    <!-- Scheduled Audits Table -->
                     <div class="table table-responsive" *ngIf="completeTab">
@@ -101,6 +105,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="has-text-centered">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </div>
                     </div>
                 </div>
             </div>
