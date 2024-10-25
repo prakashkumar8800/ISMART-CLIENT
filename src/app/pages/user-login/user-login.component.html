@@ -23,17 +23,17 @@
                           <h2>Hello,</h2>
                           <p>Welcome to the <span>iSmart</span></p>
       
-                          <form class="row" #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+                          <form class="row" #userForm="ngForm" >
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Enter Email" required #email ngModel>
+                                <input type="email" name="email" class="form-control" placeholder="Enter Email" required #email>
                               </div>
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Enter Password" required [(ngModel)]="password">
+                                <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
                               </div>
                             </div>
                             <div class="col-md-12">

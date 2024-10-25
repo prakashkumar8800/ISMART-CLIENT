@@ -47,11 +47,11 @@
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <a [ngClass]="scheduledTab ?'nav-link active' : 'nav-link'"
-                                (click)="OrderList('scheduled')">Scheduled (0)</a>
+                                (click)="OrderList('scheduled')">Scheduled ({{scheduledAssigns.length}})</a>
                             </li>
                             <li class="nav-item">
                                 <a [ngClass]="pendingTab ?'nav-link active' : 'nav-link'"
-                                (click)="OrderList('pending')">Pending (0)</a>
+                                (click)="OrderList('pending')">Pending ({{pendingAssigns.length}})</a>
                             </li>
                             <li class="nav-item">
                                 <a [ngClass]="cancleTab ?'nav-link active' : 'nav-link'"
@@ -76,7 +76,7 @@
                                 <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let assignUser of filteredAssignments | paginate: { itemsPerPage: 10, currentPage: p}">
+                                <tr *ngFor="let assignUser of scheduledAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
                                     <td >{{assignUser.name}}</td>
                                     <td >{{assignUser.auditor}}</td>
                                     <td >{{assignUser.restaurant}}</td>
@@ -107,7 +107,7 @@
                                 <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let assignUser of userAssign | paginate: { itemsPerPage: 10, currentPage: p}">
+                                <tr *ngFor="let assignUser of pendingAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
                                     <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.name}}</td>
                                     <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.auditor}}</td>
                                     <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.restaurant}}</td>

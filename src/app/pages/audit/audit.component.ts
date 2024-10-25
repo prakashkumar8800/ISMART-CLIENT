@@ -16,17 +16,23 @@ import { AddAuditComponent } from 'src/app/modals/add-audit/add-audit.component'
   templateUrl: './audit.component.html',
   styleUrls: ['./audit.component.scss']
 })
-export class AuditComponent implements OnInit {
 
-  name : '';
-  shift_manager : '';
-  audit_dt : '';
-  restaurant_manager : '';
-  checklist_item : '';
-  score: number = 0;
+export class AuditComponent implements OnInit {''
 
+//  audits = {
+//   name : '',
+//   shift_manager : '',
+//   audit_dt : '',
+//   restaurant_manager : '',
+//   checklist_item : ''
+//  }
+audits=[];
+ pendingAudits=[];
+ scheduledAudits=[];
  completeTab = false;
-  pendingTab = true;
+ pendingTab = true;
+
+ currentDate:Date=new Date();
 
   p= 1;
 
@@ -81,10 +87,16 @@ export class AuditComponent implements OnInit {
     this.userdetail = [];
     this.apiService.getAPI(this.apiService.BASE_URL + "user/getAllusers").then((result)=>{
       console.log(result)
+
       if(result.status){
         this.userdetail = result.result
+        // this.pendingAudits=this.userdetail.filter(audit=>new Date(audit.audit_dt)<this.currentDate);
+        // this.scheduledAudits=this.userdetail.filter(audit=>new Date(audit.audit_dt)>=this.currentDate);
+        // console.log("Pending Audits:",this.pendingAudits);
+        // console.log("Scheduled Audits:",this.scheduledAudits);
         console.log(this.userdetail)
       }
+
     }, (error)=>{
       console.log(error.error.message);
       this.toaster.error(error.error.message)
@@ -118,7 +130,13 @@ export class AuditComponent implements OnInit {
       console.log(result);
        if (result.status == true){
           this.audits = result.result
-          this.calculateScore();
+          this.pendingAudits=this.audits.filter(audit=>new Date(audit.audit_dt)<this.currentDate);
+          this.scheduledAudits=this.audits.filter(audit=>new Date(audit.audit_dt)>=this.currentDate);
+          console.log("Pending Audits:",this.pendingAudits);
+          console.log("Scheduled Audits:",this.scheduledAudits);
+          console.log("current data",this.currentDate);
+          console.log("audits date",new Date(this.audits[0].audit_dt))
+          console.log("all my audits list",this.audits);
        }
     },(error) => {
       console.log(error.error.message);
