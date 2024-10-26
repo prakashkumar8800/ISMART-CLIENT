@@ -65,7 +65,8 @@ import { UserLoginComponent } from './pages/user-login/user-login.component';
     NavbarModule,
     OrderModule,
     AngularEditorModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -88,7 +89,7 @@ import { UserLoginComponent } from './pages/user-login/user-login.component';
     AddRestaurantComponent,
     UpdateRestaurantComponent,
     AddAuditComponent,
-    // UserLoginComponent,
+    UserLoginComponent,
     
     
   ],

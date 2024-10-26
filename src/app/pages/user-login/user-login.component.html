@@ -10,7 +10,7 @@
                       <div class="images">
                           <img src="./assets/img/images/pizza.jpg" class="logo-img" alt="" />
                       </div>
-                      <div class="logo" style="position: absolute; bottom: 325px; right: 200px;">
+                      <div class="logo" style="position: absolute; bottom: 293px; right: 200px;">
                           <img src="./assets/img/brand/logo.png" style="width: 205px; height: 60px; border-radius: 10px;" alt="" />
                       </div>
       
@@ -23,23 +23,40 @@
                           <h2>Hello,</h2>
                           <p>Welcome to the <span>iSmart</span></p>
       
-                          <form class="row" #userForm="ngForm" >
+                          <!-- <form class="row" (ngSubmit)="loginProcess()">
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Enter Email" required #email>
+                                <input type="email" name="email" class="form-control" placeholder="Enter Email"  formControlName="username" >
                               </div>
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+                                <input type="password" name="password" class="form-control" placeholder="Enter Password"  formControlName="password">
                               </div>
                             </div>
                             <div class="col-md-12">
-                              <button class="btn btn-primary" [disabled]="userForm.invalid" style="background: #be1b1e; border: none; margin-top: 0px;" type="submit">Login</button>
+                              <button class="btn btn-primary"  style="background: #be1b1e; border: none; margin-top: 0px;" type="submit">Login</button>
                             </div>
-                          </form>
+                          </form> -->
+                          <form class="row" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required ngModel />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required ngModel />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-primary" [disabled]="loginForm.invalid" style="background: #be1b1e; border: none; margin-top: 0px;" type="submit">Login</button>
+                            </div>
+                        </form>
                       </div>
                   </div>
               </div>

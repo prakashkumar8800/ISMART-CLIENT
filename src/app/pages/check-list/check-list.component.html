@@ -11,9 +11,42 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header p-0">
-                    <div style="display: flex">
-                        <p (click)="addchecklist()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
+                    
+                    <div class="row" >
+                        <div class="col-md-6">
+ 
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-4">
+
+                                    <div class="form-group d-flex" style="gap: 10px; align-items: center;">
+                                        <label for="inputscore" class="form-label">Score</label>
+                                    <input style="text-align: center;" class="form-control" name="score" readonly="true"  [value]="calculateAverageScore()" > 
+                                          
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <p (click)="addchecklist()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
+                                </div>
+
+                            </div>
+                            <!-- <div class="form-group d-flex" style="gap: 10px; align-items: center;">
+                                <label for="inputscore" class="form-label">Score</label>
+                            <input type="score" class="form-control" name="score" readonly="true"  [value]="calculateAverageScore()" > 
+                                  
+                            </div> -->
+                          <!-- <p (click)="addchecklist()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p> -->
+                        </div>
+                        <!-- <div class="form-group d-flex" style="gap: 10px; align-items: center;">
+                            <label for="inputscore" class="form-label">Score</label>
+                        <input type="score" class="form-control" name="score" readonly="true"  [value]="calculateAverageScore()" > 
+                              
+                        </div>
+                      <p (click)="addchecklist()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p> -->
                     </div>
+
                     <div class="form">
                         <form class="row">
                             <div class="col-md-6">
@@ -45,6 +78,7 @@
                                     <th>Name</th>
                                     <th>Status</th>
                                     <th>Attachment</th>
+                                    <th>Score</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,6 +88,7 @@
                                     <td *ngIf="item.status == 0">Inactive</td>
                                     <td *ngIf="item.status == 1">Active</td>
                                     <td>{{ item.attachment ? 'True' : 'False' }}</td>
+                                    <td>{{item.score}}</td>
                                 </tr>
                             </tbody>
                         </table>

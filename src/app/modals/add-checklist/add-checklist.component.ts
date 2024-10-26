@@ -18,6 +18,7 @@ export class AddChecklistComponent implements OnInit {
   name = '';
   items = '';
   attachment: '';
+  score='';
 
   myForm : FormGroup;
 
@@ -67,7 +68,7 @@ export class AddChecklistComponent implements OnInit {
     let post = {
       name: this.name,
       items: JSON.stringify(this.checklist),
-      status: this.listitem.status
+      status: this.listitem?this.listitem.status:"1"
     };
   
     this.apiService.postAPI(this.apiService.BASE_URL + "checklist/createCheckList", post)
@@ -77,6 +78,7 @@ export class AddChecklistComponent implements OnInit {
         } else {
           alert(result.message);
         }
+        window.location.reload(); 
       }, (error) => {
         console.log(error.error.message);
         alert(error.error.message);

@@ -25,7 +25,10 @@ export class CheckListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getChecklist();
+    this.calculateAverageScore();
   }
+
+
 
   // Get the checklist data from API
   getChecklist() {
@@ -47,7 +50,6 @@ export class CheckListComponent implements OnInit {
       }
     });
   }
-
   selectedService: any = null;
 
   onServiceChange() {
@@ -90,6 +92,29 @@ export class CheckListComponent implements OnInit {
     if (selectedService) {
       modal.componentInstance.listitem = selectedService;  
     }
+  }
+
+  calculateAverageScore() {
+    let totalScore = 0;
+    let totalCount = 0;
+    const maxScore = 100;
+
+    this.checklist.forEach((list) => {
+      if (list.items && list.items.length > 0) {
+        list.items.forEach((item: any) => {
+          if (item.score !== undefined) {
+            totalScore += Number(item.score);
+            totalCount++;
+          }
+        });
+      }
+    });
+
+    const averagePercentage = totalCount > 0 ? (totalScore / (totalCount * maxScore)) * 100 : 0;
+
+
+    return averagePercentage.toFixed(2);
+     // Return average score with 2 decimal places
   }
 
 }
