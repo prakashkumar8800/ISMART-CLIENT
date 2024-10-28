@@ -99,6 +99,6 @@ export class NavbarComponent implements OnInit {
   
     logoutUser() {
       this.utilService.clearALLData();
-      this.router.navigateByUrl("/login")
+      this.router.navigateByUrl("/user-login");
     }
 }

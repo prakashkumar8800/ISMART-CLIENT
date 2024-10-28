@@ -26,11 +26,14 @@ export class AuditComponent implements OnInit {''
 //   restaurant_manager : '',
 //   checklist_item : ''
 //  }
-audits=[];
+ audits=[];
  pendingAudits=[];
  scheduledAudits=[];
  completeTab = false;
  pendingTab = true;
+ filteredAssignments = [];
+ pendingAssigns=[];
+ scheduledAssigns=[];
 
  currentDate:Date=new Date();
 
@@ -123,7 +126,21 @@ audits=[];
     alert('File uploaded')
   }
 
-  audits: any[] = []
+  userAssign = []
+  getAssign() {
+    this.userAssign = [];
+    this.apiService.getAPI(this.apiService.BASE_URL + "assign/getAllAssignByList").then((result) => {
+      console.log(result)
+      if (result.status == true) {
+        this.userAssign = result.result
+        this.filteredAssignments = this.userAssign;
+        this.pendingAssigns=this.userAssign.filter(assign=>new Date(assign.ass_dt)<this.currentDate);
+        this.scheduledAssigns=this.userAssign.filter(assign=>new Date(assign.ass_dt)>=this.currentDate);
+        console.log(this.userAssign)
+      }
+    }, (error) => {
+    })
+  }
 
   getAudit(){
     this.apiService.getAPI(this.apiService.BASE_URL + "audit/getAllAuditByList").then (( result) =>{
