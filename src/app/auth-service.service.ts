@@ -9,8 +9,8 @@ import { baseUrl } from 'src/environments/environment';
 export class AuthServiceService {
 
   constructor(private http:HttpClient) { }
-   login(data):Observable<any>{
-    console.log("I am a Service");
-    return this.http.post(`${baseUrl}auth/login`,data)
-   }
+  //  login(data):Observable<any>{
+  //   console.log("I am a Service");
+  //   return this.http.post(`${baseUrl}auth/login`,data)
+   //}
 }
