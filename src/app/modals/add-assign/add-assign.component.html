@@ -1,6 +1,6 @@
 <div class="modal-header">
-    <h5 *ngIf="assign ==null">Add Assign</h5>
-    <!-- <h5 *ngIf="assign !=null">Edit Assign</h5> -->
+    <h5 *ngIf="assign == null">Add Assign</h5>
+    <h5 *ngIf="assign !=null">Edit Assign</h5>
     <button type="button" (click)="close()" data-bs-dismiss="close" aria-label="close" style="background: transparent; border: none;"><i class="fa-solid fa-xmark"></i></button>
 </div>
 
@@ -9,11 +9,9 @@
         <form class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="inputrole" class="form-label">Restaurant</label>
-              <select name="name" class="form-select" [(ngModel)]="restaurant">
-
-                <option *ngFor="let restaurant of restaurants">{{restaurant.name}}</option>
-
+              <label for="inputrestaurant" class="form-label">Restaurant</label>
+              <select name="restaurant" id="restaurant" class="form-select" [(ngModel)]="restaurant">
+                <option *ngFor="let restaurant of restaurants" [value]="">{{restaurant.name}}</option>
               </select>
             </div>
           </div>
@@ -21,41 +19,37 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputname" class="form-label">Name</label>
-              <input name="name" class="form-control"[(ngModel)]="name" placeholder="Enter Name">
+              <input name="name" id="name" class="form-control" [(ngModel)]="name">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="inputrole" class="form-label">Auditor</label>
-              <select type="name" class="form-select" name="name" [(ngModel)]="auditor">
-
-                <option *ngFor="let User of userdetail" value="">{{User.name}}</option>
-
-               
+              <label for="inputauditor" class="form-label">Auditor</label>
+              <select class="form-select" id="auditor" name="auditor" [(ngModel)]="auditor">
+                <option *ngFor="let User of userdetail" [value]="User.name">{{User.name}}</option>
               </select>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputrole" class="form-label">Service</label>
-                <select name="service" id="" [(ngModel)]="service">
-                  <option *ngFor="let list of checklist" value="" [value]="list.name">{{list.name}}</option>
+                <select name="service" id="service" class="form-select" [(ngModel)]="service">
+                  <option *ngFor="let list of checklist" [value]="list.name">{{list.name}}</option>
                 </select>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputdatetime" class="form-label">Audit Date Time</label>
-              <input type="datetime-local" class="form-control" name="date" [(ngModel)]="ass_dt">
+              <input type="datetime-local" id="ass_dt" class="form-control" name="date" [(ngModel)]="ass_DT">
             </div>
           </div>
           <div class="col-md-6">
-            <div class="form-group">
+            <div class="form-group" *ngIf="assign != null">
               <label for="inputstatus" class="form-label">Status</label>
-              <select name="status" class="form-select" [(ngModel)]="status">
-                
-                <option value="0">Inactive</option>
-                <option value="1">Active</option>
+              <select name="status" id="status" class="form-select" [(ngModel)]="status">
+                <option value="0">Cancle</option>
+                <option value="1">Completed</option>
               </select>
             </div>
           </div>
@@ -64,12 +58,7 @@
 
 </div>
 
-
-
-
-
 <div class="modal-footer">
-    <button   *ngIf="assign==null" (click)="add()" class="btn btn-primary"  type="button" style="background: #be1b1e; border: none;">SUBMIT</button>
-    <!-- <button *ngIf="assign !=null" (click)="update()" class="btn btn-primary" type="button" style="background: #be1b1e; border: none;">UPDATE</button> -->
-
+    <button *ngIf="assign == null" (click)="add()" class="btn btn-primary"  type="submit" style="background: #be1b1e; border: none;">SUBMIT</button>
+    <button *ngIf="assign != null" (click)="update()" class="btn btn-primary" type="submit" style="background: #be1b1e; border: none;">UPDATE</button>
   </div>

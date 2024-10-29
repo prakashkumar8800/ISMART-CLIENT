@@ -30,13 +30,11 @@
                             <tbody>
                                 <tr *ngFor=" let userdetails of userRoles">
                                     <td>{{userdetails.name}}</td>
-                                    <td>{{userdetails.id}}</td>
+                                    <td>{{userdetails.Total_users}}</td>
                                     <td *ngIf="userdetails.status == 1">Active</td>
                                     <td *ngIf="userdetails.status == 0">Inactive</td>
                                     <td class="text-right">
                                         <div style="display: flex">
-                                            <!-- <p (click)="viewrole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-eye"></i></p> -->
                                             <p (click)="updaterole(userdetails)" class="text-success action"
                                             style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
                                         </div>

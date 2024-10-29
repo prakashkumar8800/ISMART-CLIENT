@@ -24,15 +24,10 @@ import { NavbarModule } from './shared/navbar/navbar.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { LoaderComponent } from './modals/loader/loader.component';
 
-import { UpdateUserComponent } from './modals/update-user/update-user.component';
 import { UpdateRoleComponent } from './modals/update-role/update-role.component';
-import { ViewRoleComponent } from './modals/view-role/view-role.component';
 import { ViewAuditComponent } from './modals/view-audit/view-audit.component';
-import { UpdateAuditComponent } from './modals/update-audit/update-audit.component';
 import { UpdateServiceComponent } from './modals/update-service/update-service.component';
-import { ViewServiceComponent } from './modals/view-service/view-service.component';
 import { ToastrModule } from 'ngx-toastr';
-import { UpdateCheckListComponent } from './modals/update-check-list/update-check-list.component';
 import { AddUserComponent } from './modals/add-user/add-user.component';
 import { AddRoleComponent } from './modals/add-role/add-role.component';
 import { AddChecklistComponent } from './modals/add-checklist/add-checklist.component';
@@ -40,8 +35,9 @@ import { AddAssignComponent } from './modals/add-assign/add-assign.component';
 import { AddRestaurantComponent } from './modals/add-restaurant/add-restaurant.component';
 import { UpdateRestaurantComponent } from './modals/update-restaurant/update-restaurant.component';
 import { AddAuditComponent } from './modals/add-audit/add-audit.component';
-import { OrderModule, OrderPipe } from 'ngx-order-pipe';
+// import { OrderModule, OrderPipe } from 'ngx-order-pipe';
 import { UserLoginComponent } from './pages/user-login/user-login.component';
+import { OrderByPipe } from 'ng-orderby-pipe';
 // import { OrderByModule } from 'ng-orderby-pipe';
 
 // import { NgxEditorModule } from 'ngx-editor';
@@ -63,7 +59,7 @@ import { UserLoginComponent } from './pages/user-login/user-login.component';
     NgxPaginationModule,
     NgMultiSelectDropDownModule,
     NavbarModule,
-    OrderModule,
+    // OrderModule,
     AngularEditorModule,
     ToastrModule.forRoot(),
     HttpClientModule
@@ -74,14 +70,9 @@ import { UserLoginComponent } from './pages/user-login/user-login.component';
     AuthLayoutComponent,
     PopupalertComponent,
     LoaderComponent,
-    UpdateUserComponent,
     UpdateRoleComponent,
-    ViewRoleComponent,
     ViewAuditComponent,
-    UpdateAuditComponent,
     UpdateServiceComponent,
-    ViewServiceComponent,
-    UpdateCheckListComponent,
     AddUserComponent,
     AddRoleComponent,
     AddChecklistComponent,
@@ -94,7 +85,7 @@ import { UserLoginComponent } from './pages/user-login/user-login.component';
     
   ],
   providers: [DatePipe, 
-     OrderPipe,
+     OrderByPipe,
     ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -27,7 +27,7 @@
                             <table class="table table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th (click)="sort('id')">id &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
+                                        <!-- <th (click)="sort('id')">id &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th> -->
                                         <th (click)="sort('name')">Name &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
                                      
                                         <th (click)="sort('status')">Status &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
@@ -37,7 +37,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let restaurant of restaurants | paginate: { itemsPerPage: 10, currentPage: p }">
-                                        <td>{{restaurant.id}}</td>
+                                        <!-- <td>{{restaurant.id}}</td> -->
                                         <td>{{restaurant.name}}</td>
                                         <td *ngIf="restaurant.status == 0">Inactive</td>
                                         <td *ngIf="restaurant.status == 1">Active</td>
