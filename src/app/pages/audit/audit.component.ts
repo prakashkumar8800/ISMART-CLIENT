@@ -170,7 +170,7 @@ export class AuditComponent implements OnInit {''
     });
 
     // For example, set score based on the number of completed audits
-    this.score = completedAudits.length * 10; // Arbitrary scoring logic (e.g., 10 points per completed audit)
+    // this.score = completedAudits.length * 10; // Arbitrary scoring logic (e.g., 10 points per completed audit)
   }
 
   viewAudit(item: any) {
