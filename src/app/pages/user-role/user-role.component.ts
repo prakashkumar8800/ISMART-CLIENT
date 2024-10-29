@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UpdateRoleComponent } from '../../modals/update-role/update-role.component';
-import { ViewRoleComponent } from '../../modals/view-role/view-role.component';
 import { ApiService } from '../../services/api.service';
 import { HeaderService } from '../../services/header.service';
 import { UtilService } from '../../services/util.service';

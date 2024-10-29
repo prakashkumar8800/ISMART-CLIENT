@@ -2,12 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { UpdateUserComponent } from '../../modals/update-user/update-user.component';
 import { ApiService } from '../../services/api.service';
 import { HeaderService } from '../../services/header.service';
 import { UtilService } from '../../services/util.service';
 import { AddUserComponent } from 'src/app/modals/add-user/add-user.component';
-import { OrderPipe } from 'ngx-order-pipe';
+// import { OrderPipe } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-user',
@@ -27,16 +26,16 @@ export class UserComponent implements OnInit {
   }
   filteredUsers = [];
 
-  order: string = 'name';
+  // order: string = 'name';
   
     constructor(public utilService: UtilService,
-      private orderPipe: OrderPipe,
+      // private orderPipe: OrderPipe,
       private apiService: ApiService,
       private modalService: NgbModal,
       private toaster: ToastrService,
       private datePipe: DatePipe) { 
 
-        console.log(this.orderPipe.transform(this.userdetail, this.order));
+        // console.log(this.orderPipe.transform(this.userdetail, this.order));
     }
 
     userdetail = [];
@@ -49,7 +48,7 @@ export class UserComponent implements OnInit {
 
     searchTerm: string = '';
     
-    outlet:string ='all';
+    outlet: string ='all';
 
     applyFilters() {
       this.filteredUsers = this.userdetail.filter(user => 
@@ -73,28 +72,6 @@ export class UserComponent implements OnInit {
 
     restaurants = []
     filteredPackages: any[]=[];
-
-    // applyFilters(): void {
-    //   if (!this.restaurants || this.restaurants.length === 0) return;
-  
-    //   console.log("Filters applied:", {
-    //     searchTerm: this.searchTerm,
-  
-    //   });
-  
-    //   this.filteredPackages = this.restaurants.filter((packages) => {
-  
-    //     // Check if typedCountry is either part of the package's country name or matches dropdown selection
-        
-    //     return (
-    //       // Combine both dropdown and text input country filters
-    //       (this.searchTerm === "" ||
-    //         packages.searchTerm === this.searchTerm)
-    //     );
-    //   });
-  
-    //   console.log("Filtered Packages:", this.filteredPackages);
-    // }
 
     getRestaurant() {
       this.restaurants = [];
@@ -132,7 +109,7 @@ export class UserComponent implements OnInit {
   
     updateUser(item: any) {
       console.log(item)
-      let modal = this.modalService.open(UpdateUserComponent, {
+      let modal = this.modalService.open(AddUserComponent, {
         backdrop: 'static',
         size: 'xl',
         keyboard: false,

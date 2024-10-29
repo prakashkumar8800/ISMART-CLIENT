@@ -1,7 +1,6 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
     <div class="container-fluid">
         <div class="header-body">
-            <!-- Card stats -->
 
         </div>
     </div>
@@ -22,7 +21,7 @@
                             <div class="form-group">
                                 <label>Restaurant</label>
                                 <select class="form-control" [(ngModel)]="outlet">
-                                    <option value="all">ALL</option>
+                                    <option [value]=''>ALL</option>
                                     <option *ngFor="let restaurant of restaurants" [value]="restaurant.name">{{restaurant.name}}</option>
                                 </select>
                             </div>
@@ -30,7 +29,7 @@
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                             <div class="form-group">
                                 <label>From</label>
-                                <input type="date"  [(ngModel)]="from_date" class="form-control" name="from_date">
+                                <input type="date" [(ngModel)]="from_date" class="form-control" name="from_date">
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
@@ -55,11 +54,11 @@
                             </li>
                             <li class="nav-item">
                                 <a [ngClass]="cancleTab ?'nav-link active' : 'nav-link'"
-                                (click)="OrderList('cancle')">Cancelled (0)</a>
+                                (click)="OrderList('cancle')">Cancelled ({{cancleAssigns.length}})</a>
                             </li>
                             <li class="nav-item">
                                 <a [ngClass]="completeTab ? 'nav-link active' : 'nav-link'"
-                                (click)="OrderList('complete')">Completed (0)</a>
+                                (click)="OrderList('complete')">Completed ({{completeAssigns.length}})</a>
                             </li>
                         </ul>
                     </div>
@@ -76,7 +75,7 @@
                                 <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let assignUser of scheduledAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
+                                <tr *ngFor="let assignUser of filteredScheduledAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
                                     <td >{{assignUser.name}}</td>
                                     <td >{{assignUser.auditor}}</td>
                                     <td >{{assignUser.restaurant}}</td>
@@ -107,13 +106,13 @@
                                 <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let assignUser of pendingAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.name}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.auditor}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.restaurant}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.service}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.ass_dt}}</td>
-                                    <td class="text-right" *ngIf="outlet==assignUser.restaurant || outlet=='all'" >
+                                <tr *ngFor="let assignUser of filteredPendingAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
+                                    <td>{{assignUser.name}}</td>
+                                    <td>{{assignUser.auditor}}</td>
+                                    <td>{{assignUser.restaurant}}</td>
+                                    <td>{{assignUser.service}}</td>
+                                    <td>{{assignUser.ass_dt}}</td>
+                                    <td class="text-right">
                                         <div style="display: flex">
                                             <p (click)="updateAudit(assignUser)" class="text-success action"
                                             style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
@@ -138,13 +137,13 @@
                                 <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let assignUser of userAssign | paginate: { itemsPerPage: 10, currentPage: p}">
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.name}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.auditor}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.restaurant}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.service}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.ass_dt}}</td>
-                                    <td class="text-right" *ngIf="outlet==assignUser.restaurant || outlet=='all'" >
+                                <tr *ngFor="let assignUser of filteredCancleAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
+                                    <td>{{assignUser.name}}</td>
+                                    <td>{{assignUser.auditor}}</td>
+                                    <td>{{assignUser.restaurant}}</td>
+                                    <td>{{assignUser.service}}</td>
+                                    <td>{{assignUser.ass_dt}}</td>
+                                    <td class="text-right">
                                         <div style="display: flex">
                                             <p (click)="updateAudit(assignUser)" class="text-success action"
                                             style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
@@ -169,13 +168,13 @@
                                 <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let assignUser of userAssign | paginate: { itemsPerPage: 10, currentPage: p}">
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.name}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.auditor}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.restaurant}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.service}}</td>
-                                    <td *ngIf="outlet==assignUser.restaurant || outlet=='all'">{{assignUser.ass_dt}}</td>
-                                    <td class="text-right" *ngIf="outlet==assignUser.restaurant || outlet=='all'" >
+                                <tr *ngFor="let assignUser of filteredCompleteAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
+                                    <td>{{assignUser.name}}</td>
+                                    <td>{{assignUser.auditor}}</td>
+                                    <td>{{assignUser.restaurant}}</td>
+                                    <td>{{assignUser.service}}</td>
+                                    <td>{{assignUser.ass_dt}}</td>
+                                    <td class="text-right">
                                         <div style="display: flex">
                                             <p (click)="updateAudit(assignUser)" class="text-success action"
                                             style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>

@@ -8,14 +8,7 @@ import { LoaderComponent } from '../modals/loader/loader.component';
 })
 export class ApiService {
 
-        // BASE_URL = 'http://localhost:3000/';
-    // BASE_IMAGE_URL = 'http://localhost/astro-api';
-    // IMAGE_BASE_URL = 'http://localhost/astro-api/';
-
-//     BASE_URL = 'https://app.astroplus.co:3000/';
-//     BASE_IMAGE_URL = 'https://app.astroplus.co/astro-api';
-//     PROFILE_BASE_IMAGE_URL = 'https://app.astroplus.co/astro-api/';
-//   apiURL: string;
+  apiURL: string;
 
 
     VIDEO_UPLOAD_URL = 'http://65.0.171.139/pw_api/';
