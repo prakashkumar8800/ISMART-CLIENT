@@ -1,13 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { UpdateAuditComponent } from '../../modals/update-audit/update-audit.component';
 import { ViewAuditComponent } from '../../modals/view-audit/view-audit.component';
 import { ApiService } from '../../services/api.service';
 import { HeaderService } from '../../services/header.service';
 import { UtilService } from '../../services/util.service';
 import { UpdateServiceComponent } from 'src/app/modals/update-service/update-service.component';
-import { ViewServiceComponent } from 'src/app/modals/view-service/view-service.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AddAuditComponent } from 'src/app/modals/add-audit/add-audit.component';
 
@@ -16,6 +14,7 @@ import { AddAuditComponent } from 'src/app/modals/add-audit/add-audit.component'
   templateUrl: './audit.component.html',
   styleUrls: ['./audit.component.scss']
 })
+
 export class AuditComponent implements OnInit {''
 
 //  audits = {
@@ -35,6 +34,8 @@ export class AuditComponent implements OnInit {''
  scheduledAssigns=[];
 
  currentDate:Date=new Date();
+
+  p= 1;
 
   userForm: FormGroup;
 
@@ -122,6 +123,7 @@ export class AuditComponent implements OnInit {''
     console.log($event.target.files[0]);
     alert('File uploaded')
   }
+
   userAssign = []
   getAssign() {
     this.userAssign = [];
@@ -137,6 +139,7 @@ export class AuditComponent implements OnInit {''
     }, (error) => {
     })
   }
+
   getAudit(){
     this.apiService.getAPI(this.apiService.BASE_URL + "audit/getAllAuditByList").then (( result) =>{
       console.log(result);
@@ -155,6 +158,18 @@ export class AuditComponent implements OnInit {''
       this.toaster.error(error.error.message);
     })
   }
+
+  // calculateScore() {
+  //   let completedAudits = this.audits.filter(audit => {
+  //     let auditDate = new Date(audit.audit_dt);
+  //     let today = new Date();
+  //     // Check if the audit was completed today
+  //     return auditDate.toDateString() === today.toDateString();
+  //   });
+
+  //   // For example, set score based on the number of completed audits
+  //   this.score = completedAudits.length * 10; // Arbitrary scoring logic (e.g., 10 points per completed audit)
+  // }
 
   viewAudit(item: any) {
     let modal = this.modalService.open(ViewAuditComponent, {

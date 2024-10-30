@@ -35,7 +35,7 @@
                 <table class="table table-flush">
                     <thead class="thead-light">
                         <tr>
-                            <th (click)="sort('id')">Emp Id &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
+                            <!-- <th (click)="sort('id')">Emp Id &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th> -->
                             <th (click)="sort('name')">Name &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
                             <th (click)="sort('email')">Email &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
                             <th (click)="sort('phone')">Phone &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
@@ -48,7 +48,7 @@
                     <tbody>
                         
                        <tr *ngFor="let User of userdetail of filteredData | paginate: { itemsPerPage: 10, currentPage: p }">
-                            <td *ngIf="outlet==User.restaurant || outlet=='all'">{{User.id}}</td>
+                            <!-- <td *ngIf="outlet==User.restaurant || outlet=='all'">{{User.id}}</td> -->
                             <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.name}}</td>
                             <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.email}}</td>
                             <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.phone}}</td>

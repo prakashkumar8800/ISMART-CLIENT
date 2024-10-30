@@ -12,6 +12,9 @@ import { ROUTES } from '../../components/sidebar/sidebar.component';
 })
 export class NavbarComponent implements OnInit {
 
+  // @ViewChild('sidebar') sidebar: ElementRef;
+
+
     private listTitles: any[];
     location: Location;
     private nativeElement: Node;
@@ -49,6 +52,7 @@ export class NavbarComponent implements OnInit {
       }
       return 'audit';
     }
+
     sidebarToggle() {
       if (this.sidebarVisible === false) {
         this.sidebarOpen();
@@ -56,6 +60,7 @@ export class NavbarComponent implements OnInit {
         this.sidebarClose();
       }
     }
+
     sidebarOpen() {
       const toggleButton = this.toggleButton;
       const html = document.getElementsByTagName('html')[0];
@@ -70,6 +75,7 @@ export class NavbarComponent implements OnInit {
       }
       this.sidebarVisible = true;
     };
+
     sidebarClose() {
       const html = document.getElementsByTagName('html')[0];
       const mainPanel = <HTMLElement>document.getElementsByClassName('main-panel')[0];
@@ -82,6 +88,7 @@ export class NavbarComponent implements OnInit {
       this.sidebarVisible = false;
       html.classList.remove('nav-open');
     };
+
     collapse() {
       this.isCollapsed = !this.isCollapsed;
       const navbar = document.getElementsByTagName('nav')[0];

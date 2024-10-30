@@ -15,7 +15,7 @@ export class AddUserComponent implements OnInit {
 
   @Input() details;
 
-  name : string = '';
+  name = '';
   password : string = '';
   Cpass = '';
   phone :string = '';
@@ -40,22 +40,23 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.details != null && this.details != undefined) {
-      this.name = this.details.name.validator.required(this.name);
-      this.email = this.details.email.validator.required(this.email);
-      this.phone = this.details.phone.validator.required(this.phone);
+      this.name = this.details.name,
+      this.email = this.details.email,
+      this.phone = this.details.phone,
+      this.password =this.password,
       this.restaurant = this.details.restaurant,
       this.role = this.details.role;
       this.status = this.details.status;
     }
     this.getUserDetails();
     this.getRestaurant();
-    
+    console.log(this.details);
   }
 
   userRoles = []
 
   getUserDetails(){
-    // this.userRoles = []
+    this.userRoles = [];
     this.apiService.getAPI(this.apiService.BASE_URL + "user-type/getAllUserRole").then((result)=>{
       console.log(result)
       if(result.status == true){
@@ -70,20 +71,19 @@ export class AddUserComponent implements OnInit {
   restaurants=[];
 
   getRestaurant() {
-    // this.restaurants=[];
+    this.restaurants=[];
     this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {
       console.log(result)
       if (result.status == true) {
-        //  this.restaurants = result.result;
             this.restaurants = result.result.filter( x=> 
               x.status == 1 ?x.name:'' 
             );
-            console.log("This are my restaurants",this.restaurants);
+            // console.log("This are my restaurants",this.restaurants);
             if (this.restaurants.length > 0) {
               this.restaurant = this.restaurants[0].name;
             }
           }
-         console.log(this.restaurants);
+        //  console.log(this.restaurants);
       }
     ,error => {
       console.error('Error fetching data', error);
@@ -91,50 +91,53 @@ export class AddUserComponent implements OnInit {
   );
   }
 
-  submit(form: any) {
-    if (form.valid) {
-      console.log('Form Submitted!', form.value);
-    } else {
-      console.log('Form is invalid');
-    }
-  }
+  // submit(form: any) {
+  //   if (form.valid) {
+  //     console.log('Form Submitted!', form.value);
+  //   } else {
+  //     console.log('Form is invalid');
+  //   }
+  // }
 
   add() {
-    if (this.name == '') {
-      this.toaster.error("Please enter name");
-      return;
+    
+    let post = {
+      name: this.name,
+      email: this.email,
+      restaurant:this.restaurant,
+      phone: this.phone,
+      password: this.password,
+      role: this.role,
+      status: this.status,
     }
-    if(this.restaurant== ''){
-      this.toaster.error("Please select the restaurant");
-      return;
-    }
-    if (this.email == '') {
-      this.toaster.error("Please enter address");
-      return;
-    }
-    if (this.phone == '') {
-      this.toaster.error("Please enter Phone");
-      return;
-    }
-    if (this.password == '') {
-      this.toaster.error("Please enter password");
-      return;
-    }
-    if (this.password != this.Cpass) {
-      this.toaster.error("password and confirm password do not match");
-      return;
-    }
-        this.apiService.postAPI(this.apiService.BASE_URL + 'user/addUser',{
-        name: this.name,
-        email: this.email,
-        restaurant:this.restaurant,
-        phone: this.phone,
-        password: this.password,
-        role: this.role,
-        status: this.status,
-        }).then((result) => {
+        this.apiService.postAPI(this.apiService.BASE_URL + 'user/addUser',post).then((result) => {
             if (result.status) {
                 this.activeModal.close();
+            } else {
+                this.toaster.error(result.message)
+            }
+        }, (error) => {
+            console.log(error.error.message);
+            this.toaster.error(error.error.message)
+        })
+  }
+
+  update() {
+    let post = {
+      id: this.details.id,
+      name: this.name,
+      email: this.email,
+      restaurant:this.restaurant,
+      phone: this.phone,
+      password: this.password,
+      role: this.role,
+      status: this.status,
+    }
+
+        this.apiService.postAPI(this.apiService.BASE_URL + 'user/updateUser',post).then((result) => {
+            if (result.status) {
+                this.activeModal.close();
+                window.location.reload();
             } else {
                 this.toaster.error(result.message)
             }

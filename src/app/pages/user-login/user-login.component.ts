@@ -13,6 +13,7 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./user-login.component.scss']
 })
 
+
   //  formGroup:FormGroup
   
   // error:string='';
@@ -27,12 +28,14 @@ import { UtilService } from 'src/app/services/util.service';
   //   private router: Router,
   //  ){}
 
+
   // Hardcoded login credentials
 //   readonly validEmail = 'admin@gmail.com';
 //   readonly validPassword =
 //   onSubmit(form: any) {
 //       if (form.valid) {
 //           const { email, password } = form.value;
+
 
 //           if (email === this.validEmail && password === this.validPassword) {
 //               this.toaster.success('Login successful!', 'Success');

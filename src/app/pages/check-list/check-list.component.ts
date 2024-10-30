@@ -17,6 +17,9 @@ export class CheckListComponent implements OnInit {
   Service: any; // Holds the selected service from the dropdown
   allItems = [];
 
+  sortname: string = 'name'; // Default sort field
+  sortOrder: 'asc' | 'desc' = 'asc'; // Default sort order
+
   constructor(public utilService: UtilService,
               public apiService: ApiService,
               private headerService: HeaderService,
@@ -26,6 +29,17 @@ export class CheckListComponent implements OnInit {
   ngOnInit(): void {
     this.getChecklist();
     this.calculateAverageScore();
+  }
+
+  toggleSort(name: string) {
+    if (this.sortname === name) {
+      // Toggle sort order if the field is the same
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      // Set new sort field and reset to ascending order
+      this.sortname = name;
+      this.sortOrder = 'asc';
+    }
   }
 
 
@@ -50,6 +64,7 @@ export class CheckListComponent implements OnInit {
       }
     });
   }
+
   selectedService: any = null;
 
   onServiceChange() {
@@ -59,10 +74,12 @@ export class CheckListComponent implements OnInit {
       this.checklist.forEach((service) => {
         console.log('Service:', service.name, 'Items:', service.items);
       });
-    } else if (this.selectedService && this.selectedService.items) {
+    } 
+    else if (this.selectedService && this.selectedService.items) {
       console.log('Selected service:', this.selectedService);
       console.log('Items:', this.selectedService.items);
-    } else {
+    }
+     else {
       console.log('No items found for this service.');
     }
   }

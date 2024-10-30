@@ -12,12 +12,14 @@
                 <input [(ngModel)]="name" type="name" class="form-control" name="name" placeholder="Enter Service name">
               </div>
             </div>
-            <div class="col-md-12">
-                <button type="button" (click)="addInput()" class="btn btn-primary" style="margin-left: 20px;">+ Add</button> 
+            <div class="col-md-12"> 
             </div>
 
             <div class="col-md-12">
-                <h2 style="margin-top: 10px;">Checklist Items</h2>
+                <div class="d-flex">
+                    <h2 style="margin-top: 10px;">Checklist Items</h2>
+                    <button type="button" (click)="addInput()" class="btn btn-primary" style="margin-left: 20px;">+ Add</button>
+                </div>
             </div>
 
             <div class="col-md-12">
@@ -30,7 +32,7 @@
                     </div>
                     <div class="col-md-1">
                         <label for="formFile" class="form-label">Attachment</label>
-                        <input class="form-control" name="checkbox" type="checkbox" [(ngModel)]="list.attachment" style="width: 20px;">
+                        <input class="form-check-input" id="flexCheckDefault" type="checkbox" [(ngModel)]="list.attachment" style="width: 100px; height: 20px;">
                     </div>
                     <div class="col-md-4">
                         <label for="formFile" class="form-label">Status</label>
@@ -43,12 +45,6 @@
                         <label for="score" class="form-label">Score</label>
                         <input class="form-control" name="score" type="score" [(ngModel)]="list.score" style="text-align: center;">
                     </div>
-                    <!-- <div class="col-md-1">
-                        <div>
-                            <label for="score" class="form-label">Score</label>
-                            <input class="form-control" [(ngModel)]="score" name="score" placeholder="Enter score">
-                        </div>
-                    </div> -->
                     <div class="col-md-2">
                         <button type="button" (click)="removeInput(i)" class="btn btn-danger" style="margin-top: 30px; background: #be1b1e;">Delete</button>
                     </div>
