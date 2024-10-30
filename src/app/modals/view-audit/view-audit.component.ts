@@ -22,6 +22,10 @@ export class ViewAuditComponent implements OnInit {
   checklist_item = '';
   attachment_path = '';
 
+  allItems = [];
+
+  selectedService: any = null;
+
   userForm: FormGroup;
 
   userdetail = []
@@ -55,7 +59,7 @@ export class ViewAuditComponent implements OnInit {
     }
     this.getUser()
     this.getChecklist();
-    this.getAudit();
+    // this.getAudit();
     console.log(this.viewaudit);
   }
 
@@ -100,59 +104,69 @@ export class ViewAuditComponent implements OnInit {
   checklist=[];
 
   getChecklist() {
-    this.checklist=[];
-    this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then ((result) =>{
-      if (result.status){
-       this.checklist = result.result
-       console.log(this.checklist)
-      }
-    }) 
-  }
-
-  add() {
-    console.log("user")
-    if (this.name == '') {
-      this.toaster.error("Please enter name");
-      return;
-    }
-
-     if (this.shift_manager == '') {
-       this.toaster.error("please enter restaurant")
-   }
-
-    if (this.audit_dt == '') {
-      this.toaster.error("Please enter auditor name");
-      return;
-    }
-
-    if (this.resturant_manager == '') {
-      this.toaster.error("Please enter assign date");
-      return;
-    }
-
-    if (this.checklist_item == '') {
-      this.toaster.error("Please select service");
-      return;
-    }
-
-    this.apiService.postAPI(this.apiService.BASE_URL + "assign/createAssign", {
-      name: this.name,
-      shift_manager: this.shift_manager,
-      restaurant: this.resturant_manager,
-      audit_dt: this.audit_dt,
-      checklist_item: this.checklist_item,
-      ass_dt: this.attachment_path
-    }).then((result) => {
+    this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then((result) => {
+      console.log(result);
       if (result.status) {
-        this.activeModal.close()
-      } else {
-        alert(result.message)
+        this.checklist = result.result;
+        this.checklist.forEach((list: any) => {
+          if (typeof list.items === 'string') {
+            try {
+              list.items = JSON.parse(list.items);
+            } catch (e) {
+              console.error("Error parsing items", e);
+              list.items = []; // Set to empty array on error
+            }
+          }
+          this.allItems.push(...list.items);
+        });
       }
-    }, (error) => {
-      console.log(error.error.message);
-      alert(error.error.message)
-    })
+    });
   }
+
+  // add() {
+  //   console.log("user")
+  //   if (this.name == '') {
+  //     this.toaster.error("Please enter name");
+  //     return;
+  //   }
+
+  //    if (this.shift_manager == '') {
+  //      this.toaster.error("please enter restaurant")
+  //  }
+
+  //   if (this.audit_dt == '') {
+  //     this.toaster.error("Please enter auditor name");
+  //     return;
+  //   }
+
+  //   if (this.resturant_manager == '') {
+  //     this.toaster.error("Please enter assign date");
+  //     return;
+  //   }
+
+  //   if (this.checklist_item == '') {
+  //     this.toaster.error("Please select service");
+  //     return;
+  //   }
+
+  //   this.apiService.postAPI(this.apiService.BASE_URL + "assign/createAssign", {
+  //     name: this.name,
+  //     shift_manager: this.shift_manager,
+  //     restaurant: this.resturant_manager,
+  //     audit_dt: this.audit_dt,
+  //     checklist_item: this.checklist_item,
+  //     attachment_path: this.attachment_path
+  //   }).then((result) => {
+  //     if (result.status) {
+  //       this.activeModal.close()
+  //     } else {
+  //       alert(result.message)
+  //     }
+  //   }, (error) => {
+  //     console.log(error.error.message);
+  //     alert(error.error.message)
+  //   })
+  // }
 
 
 }

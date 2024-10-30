@@ -13,8 +13,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header p-0">
-                    <!-- <div style="display: flex">
-                        <div class="row" style="margin: 0 0 0 auto;">
+                        <!-- <-- <div class="row" style="margin: 0 0 0 auto;">
                             <div class="col-md-3"></div>
                             <div class="col-md-2"></div>
                             <div class="col-md-4">
@@ -25,9 +24,8 @@
                             </div>
                              <div class="col-md-3">
                                 <p (click)="addAudit()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
-                            </div>  -->
-                        <!-- </div> -->
-                    <!-- </div> --> 
+                            </div>
+                        </div>  -->
 
                     <div>
                         <ul class="nav nav-tabs">
@@ -56,8 +54,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let audit of audits | paginate: { itemsPerPage: 10, currentPage: p}">
-                                <tr *ngFor="let audit of pendingAudits">
+                                <tr *ngFor="let audit of pendingAudits | paginate: { itemsPerPage: 10, currentPage: p}">
                                     <td>{{audit.name}}</td>
                                     <td>{{audit.shift_manager}}</td>
                                     <td>{{audit.audit_dt}}</td>
@@ -90,7 +87,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let audit of scheduledAudits">
+                                <tr *ngFor="let audit of scheduledAudits | paginate: { itemsPerPage: 10, currentPage: p}">
                                     <td>{{audit.name}}</td>
                                     <td>{{audit.shift_manager}}</td>
                                     <td>{{audit.audit_dt}}</td>

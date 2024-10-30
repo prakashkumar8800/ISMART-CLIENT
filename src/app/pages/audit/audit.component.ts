@@ -17,23 +17,17 @@ import { AddAuditComponent } from 'src/app/modals/add-audit/add-audit.component'
 
 export class AuditComponent implements OnInit {''
 
-//  audits = {
-//   name : '',
-//   shift_manager : '',
-//   audit_dt : '',
-//   restaurant_manager : '',
-//   checklist_item : ''
-//  }
- audits=[];
- pendingAudits=[];
- scheduledAudits=[];
- completeTab = false;
- pendingTab = true;
- filteredAssignments = [];
- pendingAssigns=[];
- scheduledAssigns=[];
+  audits =[];
 
- currentDate:Date=new Date();
+  pendingAudits=[];
+  scheduledAudits=[];
+  completeTab = false;
+  pendingTab = true;
+  filteredAssignments = [];
+  pendingAssigns=[];
+  scheduledAssigns=[];
+
+  currentDate:Date=new Date();
 
   p= 1;
 
@@ -57,9 +51,19 @@ export class AuditComponent implements OnInit {''
   }
 
   ngOnInit(): void {
-    this.getAudit();
-    console.log("this is data",this.audits);
-    this.getUser()
+    this.getChecklist();
+    this.getUser();
+    this.getAssign();
+    // this.bindAuditData()
+  }
+
+  onSubmit(){ 
+    console.log('Form submitted:', this.userForm.value);
+  }
+
+  uploadFile($event){
+    console.log($event.target.files[0]);
+    alert('File uploaded')
   }
 
   selectedType = 'pending';
@@ -88,14 +92,10 @@ export class AuditComponent implements OnInit {''
     this.userdetail = [];
     this.apiService.getAPI(this.apiService.BASE_URL + "user/getAllusers").then((result)=>{
       console.log(result)
-
       if(result.status){
         this.userdetail = result.result
-        // this.pendingAudits=this.userdetail.filter(audit=>new Date(audit.audit_dt)<this.currentDate);
-        // this.scheduledAudits=this.userdetail.filter(audit=>new Date(audit.audit_dt)>=this.currentDate);
-        // console.log("Pending Audits:",this.pendingAudits);
-        // console.log("Scheduled Audits:",this.scheduledAudits);
         console.log(this.userdetail)
+        this.bindAuditData();
       }
 
     }, (error)=>{
@@ -108,23 +108,17 @@ export class AuditComponent implements OnInit {''
 
   getChecklist() {
     this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then ((result) =>{
+      console.log(result)
       if (result.status){
        this.checklist = result.result
        console.log(this.checklist)
+       this.bindAuditData();
       }
     }) 
   }
 
-  onSubmit(){ 
-    console.log('Form submitted:', this.userForm.value);
-  }
-
-  uploadFile($event){
-    console.log($event.target.files[0]);
-    alert('File uploaded')
-  }
-
   userAssign = []
+
   getAssign() {
     this.userAssign = [];
     this.apiService.getAPI(this.apiService.BASE_URL + "assign/getAllAssignByList").then((result) => {
@@ -135,41 +129,32 @@ export class AuditComponent implements OnInit {''
         this.pendingAssigns=this.userAssign.filter(assign=>new Date(assign.ass_dt)<this.currentDate);
         this.scheduledAssigns=this.userAssign.filter(assign=>new Date(assign.ass_dt)>=this.currentDate);
         console.log(this.userAssign)
+        this.bindAuditData();
       }
     }, (error) => {
     })
   }
 
-  getAudit(){
-    this.apiService.getAPI(this.apiService.BASE_URL + "audit/getAllAuditByList").then (( result) =>{
-      console.log(result);
-       if (result.status == true){
-          this.audits = result.result
-          this.pendingAudits=this.audits.filter(audit=>new Date(audit.audit_dt)<this.currentDate);
-          this.scheduledAudits=this.audits.filter(audit=>new Date(audit.audit_dt)>=this.currentDate);
-          console.log("Pending Audits:",this.pendingAudits);
-          console.log("Scheduled Audits:",this.scheduledAudits);
-          console.log("current data",this.currentDate);
-          console.log("audits date",new Date(this.audits[0].audit_dt))
-          console.log("all my audits list",this.audits);
-       }
-    },(error) => {
-      console.log(error.error.message);
-      this.toaster.error(error.error.message);
-    })
+  bindAuditData() {
+    this.audits = this.userAssign.map(assign => {
+        const shiftManager = this.userdetail.find(user => user.role === 'Admin')?.name || '';
+        const restaurantManager = this.userdetail.find(user =>  user.role === 'Restaurant Manager')?.name || '';
+        // const checklistItem = this.checklist.find(item => item.id === item.id)?.name || '';
+        return {
+            name: assign.name,
+            audit_dt: assign.ass_dt,
+            shift_manager: shiftManager,
+            restaurant_manager: restaurantManager,
+            checklist_item: assign.service
+        };
+    });
+    
+    this.pendingAudits = this.audits.filter(audit => new Date(audit.audit_dt) < this.currentDate);
+    this.scheduledAudits = this.audits.filter(audit => new Date(audit.audit_dt) >= this.currentDate);
+    console.log('Audit Data:', this.audits); // Verify audit data here
   }
+  
 
-  // calculateScore() {
-  //   let completedAudits = this.audits.filter(audit => {
-  //     let auditDate = new Date(audit.audit_dt);
-  //     let today = new Date();
-  //     // Check if the audit was completed today
-  //     return auditDate.toDateString() === today.toDateString();
-  //   });
-
-  //   // For example, set score based on the number of completed audits
-  //   this.score = completedAudits.length * 10; // Arbitrary scoring logic (e.g., 10 points per completed audit)
-  // }
 
   viewAudit(item: any) {
     let modal = this.modalService.open(ViewAuditComponent, {
@@ -182,14 +167,45 @@ export class AuditComponent implements OnInit {''
     modal.componentInstance.viewaudit = item;
   }
 
-  addAudit() {
-    let modal = this.modalService.open(AddAuditComponent, {
-      backdrop: 'static',
-      size: 'xl',
-      keyboard: false,
-      centered: true,
-      windowClass: 'customm-modal',
-    });
-  }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+  // getAudit(){
+  //   this.apiService.getAPI(this.apiService.BASE_URL + "audit/getAllAuditByList").then (( result) =>{
+  //     console.log(result);
+  //      if (result.status == true){
+  //         this.audits = result.result
+  //         this.pendingAudits=this.audits.filter(audit=>new Date(audit.audit_dt)<this.currentDate);
+  //         this.scheduledAudits=this.audits.filter(audit=>new Date(audit.audit_dt)>=this.currentDate);
+  //         console.log("Pending Audits:",this.pendingAudits);
+  //         console.log("Scheduled Audits:",this.scheduledAudits);
+  //         console.log("current data",this.currentDate);
+  //         console.log("audits date",new Date(this.audits[0].audit_dt))
+  //         console.log("all my audits list",this.audits);
+  //      }
+  //   },(error) => {
+  //     console.log(error.error.message);
+  //     this.toaster.error(error.error.message);
+  //   })
+  // }
+
+  // calculateScore() {
+  //   let completedAudits = this.audits.filter(audit => {
+  //     let auditDate = new Date(audit.audit_dt);
+  //     let today = new Date();
+  //     // Check if the audit was completed today
+  //     return auditDate.toDateString() === today.toDateString();
+  //   });
+
+  //   // For example, set score based on the number of completed audits
+  //   this.score = completedAudits.length * 10; // Arbitrary scoring logic (e.g., 10 points per completed audit)
+  // }
