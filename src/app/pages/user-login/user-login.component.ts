@@ -89,7 +89,7 @@ export class UserLoginComponent {
           //     console.log("Yo yo Honey singh");
           //   }
           console.log('Logged in successfully');
-          this.router.navigate(['/audit']); // or your protected route
+          this.router.navigate(['/assign']); // or your protected route
           },
           error => {
             console.error('Login failed', error);
@@ -107,6 +107,7 @@ export class UserLoginComponent {
             this.router.navigate(['/audit']); // Redirect to /audit if credentials match
           } else {
             console.log('Invalid email or password');
+            alert("Wrong Credentials");
           }
           //  console.log(users.result);
         },
