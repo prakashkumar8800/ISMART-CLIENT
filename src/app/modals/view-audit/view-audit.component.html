@@ -46,17 +46,19 @@
         </form>
     </div>
 
-    <div class="table table-responsive">
+    <div class="table table-responsive" >
       <table class="table table-flush">
         <thead class="thead-light">
           <th>Checklist Item</th>
           <th>Attachment</th>
           <th>Action</th>
+          <th>Score</th>
         </thead>
         <tbody>
-          <tr *ngFor="let audit of audits">
-            <td>{{audit.checklist_item}}</td>
-            <td>{{audit.attachment_path}}
+          <!-- let audit of audits -->
+          <tr *ngFor="let item of (selectedService ? selectedService.items : allItems)">
+            <td *ngIf="item == checklist_item">{{item.name}}</td>
+            <td>{{item.attachment_path}}
               <div class="mb-3">
                 <!-- <label for="formFile" class="form-label">Default file input example</label> -->
                 <input class="form-control" type="file" id="formFile">
@@ -65,6 +67,7 @@
             <td>
               <input type="checkbox" class="form-control" style="height: 25px; margin-top: 8px;">
             </td>
+            <td>{{item.score}}</td>
           </tr>
         </tbody>
       </table>

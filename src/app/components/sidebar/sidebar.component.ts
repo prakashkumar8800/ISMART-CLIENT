@@ -9,18 +9,19 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
 
-
-    { path: '/audit', title: 'AUDIT',  icon:'ni-bullet-list-67 text-granite-gray', class: '' },
+  { path: '/audit', title: 'AUDIT',  icon:'ni-bullet-list-67 text-granite-gray', class: '' },
     { path: '/assign', title: 'ASSIGN',  icon:'ni-bullet-list-67 text-granite-gray', class: '' },
     { path: '/check-list', title: 'CHECK LIST',  icon:'ni-bullet-list-67 text-granite-gray', class: '' },
     // { path: '/report', title: 'REPORT',  icon:'ni-bullet-list-67 text-granite-gray', class: '' },
     { path: '/user-role', title: 'USER ROLE',  icon:'ni-bullet-list-67 text-granite-gray', class: '' },
     { path: '/user', title: 'USER',  icon:'ni-bullet-list-67 text-granite-gray', class: '' },
-    {
-      path:'/restaurant' , title:"RESTAURANT" ,icon:'ni-bullet-list-67 text-granite-gray',class:''
-    }
+    { path:'/restaurant' , title:"RESTAURANT" ,icon:'ni-bullet-list-67 text-granite-gray',class:'' }
     
 ];
+
+const Auditor: RouteInfo[] = [
+  { path: '/audit', title: 'AUDIT',  icon:'ni-bullet-list-67 text-granite-gray', class: '' },
+]
 
 @Component({
   selector: 'app-sidebar',
