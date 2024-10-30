@@ -12,7 +12,7 @@ import { UtilService } from 'src/app/services/util.service';
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.scss']
 })
-export class UserLoginComponent implements OnInit {
+
   //  formGroup:FormGroup
   
   // error:string='';
@@ -26,34 +26,92 @@ export class UserLoginComponent implements OnInit {
   //  constructor(private authService:AuthServiceService,
   //   private router: Router,
   //  ){}
-  ngOnInit() {
-    //  this.initForm();
-  }
+
   // Hardcoded login credentials
-  readonly validEmail = 'admin@gmail.com';
-  readonly validPassword = '654321';
+//   readonly validEmail = 'admin@gmail.com';
+//   readonly validPassword =
+//   onSubmit(form: any) {
+//       if (form.valid) {
+//           const { email, password } = form.value;
 
-  constructor(
-      private router: Router,
-      private toaster: ToastrService
-  ) {}
-
-  onSubmit(form: any) {
-      if (form.valid) {
-          const { email, password } = form.value;
-
-          if (email === this.validEmail && password === this.validPassword) {
-              this.toaster.success('Login successful!', 'Success');
-              this.router.navigateByUrl('/audit'); // Navigate to audit page after successful login
-          } else {
-              this.toaster.error('Invalid email or password', 'Error');
-              alert("Wrong Credentials");
+//           if (email === this.validEmail && password === this.validPassword) {
+//               this.toaster.success('Login successful!', 'Success');
+//               this.router.navigateByUrl('/audit'); // Navigate to audit page after successful login
+//           } else {
+//               this.toaster.error('Invalid email or password', 'Error');
+//               alert("Wrong Credentials");
+//           }
+//       } else {
+//           this.toaster.error('Please fill in all required fields', 'Error');
+//           alert('Please Enter the details');
+//       }
+//   }
+export class UserLoginComponent {
+    username = '';
+    password = '';
+  
+    // constructor(private authService: AuthServiceService, private router: Router,private apiService: ApiService,  private toaster: ToastrService,) {}
+    
+    constructor(private authService: AuthServiceService,private router: Router,private apiService: ApiService,  private toaster: ToastrService,) {}
+   
+    userdetail = [];
+    getUser(){
+      this.userdetail = [];
+      this.apiService.getAPI(this.apiService.BASE_URL + "user/getAllusers").then((result)=>{
+        console.log(result)
+        if(result.status){
+          this.userdetail = result.result
+          console.log(this.userdetail)
+        }
+      }, (error)=>{
+        console.log(error.error.message);
+        this.toaster.error(error.error.message)
+      })
+    }
+    
+    onSubmit(form: any) {
+      const { email, password } = form.value;
+      // this.email = email;
+      // this.password = password;
+  
+      // Fetch all users and check if any user's credentials match
+      if(email==="admin@gmail.com" && password==="12345"){
+        this.authService.login({ username: email, password: password }).subscribe(
+          response => {
+          //   if (response.status === 201 || response.status === 200) {  
+          //   console.log('Logged in successfully');
+          // //   this.router.navigate(['/audit']); // or your protected route
+          //   this.router.navigateByUrl('/audit');
+          //   }else{
+          //     console.log("Yo yo Honey singh");
+          //   }
+          console.log('Logged in successfully');
+          this.router.navigate(['/audit']); // or your protected route
+          },
+          error => {
+            console.error('Login failed', error);
           }
-      } else {
-          this.toaster.error('Please fill in all required fields', 'Error');
-          alert('Please Enter the details');
-      }
-  }
+        );
+      }else{
+      this.authService.getUser().subscribe(
+        (users) => {
+          const validUser = users.result.find(
+            (user: any) => user.email === email && user.password === password
+          );
+  
+          if (validUser) {
+            console.log('Login successful');
+            this.router.navigate(['/audit']); // Redirect to /audit if credentials match
+          } else {
+            console.log('Invalid email or password');
+          }
+          //  console.log(users.result);
+        },
+        (error) => {
+          console.error('Error fetching users:', error);
+        }
+      );}
+    }
   // initForm(){
   //   this.formGroup=new FormGroup({
   //     username:new FormControl('', Validators.required),
