@@ -56,12 +56,23 @@
         </thead>
         <tbody>
           <!-- let audit of audits -->
-          <tr *ngFor="let item of (selectedService ? selectedService.items : allItems)">
-            <td *ngIf="item == checklist_item">{{item.name}}</td>
-            <td>{{item.attachment_path}}
+          <tr *ngFor="let item of selectedItems">
+            <td>{{item.name}}</td>
+            <td>
+          
+          
+                
+              <div *ngIf="item.attachment_path && item.attachment_path.length > 0">
+                <p *ngFor="let path of item.attachment_path">
+                  <!-- Display as a clickable link if it's a URL, or plain text otherwise -->
+                  <a *ngIf="isUrl(path)" [href]="path" target="_blank">{{ path }}</a>
+                  <span *ngIf="!isUrl(path)">{{ path }}</span>
+                </p>
+              </div>
+                
               <div class="mb-3">
                 <!-- <label for="formFile" class="form-label">Default file input example</label> -->
-                <input class="form-control" type="file" id="formFile">
+                <input class="form-control" type="file" id="formFile" multiple (change)="onFileSelected($event,item)">
               </div>
             </td>
             <td>
@@ -75,5 +86,5 @@
 </div>
 
 <div class="modal-footer">
-    <button   *ngIf="viewaudit !=null" (click)="add()" class="btn btn-primary"  type="button" style="background: #be1b1e; border: none;">Save</button>
+    <button   *ngIf="viewaudit !=null"  class="btn btn-primary"  (click)="add()"  type="button" style="background: #be1b1e; border: none;">Save</button>
   </div>

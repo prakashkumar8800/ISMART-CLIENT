@@ -8,6 +8,7 @@ import { UtilService } from '../../services/util.service';
 import { UpdateServiceComponent } from 'src/app/modals/update-service/update-service.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AddAuditComponent } from 'src/app/modals/add-audit/add-audit.component';
+import { audit } from 'rxjs';
 
 @Component({
   selector: 'app-audit',
@@ -26,8 +27,8 @@ export class AuditComponent implements OnInit {''
   filteredAssignments = [];
   pendingAssigns=[];
   scheduledAssigns=[];
+  currentDate = new Date();
 
-  currentDate:Date=new Date();
 
   p= 1;
 
@@ -49,6 +50,8 @@ export class AuditComponent implements OnInit {''
         attachment_path: ['']
       });
   }
+
+  
 
   ngOnInit(): void {
     this.getChecklist();
@@ -148,10 +151,12 @@ export class AuditComponent implements OnInit {''
             checklist_item: assign.service
         };
     });
+
+    
     
     this.pendingAudits = this.audits.filter(audit => new Date(audit.audit_dt) < this.currentDate);
-    this.scheduledAudits = this.audits.filter(audit => new Date(audit.audit_dt) >= this.currentDate);
-    console.log('Audit Data:', this.audits); // Verify audit data here
+    //this.scheduledAudits = this.audits.filter(audit => new Date(audit.audit_dt) >= this.currentDate);
+    console.log('Audit Datasfrre:', this.pendingAudits); // Verify audit data here
   }
   
 
