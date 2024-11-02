@@ -12,103 +12,34 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header p-0">
+                <div class="card-header p-4">
                     <div style="display: flex">
-                        <!-- <h4 class="card-title" style="flex-grow: 1"> Crust</h4> -->
                         <p (click)="addrole()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add Role</p>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="table table-responsive">
-                        <table class="table table-flush">
-                            <thead class="thead-light">
-                                <th>Role <i style="margin-left: 5px; cursor: pointer;" class="fa fa-sort"></i></th>
-                                <th>Total Users <i style="margin-left: 5px; cursor: pointer;" class="fa fa-sort"></i></th>
-                                <th>Status <i style="margin-left: 5px; cursor: pointer;" class="fa fa-sort"></i></th>
-                                <th>Action</th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor=" let userdetails of userRoles">
-                                    <td>{{userdetails.name}}</td>
-                                    <!-- <td>{{userdetails.Total_users}}</td> -->
-                                    <td>{{ getUserCountByRole(userdetails.name) }}</td>
-                                    <td *ngIf="userdetails.status == 1">Active</td>
-                                    <td *ngIf="userdetails.status == 0">Inactive</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="updaterole(userdetails)" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!-- <tr>
-                                    <td>Shift Manager</td>
-                                    <td>10</td>
-                                    <td>Active</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="viewrole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-eye"></i></p>
-                                            <p (click)="updaterole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Shift Manager</td>
-                                    <td>2</td>
-                                    <td>Inactive</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="viewrole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-eye"></i></p>
-                                            <p (click)="updaterole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Shift Manager</td>
-                                    <td>4</td>
-                                    <td>Active</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="viewrole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-eye"></i></p>
-                                            <p (click)="updaterole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Shift Manager</td>
-                                    <td>3</td>
-                                    <td>Inactive</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="viewrole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-eye"></i></p>
-                                            <p (click)="updaterole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Shift Manager</td>
-                                    <td>2</td>
-                                    <td>Active</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="viewrole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-eye"></i></p>
-                                            <p (click)="updaterole()" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr> -->
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="table table-responsive">
+                    <table class="table table-flush">
+                        <thead class="thead-light">
+                            <th>Role <i style="margin-left: 5px; cursor: pointer;" class="fa fa-sort"></i></th>
+                            <th>Total Users <i style="margin-left: 5px; cursor: pointer;" class="fa fa-sort"></i></th>
+                            <th>Status <i style="margin-left: 5px; cursor: pointer;" class="fa fa-sort"></i></th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor=" let userdetails of userRoles">
+                                <td>{{userdetails.name}}</td>
+                                <td>{{ getUserCountByRole(userdetails.name) }}</td>
+                                <td *ngIf="userdetails.status == 1">Active</td>
+                                <td *ngIf="userdetails.status == 0">Inactive</td>
+                                <td class="text-right">
+                                    <div style="display: flex">
+                                        <p (click)="updaterole(userdetails)" class="text-success action"
+                                        style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

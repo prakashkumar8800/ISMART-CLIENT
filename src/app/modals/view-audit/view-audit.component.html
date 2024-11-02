@@ -13,82 +13,78 @@
             <div class="col-md-6">
                 <div class="form-group">
                 <label for="inputname" class="form-label">Audit Name</label>
-                <input name="name" class="form-control"[(ngModel)]="name" readonly>
+                <input name="name" class="form-control"[(ngModel)]="name" disabled="">
                 </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputrole" class="form-label">Shift Manager</label>
-                <input type="name" class="form-control" name="shift_manager" [(ngModel)]="shift_manager" readonly>
+                <input type="name" class="form-control" name="shift_manager" [(ngModel)]="shift_manager" disabled="">
               </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                   <label for="inputdatetime" class="form-label">Audit DT</label>
-                  <input type="datetime" class="form-control" name="audit_dt" [(ngModel)]="audit_dt" readonly>
+                  <input type="datetime" class="form-control" name="audit_dt" [(ngModel)]="audit_dt" disabled="">
                 </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="inputrole" class="form-label">Restaurant Manager</label>
-                <input name="service" [(ngModel)]="resturant_manager" class="form-control" readonly>
+                <input name="service" [(ngModel)]="resturant_manager" class="form-control" disabled="">
               </div>
             </div>
-            <!-- <div class="col-md-6">
-                <div class="form-group">
-                  <label for="inputrole" class="form-label">Checklist Name</label>
-                  <input type="name" name="checklist_item" class="form-control" [(ngModel)]="viewaudit.checklist_item">
-                </div>
-            </div>
-            <div class="col-md-6"></div>
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputstatus" class="form-label">attachment_path</label>
-                    <input class="form-control" name="attach_path">
-                </div>
-            </div> -->
+              <div class="form-group">
+                <label for="inputrole" class="form-label">Status</label>
+                <select name="status" [(ngModel)]="status" class="form-select">
+                  <option value="0">Cancle</option>
+                  <option value="1">Complete</option>
+                </select>
+              </div>
+            </div>
         </form>
-    </div>
-
-    <div class="table table-responsive" >
-      <table class="table table-flush">
-        <thead class="thead-light">
-          <th>Checklist Item</th>
-          <th>Attachment</th>
-          <th>Action</th>
-          <th>Score</th>
-        </thead>
-        <tbody>
-          <!-- let audit of audits -->
-          <tr *ngFor="let item of selectedItems">
-            <td>{{item.name}}</td>
-            <td>
-          
-          
-                
-              <div *ngIf="item.attachment_path && item.attachment_path.length > 0">
-                <p *ngFor="let path of item.attachment_path">
-                  <!-- Display as a clickable link if it's a URL, or plain text otherwise -->
-                  <a *ngIf="isUrl(path)" [href]="path" target="_blank">{{ path }}</a>
-                  <span *ngIf="!isUrl(path)">{{ path }}</span>
-                </p>
-              </div>
-                
-              <div class="mb-3">
-                <!-- <label for="formFile" class="form-label">Default file input example</label> -->
-                <input class="form-control" type="file" id="formFile" multiple (change)="onFileSelected($event,item)">
-              </div>
-            </td>
-            <td>
-              <input type="checkbox" class="form-control" style="height: 25px; margin-top: 8px;">
-            </td>
-            <td>{{item.score}}</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 </div>
 
+<div class="table table-responsive" >
+  <table class="table table-flush">
+    <thead class="thead-light">
+      <th>Checklist Item</th>
+      <th>Attachment</th>
+      <th>Action</th>
+      <th>Score</th>
+    </thead>
+    <tbody>
+      <!-- let audit of audits -->
+      <tr *ngFor="let item of selectedItems">
+        <td>{{item.name}}</td>
+        <td>
+      
+      
+            
+          <div *ngIf="item.attachment_path && item.attachment_path.length > 0">
+            <p *ngFor="let path of item.attachment_path">
+              <!-- Display as a clickable link if it's a URL, or plain text otherwise -->
+              <a *ngIf="isUrl(path)" [href]="path" target="_blank">{{ path }}</a>
+              <span *ngIf="!isUrl(path)">{{ path }}</span>
+            </p>
+          </div>
+            
+          <div class="mb-3">
+            <!-- <label for="formFile" class="form-label">Default file input example</label> -->
+            <input class="form-control" type="file" id="formFile" multiple (change)="onFileSelected($event,item)">
+          </div>
+        </td>
+        <td>
+          <input type="checkbox" class="form-control" style="height: 25px; margin-top: 8px;">
+        </td>
+        <td>{{item.score}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <div class="modal-footer">
-    <button   *ngIf="viewaudit !=null"  class="btn btn-primary"  (click)="add()"  type="button" style="background: #be1b1e; border: none;">Save</button>
+    <button  *ngIf="viewaudit !=null"  class="btn btn-primary"  (click)="add()"  type="button" style="background: #be1b1e; border: none;">Save</button>
   </div>

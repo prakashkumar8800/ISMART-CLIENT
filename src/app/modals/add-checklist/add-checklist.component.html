@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-md-1">
                         <label for="formFile" class="form-label">Attachment</label>
-                        <input class="form-check-input" id="flexCheckDefault" type="checkbox" [(ngModel)]="list.attachment" style="width: 100px; height: 20px;">
+                        <input class="form-check-input" name="checkbox{{i}}" type="checkbox" [(ngModel)]="list.attachment" style="width: 100px; height: 20px;">
                     </div>
                     <div class="col-md-4">
                         <label for="formFile" class="form-label">Status</label>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-1">
                         <label for="score" class="form-label">Score</label>
-                        <input class="form-control" name="score" type="score" [(ngModel)]="list.score" style="text-align: center;">
+                        <input class="form-control" name="score{{i}}" [(ngModel)]="list.score" style="text-align: center;">
                     </div>
                     <div class="col-md-2">
                         <button type="button" (click)="removeInput(i)" class="btn btn-danger" style="margin-top: 30px; background: #be1b1e;">Delete</button>

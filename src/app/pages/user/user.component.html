@@ -8,7 +8,7 @@
 
 <div class="container-fluid mt--7">
     <div class="card">
-        <div class="card-header p-0">
+        <div class="card-header p-4">
             <div style="display: flex">
                 <p (click)="addUser()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
             </div>
@@ -30,51 +30,59 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
-            <div class="table table-responsive">
-                <table class="table table-flush">
-                    <thead class="thead-light">
-                        <tr>
-                            <!-- <th (click)="sort('id')">Emp Id &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th> -->
-                            <th (click)="sort('name')">Name &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
-                            <th (click)="sort('email')">Email &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
-                            <th (click)="sort('phone')">Phone &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
-                            <th (click)="sort('role')">Role &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
-                            <th (click)="sort('status')">Status &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
-                            <th (click)="sort('added_on')">Added On &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                       <tr *ngFor="let User of userdetail of filteredData | paginate: { itemsPerPage: 10, currentPage: p }">
-                            <!-- <td *ngIf="outlet==User.restaurant || outlet=='all'">{{User.id}}</td> -->
-                            <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.name}}</td>
-                            <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.email}}</td>
-                            <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.phone}}</td>
-                            <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.role}}</td>
-                            <div *ngIf="outlet=='all' || outlet==User.restaurant">
-                                <td *ngIf="User.status == 0 ">Inactive</td>
-                                <td *ngIf="User.status == 1 ">Active</td>
+        <div class="table table-responsive">
+            <table class="table table-flush">
+                <thead class="thead-light">
+                    <tr>
+                        <th (click)="sort('name')">Name &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
+                        <th (click)="sort('email')">Email &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
+                        <th (click)="sort('phone')">Phone &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
+                        <th (click)="sort('role')">Role &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
+                        <th (click)="sort('status')">Status &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
+                        <th (click)="sort('added_on')">Added On &nbsp;<i style="cursor: pointer;" class="fa fa-sort"></i></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>  
+                    <tr *ngFor="let User of userdetail of filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
+                        <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.name}}</td>
+                        <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.email}}</td>
+                        <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.phone}}</td>
+                        <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.role}}</td>
+                        <div *ngIf="outlet=='all' || outlet==User.restaurant">
+                            <td *ngIf="User.status == 0 ">Inactive</td>
+                            <td *ngIf="User.status == 1 ">Active</td>
+                        </div>
+                        <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.created_DT}}</td>
+                        <td class="text-right"  *ngIf="outlet==User.restaurant || outlet=='all'">
+                            <div style="display: flex">
+                                <p (click)="updateUser(User)" class="text-success action"
+                                style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
                             </div>
-                            <td  *ngIf="outlet==User.restaurant || outlet=='all'">{{User.created_DT}}</td>
-                            <td class="text-right"  *ngIf="outlet==User.restaurant || outlet=='all'">
-                                <div style="display: flex">
-                                    <p (click)="updateUser(User)" class="text-success action"
-                                    style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                </div>
-                            </td>
-                        
-                        </tr>
-                        
-                    </tbody>
-                </table>
-                <div class="has-text-centered">
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                </div>
-            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="changePage(currentPage - 1)" tabindex="-1">
+                      <i class="fa fa-angle-left"></i>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                    <a style="cursor: pointer;" class="page-link" (click)="changePage(page)">{{page}}</a>
+                  </li>
+                  <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                    <a class="page-link" (click)="changePage(currentPage + 1)">
+                      <i class="fa fa-angle-right"></i>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+            </nav>
         </div>
-        
     </div>
 </div>
 

@@ -11,7 +11,8 @@
             <div class="form-group">
               <label for="inputrestaurant" class="form-label">Restaurant</label>
               <select name="restaurant" id="restaurant" class="form-select" [(ngModel)]="restaurant">
-                <option *ngFor="let restaurant of restaurants" [value]="">{{restaurant.name}}</option>
+                <option value="">Choose Restaurant</option>
+                <option *ngFor="let restaurant of restaurants" [value]="restaurant.id">{{restaurant.id != restaurant}}</option>
               </select>
             </div>
           </div>
@@ -19,13 +20,14 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputname" class="form-label">Name</label>
-              <input name="name" id="name" class="form-control" [(ngModel)]="name">
+              <input name="name" id="name" class="form-control" [(ngModel)]="name" placeholder="Enter name">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputauditor" class="form-label">Auditor</label>
               <select class="form-select" id="auditor" name="auditor" [(ngModel)]="auditor">
+                <option value="">Select Auditor</option>
                 <option *ngFor="let User of userdetail" [value]="User.name">{{User.name}}</option>
               </select>
             </div>
@@ -34,6 +36,7 @@
             <div class="form-group">
               <label for="inputrole" class="form-label">Service</label>
                 <select name="service" id="service" class="form-select" [(ngModel)]="service">
+                  <option value="">Select Service</option>
                   <option *ngFor="let list of checklist" [value]="list.name">{{list.name}}</option>
                 </select>
             </div>
@@ -41,16 +44,18 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="inputdatetime" class="form-label">Audit Date Time</label>
-              <input type="datetime-local" id="ass_dt" class="form-control" name="date" [(ngModel)]="ass_DT">
+              <input type="datetime-local" value="date" id="ass_dt" class="form-control" name="date" [(ngModel)]="ass_DT">
             </div>
           </div>
           <div class="col-md-6">
-            <div class="form-group" *ngIf="assign != null">
-              <label for="inputstatus" class="form-label">Status</label>
-              <select name="status" id="status" class="form-select" [(ngModel)]="status">
-                <option value="0">Cancle</option>
-                <option value="1">Completed</option>
-              </select>
+            <div *ngIf="assign != null">
+              <div class="form-group">
+                <label for="inputstatus" class="form-label">Status</label>
+                <select name="status" class="form-select" [(ngModel)]="status">
+                  <option value="0">Cancle</option>
+                  <option value="1">Completed</option>
+                </select>
+              </div>
             </div>
           </div>
         </form>

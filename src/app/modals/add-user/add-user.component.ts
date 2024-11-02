@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/services/api.service';
@@ -16,16 +16,17 @@ export class AddUserComponent implements OnInit {
   @Input() details;
 
   name = '';
-  password : string = '';
-  Cpass = '';
-  phone :string = '';
+  password: string = '';
+  Cpass: string = '';
+  phone : number;
   email : string = '';
   role = '';
   status = '1';
+  passwordMatch: boolean = true;
 
-  restaurant: string = '';
+  restaurant = '';
   
-  userForm: FormGroup;
+  // userForm: FormGroup;
 
   constructor( public utilService: UtilService,
     public apiService: ApiService,
@@ -36,14 +37,19 @@ export class AddUserComponent implements OnInit {
     private fb: FormBuilder
   ) 
 
-    {this.userForm = this.fb.group({}) }
+    { }
+
+    checkPasswords() {
+      this.passwordMatch = this.password === this.Cpass;
+    }
 
   ngOnInit(): void {
     if (this.details != null && this.details != undefined) {
       this.name = this.details.name,
       this.email = this.details.email,
       this.phone = this.details.phone,
-      this.password =this.password,
+      this.password = this.details.password,
+      this.Cpass = this.details.Cpass,
       this.restaurant = this.details.restaurant,
       this.role = this.details.role;
       this.status = this.details.status;
@@ -68,45 +74,39 @@ export class AddUserComponent implements OnInit {
     })
   }
 
-  restaurants=[];
+
+  restaurants: any = []
 
   getRestaurant() {
-    this.restaurants=[];
+    this.restaurants = []
     this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {
       console.log(result)
       if (result.status == true) {
             this.restaurants = result.result.filter( x=> 
               x.status == 1 ?x.name:'' 
             );
-            // console.log("This are my restaurants",this.restaurants);
-            if (this.restaurants.length > 0) {
-              this.restaurant = this.restaurants[0].name;
-            }
           }
-        //  console.log(this.restaurants);
-      }
-    ,error => {
-      console.error('Error fetching data', error);
-    }
-  );
+          else {
+            this.restaurant = null;
+            this.toaster.error('Restaurant data could not be retrieved');
+          }
+         console.log(this.restaurants);
+      },error => {
+        console.error('Error fetching restaurant data:', error);
+        this.restaurant = null;
+        this.toaster.error('Error fetching restaurant details');
+      });
   }
-
-  // submit(form: any) {
-  //   if (form.valid) {
-  //     console.log('Form Submitted!', form.value);
-  //   } else {
-  //     console.log('Form is invalid');
-  //   }
-  // }
 
   add() {
     
     let post = {
       name: this.name,
       email: this.email,
-      restaurant:this.restaurant,
+      restaurant: this.restaurant,
       phone: this.phone,
       password: this.password,
+      Cpass: this.Cpass,
       role: this.role,
       status: this.status,
     }
@@ -127,9 +127,10 @@ export class AddUserComponent implements OnInit {
       id: this.details.id,
       name: this.name,
       email: this.email,
-      restaurant:this.restaurant,
+      restaurant: this.restaurant,
       phone: this.phone,
       password: this.password,
+      Cpass: this.Cpass,
       role: this.role,
       status: this.status,
     }

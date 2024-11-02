@@ -11,36 +11,38 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header p-0">
+                <div class="card-header p-4">
                     <div style="display: flex">
                         <p (click)="addAssign()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                            <div class="form-group">
-                                <label>Restaurant</label>
-                                <select class="form-control" [(ngModel)]="outlet">
-                                    <option [value]=''>ALL</option>
-                                    <option *ngFor="let restaurant of restaurants" [value]="restaurant.name">{{restaurant.name}}</option>
-                                </select>
+                    <div class="form">
+                        <form class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Restaurant</label>
+                                    <select class="form-control" name="outlet" [(ngModel)]="outlet">
+                                        <option value='all'>ALL</option>
+                                        <option *ngFor="let restaurant of restaurants" [value]="restaurant.name">{{restaurant.name}}</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label>From</label>
-                                <input type="date" [(ngModel)]="from_date" class="form-control" name="from_date">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-lable">From</label>
+                                    <input type="date" [(ngModel)]="from_date" class="form-control" name="from_date">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label>To</label>
-                                <input type="date" class="form-control"  [(ngModel)]="to_date" name="to_date">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">To</label>
+                                    <input type="date" class="form-control"  [(ngModel)]="to_date" name="to_date">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                            <button (click)="onDateOrOutletChange()" class="btn btn-primary" style="background: #be1b1e; border: none; margin-top: 30px;">Search</button>
-                        </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                <button (click)="onDateOrOutletChange()" class="btn btn-primary" style="background: #be1b1e; border: none; margin-top: 30px;">Search</button>
+                            </div>
+                        </form>
                     </div>
                     <div>
                         <ul class="nav nav-tabs">
@@ -63,130 +65,193 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="table table-responsive" *ngIf="scheduledTab">
-                        <table class="table table-flush">
-                            <thead class="thead-light">
-                                <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Audit Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let assignUser of filteredScheduledAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
-                                    <td >{{assignUser.name}}</td>
-                                    <td >{{assignUser.auditor}}</td>
-                                    <td >{{assignUser.restaurant}}</td>
-                                    <td >{{assignUser.service}}</td>
-                                    <td >{{assignUser.ass_dt}}</td>
-                                    <td class="text-right" >
-                                        <div style="display: flex">
-                                            <p (click)="updateAudit(assignUser)" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="has-text-centered">
-                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                        </div>
-                    </div>
 
-                    <div class="table table-responsive" *ngIf="pendingTab">
-                        <table class="table table-flush">
-                            <thead class="thead-light">
-                                <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Audit Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let assignUser of filteredPendingAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
-                                    <td>{{assignUser.name}}</td>
-                                    <td>{{assignUser.auditor}}</td>
-                                    <td>{{assignUser.restaurant}}</td>
-                                    <td>{{assignUser.service}}</td>
-                                    <td>{{assignUser.ass_dt}}</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="updateAudit(assignUser)" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="has-text-centered">
-                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                        </div>
-                    </div>
+                <div class="table table-responsive" *ngIf="scheduledTab">
+                    <table class="table table-flush">
+                        <thead class="thead-light">
+                            <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Audit Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let assignUser of filteredScheduledAssigns.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
+                                <td >{{assignUser.name}}</td>
+                                <td >{{assignUser.auditor}}</td>
+                                <td >{{assignUser.restaurant}}</td>
+                                <td >{{assignUser.service}}</td>
+                                <td >{{assignUser.ass_dt}}</td>
+                                <td class="text-right" >
+                                    <div style="display: flex">
+                                        <p (click)="updateAudit(assignUser)" class="text-success action"
+                                        style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <li class="page-item" [class.disabled]="currentPage === 1">
+                            <a class="page-link" (click)="changePage(currentPage - 1)" tabindex="-1">
+                              <i class="fa fa-angle-left"></i>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
+                          <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                            <a style="cursor: pointer;" class="page-link" (click)="changePage(page)">{{page}}</a>
+                          </li>
+                          <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                            <a class="page-link" (click)="changePage(currentPage + 1)">
+                              <i class="fa fa-angle-right"></i>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </li>
+                        </ul>
+                    </nav>
+                </div>
 
-                    <div class="table table-responsive" *ngIf="cancleTab">
-                        <table class="table table-flush">
-                            <thead class="thead-light">
-                                <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Audit Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let assignUser of filteredCancleAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
-                                    <td>{{assignUser.name}}</td>
-                                    <td>{{assignUser.auditor}}</td>
-                                    <td>{{assignUser.restaurant}}</td>
-                                    <td>{{assignUser.service}}</td>
-                                    <td>{{assignUser.ass_dt}}</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="updateAudit(assignUser)" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="has-text-centered">
-                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                        </div>
-                    </div>
+                <div class="table table-responsive" *ngIf="pendingTab">
+                    <table class="table table-flush">
+                        <thead class="thead-light">
+                            <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Audit Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let assignUser of filteredPendingAssigns.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
+                                <td>{{assignUser.name}}</td>
+                                <td>{{assignUser.auditor}}</td>
+                                <td>{{assignUser.restaurant}}</td>
+                                <td>{{assignUser.service}}</td>
+                                <td>{{assignUser.ass_dt}}</td>
+                                <td class="text-right">
+                                    <div style="display: flex">
+                                        <p (click)="updateAudit(assignUser)" class="text-success action"
+                                        style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <li class="page-item" [class.disabled]="currentPage === 1">
+                            <a class="page-link" (click)="changePage(currentPage - 1)" tabindex="-1">
+                              <i class="fa fa-angle-left"></i>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
+                          <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                            <a style="cursor: pointer;" class="page-link" (click)="changePage(page)">{{page}}</a>
+                          </li>
+                          <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                            <a class="page-link" (click)="changePage(currentPage + 1)">
+                              <i class="fa fa-angle-right"></i>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </li>
+                        </ul>
+                    </nav>
+                </div>
 
-                    <div class="table table-responsive" *ngIf="completeTab">
-                        <table class="table table-flush">
-                            <thead class="thead-light">
-                                <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Audit Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                                <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let assignUser of filteredCompleteAssigns | paginate: { itemsPerPage: 10, currentPage: p}">
-                                    <td>{{assignUser.name}}</td>
-                                    <td>{{assignUser.auditor}}</td>
-                                    <td>{{assignUser.restaurant}}</td>
-                                    <td>{{assignUser.service}}</td>
-                                    <td>{{assignUser.ass_dt}}</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="updateAudit(assignUser)" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="has-text-centered">
-                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                        </div>
-                    </div>
+                <div class="table table-responsive" *ngIf="cancleTab">
+                    <table class="table table-flush">
+                        <thead class="thead-light">
+                            <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Audit Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let assignUser of filteredCancleAssigns.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
+                                <td>{{assignUser.name}}</td>
+                                <td>{{assignUser.auditor}}</td>
+                                <td>{{assignUser.restaurant}}</td>
+                                <td>{{assignUser.service}}</td>
+                                <td>{{assignUser.ass_dt}}</td>
+                                <td class="text-right">
+                                    <div style="display: flex">
+                                        <p (click)="updateAudit(assignUser)" class="text-success action"
+                                        style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <li class="page-item" [class.disabled]="currentPage === 1">
+                            <a class="page-link" (click)="changePage(currentPage - 1)" tabindex="-1">
+                              <i class="fa fa-angle-left"></i>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
+                          <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                            <a style="cursor: pointer;" class="page-link" (click)="changePage(page)">{{page}}</a>
+                          </li>
+                          <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                            <a class="page-link" (click)="changePage(currentPage + 1)">
+                              <i class="fa fa-angle-right"></i>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="table table-responsive" *ngIf="completeTab">
+                    <table class="table table-flush">
+                        <thead class="thead-light">
+                            <th>Name <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Auditor <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Restaurant <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Service <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Audit Date <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                            <th>Action <i style="margin-left: 5px;" class="fa fa-sort"></i></th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let assignUser of filteredCompleteAssigns.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
+                                <td>{{assignUser.name}}</td>
+                                <td>{{assignUser.auditor}}</td>
+                                <td>{{assignUser.restaurant}}</td>
+                                <td>{{assignUser.service}}</td>
+                                <td>{{assignUser.ass_dt}}</td>
+                                <td class="text-right">
+                                    <div style="display: flex">
+                                        <p (click)="updateAudit(assignUser)" class="text-success action"
+                                        style="margin-left: 10px;"><i class="fa fa-edit" style="cursor: pointer;"></i></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <li class="page-item" [class.disabled]="currentPage === 1">
+                            <a class="page-link" (click)="changePage(currentPage - 1)" tabindex="-1">
+                              <i class="fa fa-angle-left"></i>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
+                          <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                            <a style="cursor: pointer;" class="page-link" (click)="changePage(page)">{{page}}</a>
+                          </li>
+                          <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                            <a class="page-link" (click)="changePage(currentPage + 1)">
+                              <i class="fa fa-angle-right"></i>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>

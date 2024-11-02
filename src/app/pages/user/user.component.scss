@@ -8,21 +8,15 @@
 .container-fluid{
     .card{
         margin-top: -16rem;
-        padding: 16px;
 
         .card-header{
-            padding: 5px 15px;
 
             .card-title{
                 font-size: 1.57em;
-                font-family: 'Montserrat, Helvetica Neue, Arial, sans-serif';
+                // font-family: 'Montserrat, Helvetica Neue, Arial, sans-serif';
                 font-weight: 400;
                 color: #252422;
             }
-        }
-
-        .card-body table th{
-            font-size: 0.8rem;
         }
     }
 }

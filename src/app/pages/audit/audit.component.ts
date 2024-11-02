@@ -29,8 +29,8 @@ export class AuditComponent implements OnInit {''
   scheduledAssigns=[];
   currentDate = new Date();
 
-
-  p= 1;
+  itemsPerPage = 10;
+  currentPage = 1;
 
   userForm: FormGroup;
 
@@ -49,6 +49,23 @@ export class AuditComponent implements OnInit {''
         cheklist_name: [''],
         attachment_path: ['']
       });
+  }
+
+  // Method to calculate total pages
+  getTotalPages(): number {
+    return Math.ceil(this.pendingAudits.length / this.itemsPerPage);
+  }
+
+  // Method to return an array of page numbers for pagination controls
+  getPages(): number[] {
+    return Array(this.getTotalPages()).fill(0).map((x, i) => i + 1);
+  }
+
+  // Method to change the page when a pagination link is clicked
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.getTotalPages()) {
+        this.currentPage = page;
+    }
   }
 
   

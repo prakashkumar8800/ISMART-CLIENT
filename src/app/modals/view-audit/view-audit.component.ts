@@ -19,6 +19,7 @@ export class ViewAuditComponent implements OnInit {
   shift_manager = '';
   audit_dt = '';
   resturant_manager = '';
+  status = '1';
   checklist_item = '';
   attachment_path = '';
 
@@ -46,6 +47,7 @@ export class ViewAuditComponent implements OnInit {
         shift_manager: [''],
         audit_dt: [''],
         resturant_name: [''],
+        status: [''],
         checklist_item: [''],
         attachment_path: ['']
       });
@@ -63,6 +65,7 @@ export class ViewAuditComponent implements OnInit {
       this.shift_manager= this.viewaudit.shift_manager,
       this.resturant_manager = this.viewaudit.restaurant_manager
       this.audit_dt = this.viewaudit.audit_dt,
+      this.status = this.viewaudit.status,
       this.checklist_item = this.viewaudit.cheklist_item,
       this.attachment_path = this.viewaudit.attachment_path
       this.selectedService=this.viewaudit.checklist_item
@@ -242,6 +245,7 @@ async add() {
       shift_manager: this.shift_manager,
       audit_dt: this.audit_dt,
       restaurant_manager: this.resturant_manager,
+      status: this.status,
       checklist_item: JSON.stringify(this.selectedItems.map(item => ({
           name: item.name,
           score: item.score,
