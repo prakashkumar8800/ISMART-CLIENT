@@ -31,6 +31,7 @@ export class ViewAuditComponent implements OnInit {
   userForm: FormGroup;
 
   userdetail = []
+  averageScore: number = 0;
 
   constructor(public utilService: UtilService,
     public apiService: ApiService,
@@ -71,12 +72,16 @@ export class ViewAuditComponent implements OnInit {
     this.getUser()
     this.getChecklist();
     this.getAudit();
+
+    // this.calculateAverageScore();
     // this.getChecklist();
     // this.getUser()
     // this.getChecklist();
     // this.getAudit();
     // console.log("Yo Yo Honey Singh",this.selectedService.items);
   }
+
+ 
 
   audits = [];
 
@@ -165,189 +170,6 @@ export class ViewAuditComponent implements OnInit {
     }
   }
 
-// onFileSelected(event: Event): void {
-//   const input = event.target as HTMLInputElement;
-//   if (input.files) {
-//     this.selectedFiles = Array.from(input.files);
-//     console.log('Selected files:', this.selectedFiles);
-//   }
-// }
-
-// async add() {
-//   const formData = new FormData();
-
-//   // Initialize selectedItems with selectedFiles as an empty array
-// this.selectedItems = this.checklist.map(item => ({
-//   ...item,
-//   selectedFiles: []  // Initialize selectedFiles to avoid undefined errors
-// }));
-
-
-//   // Append each audit detail
-//   formData.append('name', this.userForm.value.name);
-//   formData.append('shift_manager', this.userForm.value.shift_manager);
-//   formData.append('audit_dt', this.userForm.value.audit_dt);
-//   formData.append('restaurant_manager', this.userForm.value.resturant_manager);
-
-//   // Append checklist items and their attachments
-//   this.selectedItems.forEach((item, index) => {
-//     formData.append(`checklist_items[${index}][name]`, item.name);
-//     formData.append(`checklist_items[${index}][score]`, item.score);
-
-//     // If the item has selected files, add them to FormData
-//     if (item.selectedFiles) {
-//       item.selectedFiles.forEach((file: File, fileIndex: number) => {
-//         formData.append(`checklist_items[${index}][attachments][${fileIndex}]`, file);
-//       });
-//     }
-//   });
-
-//   // Submit the data through ApiService
-//   try {
-//     const response = await this.apiService.postAPI(this.apiService.BASE_URL + 'audit/createAudit', formData);
-
-//     if (response.status) {
-//       this.toaster.success('Audit added successfully!');
-//       this.activeModal.close();
-//     } else {
-//       this.toaster.error('Failed to add audit');
-//     }
-//   } catch (error) {
-//     console.error('Error adding audit:', error);
-//     this.toaster.error('Error adding audit');
-//   }
-// }
-
-// onFileSelected(event: Event, item: any): void {
-//   const input = event.target as HTMLInputElement;
-//   if (input.files && item) {
-//     item.selectedFiles = Array.from(input.files);
-//     console.log('Selected files for item:', item.selectedFiles);
-//   }
-// }
-// onFileSelected(event: Event, item: any): void {
-//   const input = event.target as HTMLInputElement;
-//   if (input.files) {
-//     const files = Array.from(input.files);
-    
-//     // Store file names in attachment_path or URLs if uploaded to a server
-//     item.attachment_path = files.map(file => file.name);
-
-//     // Optionally, store the actual files if needed for further processing
-//     item.selectedFiles = files;
-
-//     console.log('Attachment paths for item:', item.attachment_path);
-//   }
-// }
-// onFileSelected(event: Event, item: any): void {
-//   if (!item) {
-//     console.error("Item is undefined, cannot set attachment_path.");
-//     return; // Exit if item is undefined
-//   }
-
-//   const input = event.target as HTMLInputElement;
-//   if (input.files) {
-//     const files = Array.from(input.files);
-
-//     // Store file names in attachment_path or URLs if uploaded to a server
-//     item.attachment_path = files.map(file => file.name);
-
-//     // Optionally, store the actual files if needed for further processing
-//     item.selectedFiles = files;
-
-//     console.log('Attachment paths for item:', item.attachment_path);
-//   }
-// }
-// onFileSelected(event: Event, item: any): void {
-//   if (!item) {
-//     console.error("Item is undefined, cannot set attachment_path.");
-//     return; // Exit if item is undefined
-//   }
-
-//   const input = event.target as HTMLInputElement;
-//   if (input.files) {
-//     const files = Array.from(input.files);
-    
-//     // Ensure item.attachment_path exists and store file names
-//     item.attachment_path = files.map(file => file.name);
-//     console.log('Attachment paths for item:', item.attachment_path);
-//   }
-// }
-// async add() {
-//   const formData = new FormData();
-
-//   // Add audit details to formData
-//   formData.append('name', this.name);
-//   formData.append('shift_manager', this.shift_manager);
-//   formData.append('audit_dt', this.audit_dt);
-//   formData.append('resturant_manager', this.resturant_manager);
-
-//   // Add checklist items and their attachments
-//   this.selectedItems.forEach(item => {
-//     formData.append('checklist_items[]', JSON.stringify({
-//       name: item.name,
-//       score: item.score
-//     }));
-
-//     // Append each selected file for the current item
-//     if (item.selectedFiles) {
-//       item.selectedFiles.forEach((file: File, index: number) => {
-//         formData.append(`attachments[${item.name}][${index}]`, file, file.name);
-//       });
-//     }
-//   });
-
-
-  // try {
-  //   const response = await this.apiService.BASE_URL + ('audit/createAudit', formData);
-  //   if (response.status === true) {
-  //     this.toaster.success('Audit created successfully!');
-  //     this.activeModal.close();
-  //   } else {
-  //     this.toaster.error('Failed to create audit');
-  //   }
-  // } catch (error) {
-  //   console.error('Error creating audit:', error);
-  //   this.toaster.error('An error occurred while creating audit');
-  // }
-  //   for (let pair of formData.entries()) {
-  //   console.log(`${pair[0]}: ${pair[1]}`);
-  // }
-
-
-  // try {
-  //   this.apiService.postAPI(this.apiService.BASE_URL + "audit/createAudit",formData).then((result) => {
-  //     console.log(formData);
-  //     if (result.status) {
-  //       this.toaster.success('Audit created successfully!');
-  //       this.activeModal.close();
-  //     }
-  //   });
-      
-  //   } catch (error) {
-  //     console.error('Error creating audit:', error);
-  //     this.toaster.error('An error occurred while creating audit');
-  //   }
-  // this.apiService.postAPI(this.apiService.BASE_URL + "audit/createAudit").then((result) => {
-  //   console.log(result);
-  //   if (result.status) {
-  //     this.toaster.success('Audit created successfully!');
-  //     this.activeModal.close();
-  //   }
-  // });
-//}
-
-// onFileSelected(event: Event, item: any): void {
-//   const input = event.target as HTMLInputElement;
-//   if (input.files) {
-//     const files = Array.from(input.files);
-    
-//     // Ensure item.attachment_path exists and store file names
-//     item.attachment_path = files.map(file => file.name);
-//     item.selectedFiles = files; // Store the actual files for upload
-//     console.log('Attachment paths for item:', item.attachment_path);
-//   }
-// }
 
 
    

@@ -21,9 +21,10 @@ export class UserRoleComponent implements OnInit {
     private toaster: ToastrService) { }
 
     userRoles = []
-
+    userdetail=[]
   ngOnInit(): void {
     this.getUserDetails();
+    this.getUser();
   }
 
   getUserDetails(){
@@ -36,6 +37,22 @@ export class UserRoleComponent implements OnInit {
       }
     }, (error)=> {
 
+    })
+  }
+  getUserCountByRole(role: string): number {
+    return this.userdetail.filter((x) => x.role === role).length;
+  }
+  getUser(){
+    this.apiService.getAPI(this.apiService.BASE_URL + "user/getAllusers").then((result)=>{
+      //console.log(result)
+      if(result.status){
+        this.userdetail = result.result
+        console.log(this.userdetail);
+      }
+      console.log("Jay Shree Ram",this.userdetail);
+    }, (error)=>{
+      console.log(error.error.message);
+      this.toaster.error(error.error.message)
     })
   }
 
@@ -53,6 +70,13 @@ export class UserRoleComponent implements OnInit {
    });
    modal.componentInstance.user_role = item;
   }
+  // count:number;
+  // updateUserCounts(): void {
+  //   this.userRoles.forEach(role => {
+  //     // Filter the users by role and count
+  //     role.Total_users = this.usertable.filter(user => user.role === role.name).length;
+  //   });
+  // }
 
   addrole() {
     let modal = this.modalService.open(AddRoleComponent, {

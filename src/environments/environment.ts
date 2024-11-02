@@ -7,7 +7,7 @@ export const environment = {
   
 
 };
-export const baseUrl='http://65.0.171.139:4000/auth';
+export const baseUrl='https://ismartapi.pw.work.gd/auth';
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

@@ -30,7 +30,8 @@
                             <tbody>
                                 <tr *ngFor=" let userdetails of userRoles">
                                     <td>{{userdetails.name}}</td>
-                                    <td>{{userdetails.Total_users}}</td>
+                                    <!-- <td>{{userdetails.Total_users}}</td> -->
+                                    <td>{{ getUserCountByRole(userdetails.name) }}</td>
                                     <td *ngIf="userdetails.status == 1">Active</td>
                                     <td *ngIf="userdetails.status == 0">Inactive</td>
                                     <td class="text-right">

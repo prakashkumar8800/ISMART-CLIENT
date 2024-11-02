@@ -34,7 +34,7 @@ export class AuthServiceService {
     return localStorage.getItem('authtoken');
   }
   getUser(): Observable<any> {
-    return this.http.get('http://65.0.171.139:4000/user/getAllusers'); // replace with actual endpoint
+    return this.http.get('https://ismartapi.pw.work.gd/user/getAllusers'); // replace with actual endpoint
   }
 }
 
