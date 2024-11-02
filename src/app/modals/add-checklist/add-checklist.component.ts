@@ -18,7 +18,7 @@ export class AddChecklistComponent implements OnInit {
   name = '';
   items = '';
   attachment: '';
-  score='';
+  score: string = '';
 
   myForm : FormGroup;
 
@@ -53,6 +53,7 @@ export class AddChecklistComponent implements OnInit {
   addInput() {
     this.checklist.push({
       name:"",
+      score: "",
       attachment:false,
       status:"1"
     }); // This should now work without errors

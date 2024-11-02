@@ -22,7 +22,7 @@ export class AssignComponent implements OnInit {
   userType = ''
   from_date:string = '';
   to_date :string= '';
-  outlet: string ='';
+  outlet: string ='all';
   filteredAssignments = [];
   pendingAssigns=[];
   scheduledAssigns=[];
@@ -34,7 +34,8 @@ export class AssignComponent implements OnInit {
   filteredCompleteAssigns = [];
   currentDate:Date=new Date();
   
-  p= 1;
+  itemsPerPage = 10;
+  currentPage = 1;
 
   selectedType = 'scheduled';
 
@@ -45,8 +46,23 @@ export class AssignComponent implements OnInit {
     private datePipe: DatePipe,
     private toaster: ToastrService) {
 
-    // this.from_date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    // this.to_date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  }
+
+   // Method to calculate total pages
+   getTotalPages(): number {
+    return Math.ceil(this.filteredScheduledAssigns.length / this.itemsPerPage);
+  }
+
+  // Method to return an array of page numbers for pagination controls
+  getPages(): number[] {
+    return Array(this.getTotalPages()).fill(0).map((x, i) => i + 1);
+  }
+
+  // Method to change the page when a pagination link is clicked
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.getTotalPages()) {
+        this.currentPage = page;
+    }
   }
 
   ngOnInit(): void {
@@ -90,12 +106,6 @@ export class AssignComponent implements OnInit {
       } else {
         this.toaster.error('No Outlets Found');
       }
-
-      // console.log(result);
-      // if (result.status == true) {
-      //   this.restaurants = activeRestaurants;
-      //   console.log(this.restaurants);
-      // }
     }, (error) => {
       console.error('Error fetching restaurants:', error);
     });
@@ -195,69 +205,37 @@ export class AssignComponent implements OnInit {
     this.getAssign();
   }
 
-  // filteredScheduledAssigns = [];
-  // filteredPendingAssigns = []; 
-  // filteredCancleAssigns = [];
-  // filteredCompleteAssigns = [];
-
-  // updateFilteredAssignments() {
-  //   // Filter assignments by restaurant and date range if provided
-  //   this.filteredScheduledAssigns = this.scheduledAssigns.filter(assign => 
-  //     (this.outlet === 'all' || assign.restaurant === this.outlet) &&
-  //     (!this.from_date || new Date(assign.ass_dt) >= new Date(this.from_date)) &&
-  //     (!this.to_date || new Date(assign.ass_dt) <= new Date(this.to_date))
-  //   );
-  
-  //   this.filteredPendingAssigns = this.pendingAssigns.filter(assign => 
-  //     (this.outlet === 'all' || assign.restaurant === this.outlet) &&
-  //     (!this.from_date || new Date(assign.ass_dt) >= new Date(this.from_date)) &&
-  //     (!this.to_date || new Date(assign.ass_dt) <= new Date(this.to_date))
-  //   );
-  
-  //   this.filteredCancleAssigns = this.cancleAssigns.filter(assign => 
-  //     (this.outlet === 'all' || assign.restaurant === this.outlet) &&
-  //     (!this.from_date || new Date(assign.ass_dt) >= new Date(this.from_date)) &&
-  //     (!this.to_date || new Date(assign.ass_dt) <= new Date(this.to_date))
-  //   );
-  
-  //   this.filteredCompleteAssigns = this.completeAssigns.filter(assign => 
-  //     (this.outlet === 'all' || assign.restaurant === this.outlet) &&
-  //     (!this.from_date || new Date(assign.ass_dt) >= new Date(this.from_date)) &&
-  //     (!this.to_date || new Date(assign.ass_dt) <= new Date(this.to_date))
-  //   );
-  // }
-
   updateFilteredAssignments() {
     // Check if the outlet, from_date, and to_date are all unselected/empty
     console.log("Informations",this.from_date,this.to_date,this.outlet)
-    const noOutletFilter = !this.outlet || this.outlet === 'All';
+    const noOutletFilter = !this.outlet || this.outlet === 'all';
     const noDateFilter = !this.from_date && !this.to_date;
 
     // If no filters are applied, show all data by assigning the full array
     this.filteredScheduledAssigns = (noOutletFilter && noDateFilter) ? this.scheduledAssigns : 
         this.scheduledAssigns.filter(assign => 
-            (this.outlet === 'All' || assign.restaurant === this.outlet) &&
+            (this.outlet === 'all' || assign.restaurant === this.outlet) &&
             (!this.from_date || new Date(assign.ass_dt) >= new Date(this.from_date)) &&
             (!this.to_date || new Date(assign.ass_dt) <= new Date(this.to_date))
         );
 
     this.filteredPendingAssigns = (noOutletFilter && noDateFilter) ? this.pendingAssigns : 
         this.pendingAssigns.filter(assign => 
-            (this.outlet === 'All' || assign.restaurant === this.outlet) &&
+            (this.outlet === 'all' || assign.restaurant === this.outlet) &&
             (!this.from_date || new Date(assign.ass_dt) >= new Date(this.from_date)) &&
             (!this.to_date || new Date(assign.ass_dt) <= new Date(this.to_date))
         );
 
     this.filteredCancleAssigns = (noOutletFilter && noDateFilter) ? this.cancleAssigns : 
         this.cancleAssigns.filter(assign => 
-            (this.outlet === 'All' || assign.restaurant === this.outlet) &&
+            (this.outlet === 'all' || assign.restaurant === this.outlet) &&
             (!this.from_date || new Date(assign.ass_dt) >= new Date(this.from_date)) &&
             (!this.to_date || new Date(assign.ass_dt) <= new Date(this.to_date))
         );
 
     this.filteredCompleteAssigns = (noOutletFilter && noDateFilter) ? this.completeAssigns : 
         this.completeAssigns.filter(assign => 
-            (this.outlet === 'All' || assign.restaurant === this.outlet) &&
+            (this.outlet === 'all' || assign.restaurant === this.outlet) &&
             (!this.from_date || new Date(assign.ass_dt) >= new Date(this.from_date)) &&
             (!this.to_date || new Date(assign.ass_dt) <= new Date(this.to_date))
         );

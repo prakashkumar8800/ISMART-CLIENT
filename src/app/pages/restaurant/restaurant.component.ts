@@ -14,7 +14,8 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class RestaurantComponent implements OnInit {
 
-  p = 1
+  itemsPerPage = 10;
+  currentPage = 1;
 
   key: string = 'name';
   reverse: boolean = false;
@@ -32,6 +33,22 @@ export class RestaurantComponent implements OnInit {
     private toast: ToastrService
   ) { 
 
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.restaurants.length / this.itemsPerPage);
+  }
+
+  // Method to return an array of page numbers for pagination controls
+  getPages(): number[] {
+    return Array(this.getTotalPages()).fill(0).map((x, i) => i + 1);
+  }
+
+  // Method to change the page when a pagination link is clicked
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.getTotalPages()) {
+        this.currentPage = page;
+    }
   }
   
   restaurants=[];

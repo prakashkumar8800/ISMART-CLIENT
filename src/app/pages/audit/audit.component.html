@@ -12,21 +12,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header p-0">
-                        <!-- <-- <div class="row" style="margin: 0 0 0 auto;">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-2"></div>
-                            <div class="col-md-4">
-                                <div class="form-group d-flex" style="gap: 10px; align-items: center;">
-                                  <label for="inputscore" class="form-label">Score</label>
-                                  <input type="score" class="form-control" name="score" [(ngModel)]="score" readonly="true">
-                                </div>
-                            </div>
-                             <div class="col-md-3">
-                                <p (click)="addAudit()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
-                            </div>
-                        </div>  -->
-
+                <div class="card-header p-4">
                     <div>
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
@@ -40,72 +26,102 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="table table-responsive" *ngIf="pendingTab">
-                        <table class="table table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Shift Manager</th>
-                                    <th>Audit DT</th>
-                                    <th>Restaurant Manager</th>
-                                    <th>Checklist Item</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let audit of pendingAudits | paginate: { itemsPerPage: 10, currentPage: p}">
-                                    <td>{{audit.name}}</td>
-                                    <td>{{audit.shift_manager}}</td>
-                                    <td>{{audit.audit_dt}}</td>
-                                    <td>{{audit.restaurant_manager}}</td>
-                                    <td>{{audit.checklist_item}}</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="viewAudit(audit)" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa-solid fa-eye" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="has-text-centered">
-                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                        </div>
-                    </div>
-                   <!-- Scheduled Audits Table -->
-                    <div class="table table-responsive" *ngIf="completeTab">
-                        <table class="table table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Shift Manager</th>
-                                    <th>Audit DT</th>
-                                    <th>Restaurant Manager</th>
-                                    <th>Checklist Item</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- <tr>
-                                    <td>{{audit.name}}</td>
-                                    <td>{{audit.shift_manager}}</td>
-                                    <td>{{audit.audit_dt}}</td>
-                                    <td>{{audit.resturant_manager}}</td>
-                                    <td>{{audit.checklist_item}}</td>
-                                    <td class="text-right">
-                                        <div style="display: flex">
-                                            <p (click)="viewAudit(audit)" class="text-success action"
-                                            style="margin-left: 10px;"><i class="fa-solid fa-eye" style="cursor: pointer;"></i></p>
-                                        </div>
-                                    </td>
-                                </tr> -->
-                            </tbody>
-                        </table>
-                        <div class="has-text-centered">
-                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                        </div>
-                    </div>
+                <div class="table table-responsive" *ngIf="pendingTab">
+                    <table class="table table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Shift Manager</th>
+                                <th>Audit DT</th>
+                                <th>Restaurant Manager</th>
+                                <th>Checklist Item</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let audit of pendingAudits.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
+                                <td>{{audit.name}}</td>
+                                <td>{{audit.shift_manager}}</td>
+                                <td>{{audit.audit_dt}}</td>
+                                <td>{{audit.restaurant_manager}}</td>
+                                <td>{{audit.checklist_item}}</td>
+                                <td class="text-right">
+                                    <div style="display: flex">
+                                        <p (click)="viewAudit(audit)" class="text-success action"
+                                        style="margin-left: 10px;"><i class="fa-solid fa-eye" style="cursor: pointer;"></i></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <li class="page-item" [class.disabled]="currentPage === 1">
+                            <a class="page-link" (click)="changePage(currentPage - 1)" tabindex="-1">
+                              <i class="fa fa-angle-left"></i>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
+                          <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                            <a style="cursor: pointer;" class="page-link" (click)="changePage(page)">{{page}}</a>
+                          </li>
+                          <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                            <a class="page-link" (click)="changePage(currentPage + 1)">
+                              <i class="fa fa-angle-right"></i>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </li>
+                        </ul>
+                    </nav>
+                </div>
+               <!-- Scheduled Audits Table -->
+                <div class="table table-responsive" *ngIf="completeTab">
+                    <table class="table table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Shift Manager</th>
+                                <th>Audit DT</th>
+                                <th>Restaurant Manager</th>
+                                <th>Checklist Item</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <tr>
+                                <td>{{audit.name}}</td>
+                                <td>{{audit.shift_manager}}</td>
+                                <td>{{audit.audit_dt}}</td>
+                                <td>{{audit.resturant_manager}}</td>
+                                <td>{{audit.checklist_item}}</td>
+                                <td class="text-right">
+                                    <div style="display: flex">
+                                        <p (click)="viewAudit(audit)" class="text-success action"
+                                        style="margin-left: 10px;"><i class="fa-solid fa-eye" style="cursor: pointer;"></i></p>
+                                    </div>
+                                </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <li class="page-item" [class.disabled]="currentPage === 1">
+                            <a class="page-link" (click)="changePage(currentPage - 1)" tabindex="-1">
+                              <i class="fa fa-angle-left"></i>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
+                          <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                            <a style="cursor: pointer;" class="page-link" (click)="changePage(page)">{{page}}</a>
+                          </li>
+                          <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                            <a class="page-link" (click)="changePage(currentPage + 1)">
+                              <i class="fa fa-angle-right"></i>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -121,57 +137,9 @@
 
 
 
-<!-- <div class="form">
-                        <form class="row" (ngSubmit)="onSubmit()" #userForm="ngForm" *ngFor="let audit of audits">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="inputname" class="form-label">Audit Name</label>
-                                    <input [(ngModel)]="audit.name" name="name" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="inputstatus" class="form-label">Shift Manager</label>
-                                    <select name="shift_manager" class="form-select">
-                                      <option *ngFor="let User of userdetail">{{User.role=="shift manager" && User.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="inputdatetime" class="form-label">Audit Date Time</label>
-                                    <input [(ngModel)]="audit.audit_dt" name="audit_time" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="inputstatus" class="form-label">Restaurent Manager</label>
-                                    <select name="resturant_manager" class="form-select">
-                                      <option *ngFor="let User of userdetail">{{ User.role=="restaurant manager" && User.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="table table-responsive" style="margin-top: 20px;">
-                            <table class="table table-flush">
-                              <thead class="thead-light">
-                                 <th>Check List</th>
-                                 <th>Attachement: (Yes/ No)</th>
-                                 <th>Action</th>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let audit of audits">
-                                  <td>{{audit.checklist_item}}</td>
-                                  <td><input hidden type="file" #uploader (change)="uploadFile($event)">
-                                    <button class="btn btn-primary" (click)="uploader.click()" style="background: #be1b1e; border: none; margin-left: 10px;">Upload</button></td>
-                                  <td><div class="form-group">
-                                    <input type="checkbox" class="form-control" style="height: 25px; margin-top: 8px;">
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                        </div>
+
+                    <!-- <div class="has-text-centered">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     </div> -->
 
 

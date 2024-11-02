@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header p-0">
+                <div class="card-header p-4">
                     <div class="d-flex">
                         <p (click)="addchecklist()" style="cursor: pointer; font-weight: 500; margin: 0 0 0 auto;">+ Add</p>
                     </div>
@@ -37,37 +37,35 @@
                         </form>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive" *ngIf="(selectedService && selectedService.items?.length > 0)">
-                        <table class="table table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th (click)="toggleSort('name')" style="cursor: pointer;">Name</th>
-                                    <th (click)="toggleSort('status')" style="cursor: pointer;">Status</th>
-                                    <th (click)="toggleSort('attachment')" style="cursor: pointer;">Attachment</th>
-                                    <th (click)="toggleSort('score')" style="cursor: pointer;">Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Display items based on selected service -->
-                                <tr *ngFor="let item of (selectedService ? selectedService.items : allItems)">
-                                    <td>{{ item.name }}</td>
-                                    <td *ngIf="item.status == 0">Inactive</td>
-                                    <td *ngIf="item.status == 1">Active</td>
-                                    <td>{{ item.attachment ? 'True' : 'False' }}</td>
-                                    <td>{{item.score}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Show a message only if Service exists but has no items -->
-                    <div *ngIf="selectedService && (!selectedService.items || selectedService.items.length == 0)">
-                        <p>No items available for this service.</p>
-                    </div>
-                    <!-- Show a message when "ALL" is selected but no items exist -->
-                    <div *ngIf="selectedService === null && allItems.length === 0">
-                        <p>No items available in the checklist.</p>
-                    </div>
+                <div class="table-responsive" *ngIf="(selectedService && selectedService.items?.length > 0)">
+                    <table class="table table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th (click)="toggleSort('name')" style="cursor: pointer;">Name</th>
+                                <th (click)="toggleSort('status')" style="cursor: pointer;">Status</th>
+                                <th (click)="toggleSort('attachment')" style="cursor: pointer;">Attachment</th>
+                                <th (click)="toggleSort('score')" style="cursor: pointer;">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Display items based on selected service -->
+                            <tr *ngFor="let item of (selectedService ? selectedService.items : allItems)">
+                                <td>{{ item.name }}</td>
+                                <td *ngIf="item.status == 0">Inactive</td>
+                                <td *ngIf="item.status == 1">Active</td>
+                                <td>{{ item.attachment ? 'True' : 'False' }}</td>
+                                <td>{{item.score}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Show a message only if Service exists but has no items -->
+                <div *ngIf="selectedService && (!selectedService.items || selectedService.items.length == 0)">
+                    <p>No items available for this service.</p>
+                </div>
+                <!-- Show a message when "ALL" is selected but no items exist -->
+                <div *ngIf="selectedService === null && allItems.length === 0">
+                    <p>No items available in the checklist.</p>
                 </div>
             </div>
         </div>

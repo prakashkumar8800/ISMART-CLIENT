@@ -15,7 +15,8 @@ import { AddUserComponent } from 'src/app/modals/add-user/add-user.component';
 })
 export class UserComponent implements OnInit {
 
-  p = 1
+  itemsPerPage = 10;
+  currentPage = 1;
 
   key: string = 'name';
   reverse: boolean = false;
@@ -26,7 +27,6 @@ export class UserComponent implements OnInit {
   }
   filteredUsers = [];
 
-  // order: string = 'name';
   
     constructor(public utilService: UtilService,
       // private orderPipe: OrderPipe,
@@ -35,7 +35,22 @@ export class UserComponent implements OnInit {
       private toaster: ToastrService,
       private datePipe: DatePipe) { 
 
-        // console.log(this.orderPipe.transform(this.userdetail, this.order));
+    }
+
+    getTotalPages(): number {
+      return Math.ceil(this.filteredData.length / this.itemsPerPage);
+    }
+  
+    // Method to return an array of page numbers for pagination controls
+    getPages(): number[] {
+      return Array(this.getTotalPages()).fill(0).map((x, i) => i + 1);
+    }
+  
+    // Method to change the page when a pagination link is clicked
+    changePage(page: number): void {
+      if (page >= 1 && page <= this.getTotalPages()) {
+          this.currentPage = page;
+      }
     }
 
     userdetail = [];

@@ -37,6 +37,7 @@ export class AddAssignComponent implements OnInit {
       this.name = this.assign.name,
       this.auditor = this.assign.auditor,
       this.restaurant = this.assign.restaurant,
+      this.service = this.assign.service,
       this.ass_DT = this.assign.ass_DT,
       this.status = this.assign.status
     }
@@ -134,7 +135,7 @@ export class AddAssignComponent implements OnInit {
       auditor: this.auditor,
       service: this.service,
       ass_DT: this.ass_DT,
-      status: this.status,
+      status: this.status == '1',
     }
 
     this.apiService.postAPI(this.apiService.BASE_URL + "assign/updateAssign", post).then((result) => {
