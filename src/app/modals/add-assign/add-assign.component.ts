@@ -53,9 +53,11 @@ export class AddAssignComponent implements OnInit {
     this.userdetail = [];
     this.apiService.getAPI(this.apiService.BASE_URL + "user/getAllusers").then((result)=>{
       console.log(result)
-      if(result.status){
-        this.userdetail = result.result
-        console.log(this.userdetail)
+      if(result.status == true){
+        this.userdetail = result.result.filter(user =>
+          user.role == 'Auditor' ?user.name: ''
+        );
+        console.log(this.userdetail);
       }
     }, (error)=>{
       console.log(error.error.message);

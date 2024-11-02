@@ -12,7 +12,7 @@
               <label for="inputrestaurant" class="form-label">Restaurant</label>
               <select name="restaurant" id="restaurant" class="form-select" [(ngModel)]="restaurant">
                 <option value="">Choose Restaurant</option>
-                <option *ngFor="let restaurant of restaurants" [value]="restaurant.id">{{restaurant.id != restaurant}}</option>
+                <option *ngFor="let restaurant of restaurants" [value]="restaurant.name">{{restaurant.name}}</option>
               </select>
             </div>
           </div>
