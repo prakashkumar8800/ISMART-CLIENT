@@ -13,12 +13,10 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class CheckListComponent implements OnInit {
 
-  checklist = [];
+  checklist: any[] = [];
   Service: any; // Holds the selected service from the dropdown
   allItems = [];
 
-  sortname: string = 'name'; // Default sort field
-  sortOrder: 'asc' | 'desc' = 'asc'; // Default sort order
 
   constructor(public utilService: UtilService,
               public apiService: ApiService,
@@ -31,17 +29,6 @@ export class CheckListComponent implements OnInit {
     this.calculateAverageScore();
   }
 
-  toggleSort(name: string) {
-    if (this.sortname === name) {
-      // Toggle sort order if the field is the same
-      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-    } else {
-      // Set new sort field and reset to ascending order
-      this.sortname = name;
-      this.sortOrder = 'asc';
-    }
-  }
-
 
 
   // Get the checklist data from API
@@ -50,6 +37,7 @@ export class CheckListComponent implements OnInit {
       console.log(result);
       if (result.status) {
         this.checklist = result.result;
+
         this.checklist.forEach((list: any) => {
           if (typeof list.items === 'string') {
             try {
@@ -62,6 +50,7 @@ export class CheckListComponent implements OnInit {
           this.allItems.push(...list.items);
         });
       }
+      this.checklist == result;
     });
   }
 
@@ -70,7 +59,7 @@ export class CheckListComponent implements OnInit {
   onServiceChange() {
     if (this.selectedService === null) {
       // "ALL" selected - display all items
-      console.log('Showing all items:');
+      console.log('Showing all items:', null);
       this.checklist.forEach((service) => {
         console.log('Service:', service.name, 'Items:', service.items);
       });
@@ -93,7 +82,7 @@ export class CheckListComponent implements OnInit {
       centered: true,
       windowClass: 'customm-modal',
     });
-    this.getChecklist();
+    // this.getChecklist();
   }
 
   // Edit the selected service's checklist

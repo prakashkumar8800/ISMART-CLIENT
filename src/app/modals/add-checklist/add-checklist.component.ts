@@ -43,7 +43,7 @@ export class AddChecklistComponent implements OnInit {
       this.checklist = this.listitem.items;
     }
     console.log(this.listitem);  // Ensure the items are logged correctly
-    console.log(this.checklist); // Ensure the checklist array is populated
+    // console.log(this.checklist); // Ensure the checklist array is populated
   }
   
   
