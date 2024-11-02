@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group" *ngIf="(selectedService && selectedService.items?.length > 0)">
                                     <button type="button" (click)="editchecklist(selectedService)" style="margin-top: 30px; border: none;" class="btn btn-primary">Edit</button>
                                 </div>
                             </div>
@@ -41,10 +41,10 @@
                     <table class="table table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th (click)="toggleSort('name')" style="cursor: pointer;">Name</th>
-                                <th (click)="toggleSort('status')" style="cursor: pointer;">Status</th>
-                                <th (click)="toggleSort('attachment')" style="cursor: pointer;">Attachment</th>
-                                <th (click)="toggleSort('score')" style="cursor: pointer;">Score</th>
+                                <th (click)="sort('name')" style="cursor: pointer;">Name</th>
+                                <th (click)="sort('status')" style="cursor: pointer;">Status</th>
+                                <th (click)="sort('attachment')" style="cursor: pointer;">Attachment</th>
+                                <th (click)="sort('score')" style="cursor: pointer;">Score</th>
                             </tr>
                         </thead>
                         <tbody>
