@@ -12,7 +12,7 @@
               <label for="inputrestaurant" class="form-label">Restaurant</label>
               <select name="restaurant" id="restaurant" class="form-select" [(ngModel)]="restaurant">
                 <option value="">Choose Restaurant</option>
-                <option *ngFor="let restaurant of restaurants" [value]="restaurant.name">{{restaurant.name}}</option>
+                <option *ngFor="let restaurant of restaurants" [value]="restaurant.id">{{restaurant.name}}</option>
               </select>
             </div>
           </div>
@@ -28,7 +28,7 @@
               <label for="inputauditor" class="form-label">Auditor</label>
               <select class="form-select" id="auditor" name="auditor" [(ngModel)]="auditor">
                 <option value="">Select Auditor</option>
-                <option *ngFor="let User of userdetail" [value]="User.name">{{User.name}}</option>
+                <option *ngFor="let User of userdetail" [value]="User.id">{{User.name}}</option>
               </select>
             </div>
           </div>
@@ -37,7 +37,7 @@
               <label for="inputrole" class="form-label">Service</label>
                 <select name="service" id="service" class="form-select" [(ngModel)]="service">
                   <option value="">Select Service</option>
-                  <option *ngFor="let list of checklist" [value]="list.name">{{list.name}}</option>
+                  <option *ngFor="let list of checklist" [value]="list.id">{{list.name}}</option>
                 </select>
             </div>
           </div>
