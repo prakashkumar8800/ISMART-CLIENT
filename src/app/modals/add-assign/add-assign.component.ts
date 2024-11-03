@@ -33,15 +33,20 @@ export class AddAssignComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.getRestaurant();
+    this.getUser()
+    this.getChecklist();
     if (this.assign != null && this.assign != undefined) {
       this.name = this.assign.name,
       this.auditor = this.assign.auditor,
       this.restaurant = this.assign.restaurant,
       this.service = this.assign.service,
-      this.ass_DT = this.assign.ass_DT,
+      this.ass_DT=this.assign.ass_DT
+
+
       this.status = this.assign.status
     }
-    console.log(this.assign);
+    console.log("assign date and time",this.assign.ass_DT);
     this.getRestaurant();
     this.getUser()
     this.getChecklist();
@@ -70,7 +75,6 @@ export class AddAssignComponent implements OnInit {
   getRestaurant() {
     this.restaurants = []
     this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {
-      console.log(result)
       if (result.status == true) {
             this.restaurants = result.result.filter( x=> 
               x.status == 1 ?x.name:'' 
@@ -80,7 +84,7 @@ export class AddAssignComponent implements OnInit {
             this.restaurant = null;
             this.toaster.error('Restaurant data could not be retrieved');
           }
-         console.log(this.restaurants);
+         console.log("chumma chumma de de",this.restaurants);
       },error => {
         console.error('Error fetching restaurant data:', error);
         this.restaurant = null;
@@ -137,7 +141,8 @@ export class AddAssignComponent implements OnInit {
       auditor: this.auditor,
       service: this.service,
       ass_DT: this.ass_DT,
-      status: this.status == '1',
+      status:this.status
+      // status: this.status == '1',
     }
 
     this.apiService.postAPI(this.apiService.BASE_URL + "assign/updateAssign", post).then((result) => {

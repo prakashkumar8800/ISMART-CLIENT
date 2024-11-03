@@ -69,6 +69,8 @@ export class ViewAuditComponent implements OnInit {
       this.checklist_item = this.viewaudit.cheklist_item,
       this.attachment_path = this.viewaudit.attachment_path
       this.selectedService=this.viewaudit.checklist_item
+
+      console.log("Jay shree ram",this.selectedService);
       // this.getChecklist();
       // this.updateSelectedItems();
     }
@@ -149,7 +151,7 @@ export class ViewAuditComponent implements OnInit {
     });
   }
   updateSelectedItems() {
-    const selectedChecklist = this.checklist.find((check) => check.name === this.selectedService);
+    const selectedChecklist = this.checklist.find((check) => check.id=== this.selectedService);
     // this.selectedItems = selectedChecklist ? selectedChecklist.items : [];
     if (selectedChecklist) {
       this.selectedItems = typeof selectedChecklist.items === 'string' 

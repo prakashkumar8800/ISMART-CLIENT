@@ -33,6 +33,7 @@ export class AssignComponent implements OnInit {
   filteredCancleAssigns = [];
   filteredCompleteAssigns = [];
   currentDate:Date=new Date();
+  checklist: any[] = [];
   
   itemsPerPage = 10;
   currentPage = 1;
@@ -69,6 +70,7 @@ export class AssignComponent implements OnInit {
     this.userType = this.utilService.getItem(this.utilService.USER_TYPE)
     this.getAssign();
     this.getRestaurant()
+    this.getChecklist();
    
   }
 
@@ -193,7 +195,28 @@ export class AssignComponent implements OnInit {
       console.error("Error updating assignment:", error);
     });
   }
+  
+  getChecklist() {
+    this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then((result) => {
+      console.log(result);
+      if (result.status) {
+        this.checklist = result.result;
 
+        this.checklist.forEach((list: any) => {
+          if (typeof list.items === 'string') {
+            try {
+              list.items = JSON.parse(list.items);
+            } catch (e) {
+              console.error("Error parsing items", e);
+              list.items = []; // Set to empty array on error
+            }
+          }
+        
+        });
+      }
+      this.checklist == result;
+    });
+  }
   addAssign() {
     let modal = this.modalService.open(AddAssignComponent, {
       backdrop: 'static',
@@ -239,6 +262,18 @@ export class AssignComponent implements OnInit {
             (!this.from_date || new Date(assign.ass_dt) >= new Date(this.from_date)) &&
             (!this.to_date || new Date(assign.ass_dt) <= new Date(this.to_date))
         );
+}
+
+getRestaurantName(id: number) {
+  return this.restaurants.find(r => r.id === id)?.name || 'Unknown';
+}
+
+getAuditorName(id: number) {
+  return this.userAssign.find(a => a.id === id)?.name || 'Unknown';
+}
+
+getServiceName(id: number) {
+  return this.checklist.find(s => s.id === id)?.name || 'Unknown';
 }
   
   onDateOrOutletChange() {

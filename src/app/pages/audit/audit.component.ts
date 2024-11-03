@@ -189,6 +189,11 @@ export class AuditComponent implements OnInit {''
     modal.componentInstance.viewaudit = item;
   }
 
+  getServiceName(id: number) {
+    console.log("This is my id",id);
+    return this.checklist.find(s => s.id === id)?.name || 'Unknown';
+  }
+
 }
 
 

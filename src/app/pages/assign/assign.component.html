@@ -79,9 +79,9 @@
                         <tbody>
                             <tr *ngFor="let assignUser of filteredScheduledAssigns.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
                                 <td >{{assignUser.name}}</td>
-                                <td >{{assignUser.auditor}}</td>
-                                <td >{{assignUser.restaurant}}</td>
-                                <td >{{assignUser.service}}</td>
+                                <td >{{ getAuditorName(assignUser.auditor) }}</td>
+                                <td >{{ getRestaurantName(assignUser.restaurant) }}</td>
+                                <td >{{ getServiceName(assignUser.service) }}</td>
                                 <td >{{assignUser.ass_dt}}</td>
                                 <td class="text-right" >
                                     <div style="display: flex">
@@ -126,9 +126,9 @@
                         <tbody>
                             <tr *ngFor="let assignUser of filteredPendingAssigns.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
                                 <td>{{assignUser.name}}</td>
-                                <td>{{assignUser.auditor}}</td>
-                                <td>{{assignUser.restaurant}}</td>
-                                <td>{{assignUser.service}}</td>
+                                <td>{{ getAuditorName(assignUser.auditor) }}</td>
+                                <td>{{ getRestaurantName(assignUser.restaurant) }}</td>
+                                <td>{{ getServiceName(assignUser.service) }}</td>
                                 <td>{{assignUser.ass_dt}}</td>
                                 <td class="text-right">
                                     <div style="display: flex">
@@ -173,9 +173,9 @@
                         <tbody>
                             <tr *ngFor="let assignUser of filteredCancleAssigns.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
                                 <td>{{assignUser.name}}</td>
-                                <td>{{assignUser.auditor}}</td>
-                                <td>{{assignUser.restaurant}}</td>
-                                <td>{{assignUser.service}}</td>
+                                <td>{{ getAuditorName(assignUser.auditor) }}</td>
+                                <td>{{ getRestaurantName(assignUser.restaurant) }}</td>
+                                <td>{{ getServiceName(assignUser.service) }}</td>
                                 <td>{{assignUser.ass_dt}}</td>
                                 <td class="text-right">
                                     <div style="display: flex">
@@ -220,9 +220,9 @@
                         <tbody>
                             <tr *ngFor="let assignUser of filteredCompleteAssigns.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)">
                                 <td>{{assignUser.name}}</td>
-                                <td>{{assignUser.auditor}}</td>
-                                <td>{{assignUser.restaurant}}</td>
-                                <td>{{assignUser.service}}</td>
+                                <td>{{ getAuditorName(assignUser.auditor) }}</td>
+                                <td>{{ getRestaurantName(assignUser.restaurant) }}</td>
+                                <td>{{ getServiceName(assignUser.service) }}</td>
                                 <td>{{assignUser.ass_dt}}</td>
                                 <td class="text-right">
                                     <div style="display: flex">

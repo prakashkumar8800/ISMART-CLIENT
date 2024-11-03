@@ -44,7 +44,7 @@
                                 <td>{{audit.shift_manager}}</td>
                                 <td>{{audit.audit_dt}}</td>
                                 <td>{{audit.restaurant_manager}}</td>
-                                <td>{{audit.checklist_item}}</td>
+                                <td>{{ getServiceName(audit.checklist_item) }}</td>
                                 <td class="text-right">
                                     <div style="display: flex">
                                         <p (click)="viewAudit(audit)" class="text-success action"
