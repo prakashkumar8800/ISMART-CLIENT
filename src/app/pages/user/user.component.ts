@@ -25,6 +25,7 @@ export class UserComponent implements OnInit {
     this.key = key;
     this.reverse = !this.reverse;
   }
+  
   filteredUsers = [];
 
   

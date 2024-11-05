@@ -70,20 +70,11 @@ export class ViewAuditComponent implements OnInit {
       this.attachment_path = this.viewaudit.attachment_path
       this.selectedService=this.viewaudit.checklist_item
 
-      console.log("Jay shree ram",this.selectedService);
-      // this.getChecklist();
-      // this.updateSelectedItems();
+      console.log(this.selectedService);
     }
     this.getUser()
     this.getChecklist();
     this.getAudit();
-
-    // this.calculateAverageScore();
-    // this.getChecklist();
-    // this.getUser()
-    // this.getChecklist();
-    // this.getAudit();
-    // console.log("Yo Yo Honey Singh",this.selectedService.items);
   }
 
  
@@ -97,7 +88,7 @@ export class ViewAuditComponent implements OnInit {
        if (result.status == true){
           this.audits = result.result
        }
-       console.log("Priya Ram",this.audits);
+       console.log(this.audits);
     },(error) => {
       console.log(error.error.message);
       this.toaster.error(error.error.message);
@@ -150,6 +141,7 @@ export class ViewAuditComponent implements OnInit {
       }
     });
   }
+
   updateSelectedItems() {
     const selectedChecklist = this.checklist.find((check) => check.id=== this.selectedService);
     // this.selectedItems = selectedChecklist ? selectedChecklist.items : [];
@@ -160,7 +152,7 @@ export class ViewAuditComponent implements OnInit {
     } else {
       this.selectedItems = [];
     }
-    console.log("Prakash here are your lists",this.checklist);
+    console.log(this.checklist);
     console.log("Selected Service",this.selectedItems);
   }
 
@@ -174,8 +166,6 @@ export class ViewAuditComponent implements OnInit {
       return false;
     }
   }
-
-
 
    
 onFileSelected(event: Event, item: any): void {
@@ -192,48 +182,7 @@ onFileSelected(event: Event, item: any): void {
       console.log('Updated attachment paths for item:', item.attachment_path);
   }
 }
-//async add() {
-//   const formData = new FormData();
 
-//   // Add audit details to formData
-//   console.log("God Help",this.name);
-//   formData.append('name', this.name);
-//   formData.append('shift_manager', this.shift_manager);
-//   formData.append('audit_dt', this.audit_dt);
-//   formData.append('restaurant_manager', this.resturant_manager);
-//   console.log("Form data",formData);
-//   // Prepare to send checklist items with their attachments and status
-//   this.selectedItems.forEach(item => {
-//       formData.append('checklist_items[]', JSON.stringify({
-//           name: item.name,
-//           score: item.score,
-//           status: item.status, // Capture the status from checkbox
-//           attachments: item.attachment_path // Attachments array
-//       }));
-
-//       // Append each selected file for the current item to formData
-//       if (item.selectedFiles && item.selectedFiles.length > 0) {
-//           item.selectedFiles.forEach((file: File, index: number) => {
-//               formData.append(`attachments[${item.name}][${index}]`, file, file.name);
-//           });
-//       }
-//   });
-
-
-
-//   try {
-//       const result = await this.apiService.postAPI(this.apiService.BASE_URL + "audit/createAudit", formData);
-//       if (result.status) {
-//           this.toaster.success('Audit saved successfully!');
-//           this.activeModal.close();
-//       } else {
-//           this.toaster.error('Failed to save audit');
-//       }
-//   } catch (error) {
-//       console.error('Error saving audit:', error);
-//       this.toaster.error('An error occurred while saving the audit');
-//   }
-// }
 getAttachmentUrl(path: string): string {
   console.log("vcvfvvevevu");
   return `${this.apiService.BASE_URL}/attachments/${path}`;
@@ -258,7 +207,7 @@ async add() {
 
   // Log the audit data for debugging
   console.log('Audit Data to be sent:', auditData);
-  console.log('jay shree ram',this.selectedItems);
+  console.log(this.selectedItems);
 
   // Perform the API call
   try {

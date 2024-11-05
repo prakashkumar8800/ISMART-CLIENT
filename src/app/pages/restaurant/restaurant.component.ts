@@ -52,9 +52,11 @@ export class RestaurantComponent implements OnInit {
   }
   
   restaurants=[];
+  
   ngOnInit(): void {
     this.getRestaurant();
   }
+
   getRestaurant() {
     this.restaurants = [];
     this.apiService.getAPI(this.apiService.BASE_URL + "restaurant/getAllRestaurants").then((result) => {

@@ -41,9 +41,7 @@ export class AddAssignComponent implements OnInit {
       this.auditor = this.assign.auditor,
       this.restaurant = this.assign.restaurant,
       this.service = this.assign.service,
-      this.ass_DT=this.assign.ass_DT
-
-
+      this.ass_DT=this.assign.ass_DT,
       this.status = this.assign.status
     }
     console.log("assign date and time",this.assign.ass_DT);
@@ -84,7 +82,7 @@ export class AddAssignComponent implements OnInit {
             this.restaurant = null;
             this.toaster.error('Restaurant data could not be retrieved');
           }
-         console.log("chumma chumma de de",this.restaurants);
+         console.log(this.restaurants);
       },error => {
         console.error('Error fetching restaurant data:', error);
         this.restaurant = null;
@@ -106,7 +104,7 @@ export class AddAssignComponent implements OnInit {
        console.log(this.checklist)
       }
     }) 
-   }
+  }
 
 
   add() {

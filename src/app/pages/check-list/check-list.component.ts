@@ -30,7 +30,6 @@ export class CheckListComponent implements OnInit {
   }
 
 
-
   // Get the checklist data from API
   getChecklist() {
     this.apiService.getAPI(this.apiService.BASE_URL + "checklist/getAllCheckList").then((result) => {

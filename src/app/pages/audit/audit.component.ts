@@ -18,15 +18,15 @@ import { audit } from 'rxjs';
 
 export class AuditComponent implements OnInit {''
 
-  audits =[];
+  audits = [];
 
-  pendingAudits=[];
-  scheduledAudits=[];
+  pendingAudits = [];
+  scheduledAudits = [];
   completeTab = false;
   pendingTab = true;
   filteredAssignments = [];
-  pendingAssigns=[];
-  scheduledAssigns=[];
+  pendingAssigns = [];
+  scheduledAssigns = [];
   currentDate = new Date();
 
   itemsPerPage = 10;
@@ -68,7 +68,6 @@ export class AuditComponent implements OnInit {''
     }
   }
 
-  
 
   ngOnInit(): void {
     this.getChecklist();
@@ -159,7 +158,6 @@ export class AuditComponent implements OnInit {''
     this.audits = this.userAssign.map(assign => {
         const shiftManager = this.userdetail.find(user => user.role === 'Admin')?.name || '';
         const restaurantManager = this.userdetail.find(user =>  user.role === 'Restaurant Manager')?.name || '';
-        // const checklistItem = this.checklist.find(item => item.id === item.id)?.name || '';
         return {
             name: assign.name,
             audit_dt: assign.ass_dt,

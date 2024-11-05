@@ -24,8 +24,8 @@ export class AssignComponent implements OnInit {
   to_date :string= '';
   outlet: string ='all';
   filteredAssignments = [];
-  pendingAssigns=[];
-  scheduledAssigns=[];
+  pendingAssigns = [];
+  scheduledAssigns = [];
   cancleAssigns = [];
   completeAssigns = [];
   filteredScheduledAssigns = [];
@@ -128,9 +128,9 @@ export class AssignComponent implements OnInit {
         this.completeAssigns = this.userAssign.filter(assign => assign.status == '1')
         console.log(this.userAssign)
         console.log(this.scheduledAssigns)
-        console.log("gguyfergfgrygefyugyu",this.pendingAssigns);
+        console.log(this.pendingAssigns);
         this.onDateOrOutletChange();
-        console.log("God please help",this.filteredCancleAssigns);
+        console.log(this.filteredCancleAssigns);
       }
     }, (error) => {
     })
@@ -217,6 +217,7 @@ export class AssignComponent implements OnInit {
       this.checklist == result;
     });
   }
+
   addAssign() {
     let modal = this.modalService.open(AddAssignComponent, {
       backdrop: 'static',
@@ -278,7 +279,7 @@ getServiceName(id: number) {
   
   onDateOrOutletChange() {
     this.updateFilteredAssignments();
-    console.log("hfjefej",this.scheduledAssigns);
+    console.log(this.scheduledAssigns);
   }
 
 
